@@ -15,21 +15,6 @@ class Portal extends FE_Controller{
     //put your code here
     function index(){
         $this->loadPage("portal", array("portal_script"), array("message" => false));
-        $this->load->view("system_application/system");
-        $this->load->view("system_application/system_script");
-    }
-    public function visitPage($pageLink = "portal", $pageLink2 = false, $extraData = false){
-        if(user_id()*1 == 0){ //if not logged in
-            exit();
-        }
-        $data = array(
-            "defaultPage" => ($pageLink2 !== "false" && $pageLink2 !== false) ? $pageLink."/".$pageLink2 : $pageLink, //if index or function in controller
-            "extra_data" => ($extraData) ? base64_decode($extraData) : false
-        );
-        $this->load->view("system_application/system_frame", $data);
-        $this->load->view("system_application/system");
-        $this->load->view("system_application/system_script");
-        $this->load->view("system_application/system_frame_script");
     }
     function login(){
         $this->form_validation->set_rules('username', 'Username/Email', 'required');
@@ -78,6 +63,13 @@ class Portal extends FE_Controller{
     function logout(){
         $this->createSession(false, false, false, false, false, false);
         header("Location: ".base_url());
+    }
+    function testKey(){
+        $this->load->library('encrypt');
+        $msg = 'My secret message';
+        $encrypted_string = $this->encrypt->encode($msg);
+        echo time();
+        
     }
     protected function createSession($firstName, $lastName, $middleName, $userType, $userID, $username){
         $this->session->set_userdata(array(

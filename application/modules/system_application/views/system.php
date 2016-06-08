@@ -1,8 +1,5 @@
 <div id="systemComponent">
-    <div id="pageComponentContainer" style="display:none">
-    </div>
-    <div class="moduleHolder full-height">
-        
-    </div>
+    <link link_name="" href="" type="text/css" rel="stylesheet">
+    <script link_name="" type="text/javascript" src=""></script>
 </div>
     
