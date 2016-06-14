@@ -82,33 +82,7 @@
     function remove_system_message(status) {
         $("#systemMessageContainer").find(".systemMessage[message_status='" + status + "']").remove();
     }
-    /*** Functions for requesting***/
-    /***
-     * Load an asset
-     * @param {String} link The link of the asset to be loaded
-     * @returns {Boolean}
-     */
-    function load_asset(link) {
-        if (link.indexOf(".css") > -1) {
-            if (!$("link[href='" + asset_url("css/" + link) + "']").length) {
-                var systemComponent = $("#systemComponent").find("link").clone();
-                systemComponent.attr("href", asset_url("css/" + link));
-                $("head").append(systemComponent);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (!$("script[src='" + asset_url("js/" + link) + "']").length) {
-                var systemComponent = $("#systemComponent").find("script").clone();
-                systemComponent.attr("src", asset_url("js/" + link));
-                $("head").append(systemComponent);
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+    
     
     /***
      * Add leading zero to a number
