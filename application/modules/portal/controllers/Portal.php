@@ -14,7 +14,11 @@
 class Portal extends FE_Controller{
     //put your code here
     function index(){
-        $this->loadPage("portal", array("portal_script"), array("message" => false));
+        if($this->input->post("load_module")){
+            $this->loadModule("portal", "portal_script");
+        }else{
+            $this->loadPage("Portal");
+        }
     }
     function login(){
         $this->form_validation->set_rules('username', 'Username/Email', 'required');

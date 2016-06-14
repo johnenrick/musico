@@ -9,10 +9,9 @@ class FE_Controller extends API_Controller{
     /***
      * Load a page which includes the system module
      */
-    public function loadPage($moduleController, $moduleFunction = false, $data = array()){
+    public function loadPage($module, $data = array()){
         $data["default"] = array(
-            "module_controller" => $moduleController,
-            "module_function" => $moduleFunction
+            "module" => $module
         );
         $this->load->view("system_application/system_frame");
         $this->load->view("system_application/system", $data);

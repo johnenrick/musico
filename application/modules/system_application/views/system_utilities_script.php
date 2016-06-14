@@ -109,18 +109,7 @@
             }
         }
     }
-    /***
-     * Send an API request. This is to be use instead for $.post for trapping different cases
-     * @param {String} link the controller and function of the api
-     * @param {type} callbackFn Callback function if the request is successful
-     * @returns {undefined}
-     */
-    function api_request(link, callbackFn){
-        $.post(api_url(link), function(data){
-            var response = JSON.parse(data);
-            callbackFn(response);
-        })
-    }
+    
     /***
      * Add leading zero to a number
      * @param {type} num The number to be padded

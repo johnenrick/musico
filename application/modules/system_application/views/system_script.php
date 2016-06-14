@@ -13,9 +13,8 @@
             api_url : "<?=api_url()?>",
             asset_url : "<?=asset_url()?>"
         },
-        data : {
-            default_page : "<?=isset($defaultPage) ? $defaultPage:""?>",
-            extra_data : ('<?=(isset($extra_data) == true && $extra_data)? $extra_data : "false"?>' !== 'false') ? JSON.parse('<?=isset($extra_data) ?  $extra_data : "{}" ?>') : false
+        default : {
+            module_controller : "<?=$default["module"]?>"
         },
         access_control_list :{},
         refresh_call : {
@@ -109,7 +108,7 @@
         moduleName = moduleName.toLowerCase();
         moduleLink = moduleLink.toLowerCase();
         if($("#moduleContainer").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
-            $.post(base_url(moduleLink), {}, function(data){
+            $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
                 var moduleHolder = $("#systemComponent").find(".moduleHolder").clone();
                 moduleHolder.attr("module_link", moduleLink);
@@ -179,7 +178,20 @@
             callBack();
         }
     }
+    /***
+     * Send an API request. This is to be use instead for $.post for trapping different cases
+     * @param {String} link the controller and function of the api
+     * @param {type} callbackFn Callback function if the request is successful
+     * @returns {undefined}
+     */
+    function api_request(link, callbackFn){
+        $.post(api_url(link), function(data){
+            var response = JSON.parse(data);
+            callbackFn(response);
+        });
+    }
 </script>
+
 <!--Document Ready-->
 <script>
     $(document).ready(function(){
@@ -187,6 +199,7 @@
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
         }
+        load_module(system_data.default.module_controller, "Test Page");
         retrieve_access_control();
     });
 </script>

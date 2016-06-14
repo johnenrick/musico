@@ -24,7 +24,6 @@ class M_sample_template extends API_Model{
     }
     public function retrieveSampleTemplate($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
-            
         );
         $selectedColumn = array(
             "sample_template.*"
