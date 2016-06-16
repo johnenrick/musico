@@ -10,5 +10,13 @@ class Test_page extends FE_Controller{
             $this->loadPage("Test_page/videoPlayer");
         }
     }
+
+    public function registrationForm(){
+    	if($this->input->post("load_module")){
+            $this->loadModule("registration", "registration_script");
+        }else{
+            $this->loadPage("Test_page/registrationForm");
+        }
+    }
     
 }
