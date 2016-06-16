@@ -20,6 +20,7 @@
         refresh_call : {
 
         },
+        module : {},
         token : false
     };
     function user_id(){
@@ -210,8 +211,10 @@
         } else {
             if (!$("script[src='" + asset_url("js/" + link) + "']").length) {
                 var systemComponent = $("#systemComponent").find("script").clone();
-                systemComponent.attr("src", asset_url("js/" + link));
-                $("head").append(systemComponent);
+                var s = document.createElement("script");
+                s.type = "text/javascript";
+                s.src = asset_url("js/" + link);
+                $("head").append(s);
                 return true;
             } else {
                 return false;
@@ -224,11 +227,11 @@
 <script>
     $(document).ready(function(){
         //set up ajax
-        $.ajaxSetup({
-            data: {
-                token: system_data.token
-            }
-        });
+//        $.ajaxSetup({
+//            data: {
+//                token: system_data.token
+//            }
+//        });
         //redirect www
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));

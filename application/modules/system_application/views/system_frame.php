@@ -11,7 +11,6 @@
     
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/core/materialize.min.js"></script>
-    <script link_name="" type="text/javascript" src="http://localhost/musico/assets/js/jquery-confirm.js"></script>
     
 </head>
 

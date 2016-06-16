@@ -1,15 +1,20 @@
 <script>
-//load_asset("jquery-confirm.js");
-$(document).ready(function(){
-    $.confirm({
-        title: 'Confirm!',
-        content: 'Simple confirm!',
-        confirm: function(){
-            $.alert('Confirmed!');
-        },
-        cancel: function(){
-            $.alert('Canceled!')
+    /*Global Variable for this module. This is also the moduleName*/
+    var sampleModule = function(){
+        sampleModule = this;
+        function testing(){
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Simple confirm!'
+            });
         }
+    };
+    
+    /*Adding an asset*/
+    load_asset("jquery-confirm.min.css");
+    load_asset("jquery-confirm.min.js");
+    
+    $(document).ready(function(){
+        var test = new sampleModule();
     });
-});
 </script>
