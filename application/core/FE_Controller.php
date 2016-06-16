@@ -10,6 +10,7 @@ class FE_Controller extends API_Controller{
      * Load a page which includes the system module
      */
     public function loadPage($module, $data = array()){
+        
         $data["default"] = array(
             "module" => $module
         );

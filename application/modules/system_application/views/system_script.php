@@ -19,7 +19,8 @@
         access_control_list :{},
         refresh_call : {
 
-        }
+        },
+        token : false
     };
     function user_id(){
         return system_data.account_information.user_ID;
@@ -222,10 +223,17 @@
 <!--Document Ready-->
 <script>
     $(document).ready(function(){
+        //set up ajax
+        $.ajaxSetup({
+            data: {
+                token: system_data.token
+            }
+        });
         //redirect www
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
         }
+        //load default page
         load_module(system_data.default.module_controller, "Test Page");
         retrieve_access_control();
     });
