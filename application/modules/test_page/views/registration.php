@@ -1,59 +1,52 @@
-
-
-
 <div class="section white">
-    <div class="row container">
-    	<button data-target="modal1" class="btn modal-trigger waves-effect waves-light red darken-1 right" type="submit" name="action">JOIN US
+    <div class="row">
+    	<button data-target="modal1" id="modal" class="btn modal-trigger waves-effect waves-light red darken-1 right" type="button" name="action">JOIN US
 	  	</button>
     </div>
  </div>
-
-<div id="modal1" class="modal small modal-fixed-footer">
-	<div class="modal-content">
-		<h4>Modal Header</h4>
-		<p>A bunch of text</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-	</div>
-</div>
-
-
-
-<div class="container" hide>
-	<div class="row">
-		<div class="blog-header col-md-8 col-md-offset-4">
-		    <h1 class="blog-title">Registration</h1><p>Etiam porta sem malesuada magna mollis euismod.</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="panel col-md-6 col-md-offset-4">
-			<form class="registrationForm" id="registrationForm" action="">
-				<div class="col-md-8 input-group">
-					<label for="registrationFirstName">First name</label>
-					<input class="form-control" type="text" name="registrationFirstName">
-				</div>
-				<div class="col-md-8 input-group">
-					<label for="registrationMiddleName">Middle name</label>
-					<input class="form-control" type="text" name="registrationMiddleName">
-				</div>
-				<div class="col-md-8 input-group">
-					<label for="registrationLastName">Last name</label>
-					<input class="form-control" type="text" name="registrationLastName">
-				</div>
-				<div class="col-md-8 input-group">
-					<label for="registrationEmail">Email Address</label>
-					<input class="form-control" type="email" name="registrationEmail">
-				</div>
-				<div class="col-md-8 input-group">
-					<label>Country</label>
-					<input class="form-control" type="text" name="registrationCountry">
-				</div>
-				<button type="submit" class="btn btn-primary">Register</button>
-				<div>
-			</form>
-			<div class="success-module">
-				<span class="registrationMessage"></span>
+<!--  modal -->
+<div id="modal1" class="modal custom">
+	<div class="modal-content white">
+		<div class="row">
+			<div class="col m7">
+				<p class="grey-text">music is forever</p>
+				<h4 class="center-align">Become a member</h4>
+				<p class="grey-text center-align"><small>Be part of the largest video sharing website ever </small></p>
+			    <form class="col m12" action="" id="registrationForm">
+			        <div class="input-field col m6">
+			          <input id="firstName" type="text" class="validate">
+			          <label for="firstName">First Name</label>
+			        </div>
+			        <div class="input-field col m6">
+			          <input id="lastName" type="tel" class="validate">
+			          <label for="lastName">Last Name</label>
+			        </div>
+			        <div class="input-field col m6">
+			          <input id="username" type="text" class="validate">
+			          <label for="username">Username</label>
+			        </div>
+			        <div class="input-field col m6">
+			          <input id="password" type="password" class="validate">
+			          <label for="password">Password</label>
+			        </div>
+			        <div class="input-field col m6 black-text">
+			          <input id="email" type="email" class="validate">
+			          <label for="email">Email Address</label>
+			        </div>
+			        <div class="input-field col m6">
+			          <input id="country" type="tel" class="validate">
+			          <label for="countery">Country</label>
+			        </div>
+			        <div class="col m6 offset-m6">
+			        <button class="btn waves-effect waves-light red darken-1">REGISTER</button>
+			        </div>
+			    </form>
+				<!-- <div class="card-panel "><a class="btn-flat"><small>BUTTON</small></a></div>
+			    <div class="card-panel "><a class="btn-flat"><small>SIGN UP USING FACEBOOK</small></a></div>
+			    <div class="card-panel "><a class="btn-flat"><small>SIGN UP USING TWITTER</a></small></div> -->
+			</div>
+			<div class="image-wrapper" class="col m5">
+				<img src="../assets/images/side.png"><img>
 			</div>
 		</div>
 	</div>

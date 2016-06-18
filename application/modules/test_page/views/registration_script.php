@@ -1,22 +1,19 @@
 <script type="text/javascript">
-load_asset("js/jquery.form.min.js");
+load_asset("jquery.form.min.js");
+load_asset("registration.css");
+load_asset("core/custom/materialize_modal.css");
 // $("#registrationMessage").hide();
 $("#registrationForm").attr('action',api_url("C_account/createAccount"));
 $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-     $('.modal-trigger').leanModal({
-     	size: 'small',
-      	dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      	opacity: .5, // Opacity of modal background
-      // in_duration: 300, // Transition in duration
-      // out_duration: 200, // Transition out duration
-      // ready: function() { alert('Ready'); }, // Callback for Modal open
-      // complete: function() { alert('Closed'); } // Callback for Modal close
-    });
+  $("#modal1").attr("opacity",1);
+  $("#modal").click(function(){
+    $('#modal1').openModal();
+    
+  })
 
-
-    //register
-    $("#registrationForm").ajaxForm({
+  //register
+  $("#registrationForm").ajaxForm({
 	beforeSubmit: function(){
 		clear_form_error($("#registrationForm"));
 	},
