@@ -11,64 +11,71 @@ class C_account extends API_Controller {
      */
     public function __construct() {
         parent::__construct();
-        $this->load->model("m_account");
-        $this->load->model("M_account_information");
+//        $this->load->model("m_account");
+//        $this->load->model("M_account_information");
         $this->APICONTROLLERID = 9;
+    }
+    public function testEn(){
+        $enctoken = generateToken(1, 2);
+        print_r($enctoken);
+        $dectoken = decodeToken($enctoken);
+        print_r($dectoken);
     }
     public function createAccount(){
         $this->accessNumber = 1;
         //registration
-        if($this->input->post("account_type_ID") == 9 || (($this->input->post("account_type_ID") != 9) && (user_type() == 2))){
-            if(!$this->validReCaptcha() && $this->input->post("account_type_ID") == 9){
-                $this->responseError(5, "Invalid Captcha");
-                $this->outputResponse();
-            }
-            $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_numeric|callback_is_unique_username');
-            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]');
-            $this->form_validation->set_rules('status', 'Status', 'required');
-            $this->form_validation->set_rules('account_type_ID', 'Account Type', 'required');
+        if(!$this->validReCaptcha() && $this->input->post("account_type_ID") == 3){//registraton required captcha to proceed
+            $this->responseError(5, "Invalid Captcha");
+            $this->outputResponse();
+        }
+        if(!$this->checkACL(64) && ($this->input->post("account_type_ID") != 3 || $this->input->post("status") != 2)){//64 - if not admin and create with other account type or status
+            $this->responseError(4, "Not authorized");
+            $this->outputResponse();
+        }
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_numeric|callback_is_unique_username');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]');
+        $this->form_validation->set_rules('status', 'Status', 'required');
+        $this->form_validation->set_rules('account_type_ID', 'Account Type', 'required');
+        
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|callback_alpha_dash_space');
+        ($this->input->post("middle_name")) ? $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|callback_alpha_dash_space') : null;
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|callback_alpha_dash_space');
+        $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');
+        if($this->form_validation->run()){
             
-            $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|callback_alpha_dash_space');
-            ($this->input->post("middle_name")) ? $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|callback_alpha_dash_space') : null;
-            $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|callback_alpha_dash_space');
-            $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');
-            if($this->form_validation->run()){
-                $result = $this->m_account->createAccount(
-                        $this->input->post("username"),
-                        $this->input->post("password"),
-                        $this->input->post("account_type_ID"),
-                        $this->input->post("status")
+            $result = $this->m_account->createAccount(
+                    $this->input->post("username"),
+                    $this->input->post("password"),
+                    $this->input->post("account_type_ID"),
+                    $this->input->post("status")
+                    );
+
+            if($result){
+                $this->load->model("m_account_information");
+                $this->M_account_information->createAccountInformation(
+                        $result,
+                        $this->input->post("first_name"),
+                        "",
+                        $this->input->post("last_name"),
+                        0,
+                        $this->input->post("contact_number"),
+                        $this->input->post("email_address"),
+                        0,
+                        0,
+                        $this->input->post("complete_address")     
                         );
-                
-                if($result){
-                    $this->load->model("m_account_information");
-                    $this->M_account_information->createAccountInformation(
-                            $result,
-                            $this->input->post("first_name"),
-                            "",
-                            $this->input->post("last_name"),
-                            0,
-                            $this->input->post("contact_number"),
-                            $this->input->post("email_address"),
-                            0,
-                            0,
-                            $this->input->post("complete_address")     
-                            );
-                                        
-                    $this->actionLog($result);
-                    $this->responseData($result);
-                }else{
-                    $this->responseError(3, "Failed to create");
-                }
+
+                $this->actionLog($result);
+                $this->responseData($result);
             }else{
-                if(count($this->form_validation->error_array())){
-                    $this->responseError(102, $this->form_validation->error_array());
-                }else{
-                    $this->responseError(100, "Required Fields are empty");
-                }
+                $this->responseError(3, "Failed to create");
             }
         }else{
-            $this->responseError(1, "Not Authorized");
+            if(count($this->form_validation->error_array())){
+                $this->responseError(102, $this->form_validation->error_array());
+            }else{
+                $this->responseError(100, "Required Fields are empty");
+            }
         }
         $this->outputResponse();
     }
@@ -196,26 +203,13 @@ class C_account extends API_Controller {
             ($this->input->post('updated_data[first_name]')) ? $this->form_validation->set_rules('updated_data[first_name]', 'First Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[last_name]')) ? $this->form_validation->set_rules('updated_data[last_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[middle_name]')) ? $this->form_validation->set_rules('updated_data[middle_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
-            if($this->input->post("updated_data[account_address_description]")){
-                $this->form_validation->set_rules('updated_data[account_address_longitude]', 'Your Map Location', 'required|greater_than[0]');
-                $this->form_validation->set_message('updated_data[account_address_longitude]');
-                $this->form_validation->set_message('required', 'Click the map on the right to indicate your location');
-                $this->form_validation->set_message('greater_than', 'Click the map on the right to indicate your location');
-                
-            }
             if($this->form_validation->run()){
                 $updatedData = $this->input->post('updated_data');
                 $ID = $this->input->post('ID');
                 $condition = $this->input->post("condition");
-                //if(!$this->checkACL(32)){// accessNumber 32 Dont allow to change account type if not admin or LGU
-                if(user_type() != 2){
-                    if($this->input->post("account_type_ID")){
-                        $updatedData["account_type_ID"] = user_type();
-                    }
-                    if(isset($updatedData["status"])){ // Dont allow to change status
-                        unset($updatedData["status"]);
-                    }
-                    $ID = user_id();
+                
+                if(isset($updatedData["status"])){ // Dont allow to change status
+                    unset($updatedData["status"]);
                 }
                 
                 $result = $this->m_account->updateAccount(

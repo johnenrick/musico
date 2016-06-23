@@ -57,7 +57,6 @@ class M_access_control_list extends API_Model{
     }
     public function retrieveGroupAccessControlList($retrieveType = false, $limit = false, $offset = false, $sort = NULL, $ID = NULL, $condition = NULL){
         $joinedTable = array(
-            
         );
         $selectedColumn = array(
             "group_access_control_list.*"

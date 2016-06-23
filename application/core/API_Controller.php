@@ -2,6 +2,9 @@
 date_default_timezone_set('Asia/Manila');
 /* Created by John Enrick Pleños */
 class API_Controller extends MX_Controller{
+    public $userID = 0;
+    public $userType = 0;
+    public $token = null;
     /**
      *
      * @var int $APICONTROLLERID The ID of an API Controller which was indicated in the api_controller table in database
@@ -13,7 +16,8 @@ class API_Controller extends MX_Controller{
      */
     public $response = array(
         "data" => false,
-        "error" => array()
+        "error" => array(),
+        "token" => null
     );
     /**
      *
@@ -26,6 +30,18 @@ class API_Controller extends MX_Controller{
         $this->load->model("api/m_access_control_list");
         $this->load->model("api/m_action_log");
         $this->form_validation->CI =&$this;
+        $token = decodeToken($this->input->post("token"));
+        if($token){
+            $this->userID = $token["user_ID"];
+            $this->userType = $token["user_type"];
+            $this->response["token"] = generateToken($this->userID, $this->userType);
+        }else if($token == -1){//Expired Token
+            $this->response["token"] = $token;
+            $this->responseError("1001", "Token Expired.");
+            $this->outputResponse();
+        }else{//no token
+            
+        }
         //sleep(2);//Simulate slow internet connection
     }
     /**

@@ -1,12 +1,12 @@
 <script>
     var system_data = {
         account_information : {
-            user_ID : "<?=user_id()?>"*1,
-            first_name : "<?=user_first_name()?>",
-            middle_name : "<?=user_middle_name()?>",
-            last_name : "<?=user_last_name()?>",
-            username : "<?=username()?>",
-            user_type : "<?=user_type()?>"*1
+            user_ID : null,
+            first_name : null,
+            middle_name : null,
+            last_name : null,
+            username : null,
+            user_type : null
         },
         url : {
             base_url : "<?=base_url()?>",
@@ -21,7 +21,7 @@
 
         },
         module : {},
-        token : false
+        token : null
     };
     function user_id(){
         return system_data.account_information.user_ID;
@@ -37,6 +37,20 @@
     }
     function user_last_name(){
         return system_data.account_information.last_name;
+    }
+    function refreshAccountInformation(){
+        api_request("C_account/retrieveAccount", {user_ID : system_data.account_information.user_ID}, function(response){
+            if(!response["error"].length){
+                system_data.account_information.first_name = response["data"]["first_name"];
+                system_data.account_information.middle_name = response["data"]["middle_name"];
+                system_data.account_information.last_name = response["data"]["last_name"];
+                system_data.account_information.email_address = response["data"]["email_address"];
+                system_data.account_information.country = response["data"]["country"];
+            }else{
+                //TODO if account not found
+                
+            }
+        });
     }
     function base_url(link){
        return system_data.url.base_url+((typeof link === "undefined") ? "" : link);
@@ -183,13 +197,21 @@
     /***
      * Send an API request. This is to be use instead for $.post for trapping different cases
      * @param {String} link the controller and function of the api
-     * @param {type} callbackFn Callback function if the request is successful
+     * @param {Object} data parameter of the request
+     * @param {Function} callbackFn Callback function if the request is successful
      * @returns {undefined}
      */
-    function api_request(link, callbackFn){
-        $.post(api_url(link), function(data){
+    function api_request(link, data, callbackFn){
+        $.post(api_url(link), data, function(data){
             var response = JSON.parse(data);
-            callbackFn(response);
+            //Check token
+            system_data.token = response["token"];
+            if(response["token"]){
+                callbackFn(response);
+            }else if(response["token"] === -1){//expired token
+                //Show log in, then call the callbackFn if log in is successful
+            }
+            
         });
     }
     /*** Functions for requesting***/

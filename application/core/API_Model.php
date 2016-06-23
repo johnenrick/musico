@@ -181,7 +181,8 @@ class API_Model extends CI_Model{
                     }
                     $tableColumn = "CONCAT($tableColumnTemp)";
                 }
-                if((isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic) && ($tableColumnValue !="")){
+                if((isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic) && ($tableColumnValue !== "")){
+                    
                     $leftValue = ($passArithmetic) ? $tableColumn: "$tableName.$tableColumn";
                     $this->HASCONDITION = true;
                     switch($segment[0]){
@@ -337,6 +338,8 @@ class API_Model extends CI_Model{
         return $result;
     }
     public function initializeTableColumn($joinedTable = array()){
+        $this->DATABASETABLE = array();
+        $this->HASCONDITION = false;
         foreach($joinedTable as $joinedTableKey => $joinedTableValue){
             $tableName = explode(" AS ", $joinedTableKey); 
             $this->db->start_cache();
