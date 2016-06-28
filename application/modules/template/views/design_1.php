@@ -7,10 +7,10 @@
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/materialize.min.css" media="screen,projection" />
 
     <!--Import customized style-->
-    <link type="text/css" rel="stylesheet" href="css/common.css" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/common.css" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                 <li><a class="waves-effect waves-dark btn white grey-text text-darken-2">Join</a></li>
                 <li><a>Upload</a></li>
                 <li id="profile-btn">
-                    <a class="dropdown-button" href="#!" data-activates="profile-popup"><img src="image/profpic.png" /></a>
+                    <a class="dropdown-button" href="#!" data-activates="profile-popup"><img src="<?=asset_url()?>image/profpic.png" /></a>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-nav">
@@ -112,9 +112,9 @@
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="<?=asset_url()?>js/materialize.min.js"></script>
 
-    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="<?=asset_url()?>js/global.js"></script>
 </body>
 
 </html>
