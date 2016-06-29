@@ -27,7 +27,7 @@ body {
     position: relative;
 }
 
-#page-content-container #main {
+#page-content-container #mainContent {
     height: auto;
     min-height: calc( 100% - 100px );
     padding: 0;

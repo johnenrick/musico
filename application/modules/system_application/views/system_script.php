@@ -123,16 +123,16 @@
     function load_module(moduleLink, moduleName){
         moduleName = moduleName.toLowerCase();
         moduleLink = moduleLink.toLowerCase();
-        if($("#moduleContainer").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
+        if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
                 var moduleHolder = $("#systemComponent").find(".moduleHolder").clone();
                 moduleHolder.attr("module_link", moduleLink);
                 moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
                 moduleHolder.append(data);
-                $("#moduleContainer").append(moduleHolder);
+                $("#mainContent").append(moduleHolder);
                 /*show page*/
-                $("#moduleContainer").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
+                $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
                 if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                     $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
                     refresh_call(moduleName);
@@ -141,7 +141,7 @@
             });
         }else{
             /*show page*/
-            $("#moduleContainer").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
+            $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
             if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                 $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
                 refresh_call(moduleName);

@@ -54,8 +54,6 @@
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">event</i>Events</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">phone</i>Contact Us</a></li>
             </ul>
-
-
             <hr>
             <ul id="side-nav-large">
                 <li><span class="white-text">PLAYLIST</span></li>
@@ -73,7 +71,6 @@
         <div id="page-content-container" class="col m12 l10">
 
             <div id="main" class="row">
-
 
             </div>
 
