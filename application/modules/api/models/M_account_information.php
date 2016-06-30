@@ -7,16 +7,16 @@
  */
 
 /**
- * Description of m_account_basic_information
+ * Description of m_account_information
  *
  * @author johnenrick
  */
-class M_account_basic_information extends API_Model{
+class M_account_information extends API_Model{
     public function __construct() {
         parent::__construct();
-        $this->TABLE = "account_basic_information";
+        $this->TABLE = "account_information";
     }
-    public function createAccountBasicInformation($accountID, $firstName, $middleName, $lastName, $emailAddress, $country){
+    public function createAccountInformation($accountID, $firstName, $middleName, $lastName, $emailAddress, $country){
         $newData = array(
             "account_ID" => $accountID,
             "first_name" => $firstName,
@@ -27,21 +27,21 @@ class M_account_basic_information extends API_Model{
         );
         return $this->createTableEntry($newData);
     }
-    public function retrieveAccountBasicInformation($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
+    public function retrieveAccountInformation($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
-            "account" => "account.ID=account_basic_information.account_ID"
+            "account" => "account.ID=account_information.account_ID"
         );
         $selectedColumn = array(
-            "account_basic_information.*",
+            "account_information.*",
             "account.username, account.account_type_ID"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
     }
-    public function updateAccountBasicInformation($ID = NULL, $condition = array(), $newData = array()) {
+    public function updateAccountInformation($ID = NULL, $condition = array(), $newData = array()) {
         return $this->updateTableEntry($ID, $condition, $newData);
     }
-    public function deleteAccountBasicInformation($ID = NULL, $condition = array()){
+    public function deleteAccountInformation($ID = NULL, $condition = array()){
         return $this->deleteTableEntry($ID, $condition);
     }
 }

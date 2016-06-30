@@ -16,7 +16,6 @@
         refresh_call : {
 
         },
-        
         token : null
     };
     var systemApplication = {

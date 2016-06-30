@@ -8,11 +8,12 @@ class C_account extends API_Controller {
      * 4    - updateAccount
      * 8    - deleteAccount
      * 16   - batchCreateAccount
+     * 64   - admin
      */
     public function __construct() {
         parent::__construct();
-//        $this->load->model("m_account");
-//        $this->load->model("M_account_information");
+        $this->load->model("m_account");
+        $this->load->model("M_account_information");
         $this->APICONTROLLERID = 9;
     }
     public function testEn(){
@@ -28,7 +29,7 @@ class C_account extends API_Controller {
             $this->responseError(5, "Invalid Captcha");
             $this->outputResponse();
         }
-        if(!$this->checkACL(64) && ($this->input->post("account_type_ID") != 3 || $this->input->post("status") != 2)){//64 - if not admin and create with other account type or status
+        if(!$this->checkACL(64) && ($this->input->post("account_type_ID") != 3 || $this->input->post("status") != 2)){//
             $this->responseError(4, "Not authorized");
             $this->outputResponse();
         }
@@ -41,8 +42,8 @@ class C_account extends API_Controller {
         ($this->input->post("middle_name")) ? $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|callback_alpha_dash_space') : null;
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|callback_alpha_dash_space');
         $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');
+        $this->form_validation->set_rules('country', 'Country', 'required');
         if($this->form_validation->run()){
-            
             $result = $this->m_account->createAccount(
                     $this->input->post("username"),
                     $this->input->post("password"),
@@ -50,14 +51,13 @@ class C_account extends API_Controller {
                     $this->input->post("status")
                     );
             if($result){
-                $this->load->model("m_account_information");
                 $this->M_account_information->createAccountInformation(
                         $result,
                         $this->input->post("first_name"),
                         $this->input->post("middle_name"),
                         $this->input->post("last_name"),
                         $this->input->post("email_address"),
-                        $this->input->post("country")     
+                        $this->input->post("country")
                         );
 
                 $this->actionLog($result);
@@ -121,26 +121,27 @@ class C_account extends API_Controller {
     }
     public function updateAccount(){
         $this->accessNumber = 4;
-        if($this->checkACL()){
-            if($this->input->post("updated_data[username]") && $this->input->post("updated_data[username]") != username()){
+        $hasAdminPrivilige = true;
+        if(($this->input->post("updated_data[status]") || $this->input->post("updated_data[account_type_ID]")) && $this->checkACL(64)){
+            $hasAdminPrivilige = false;
+        }
+        if($this->checkACL() && $hasAdminPrivilige){
+            if($this->input->post("updated_data[username]") && $this->input->post("updated_data[username]") != $this->username){
                 $this->form_validation->set_rules('updated_data[username]', 'Username', 'alpha_numeric|callback_is_unique_username');
             }
             $this->form_validation->set_rules('updated_data[password]', 'Password', 'min_length[6]');
-            if($this->input->post("updated_data[account_address_longitude]") !== NULL){
-                $this->form_validation->set_rules('updated_data[account_address_description]', 'Complete Address', 'trim|required|min_length[2]');
-            }
             ($this->input->post('updated_data[first_name]')) ? $this->form_validation->set_rules('updated_data[first_name]', 'First Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[last_name]')) ? $this->form_validation->set_rules('updated_data[last_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[middle_name]')) ? $this->form_validation->set_rules('updated_data[middle_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
+            ($this->input->post('updated_data[email_address]')) ? $this->form_validation->set_rules('updated_data[email_address]', 'Email Address', 'trim|valid_email') : null;
+            ($this->input->post('updated_data[country]')) ? $this->form_validation->set_rules('updated_data[country]', 'Country', 'trim|callback_alpha_dash_space') : null;
             if($this->form_validation->run()){
                 $updatedData = $this->input->post('updated_data');
                 $ID = $this->input->post('ID');
-                $condition = $this->input->post("condition");
-                
-                if(isset($updatedData["status"])){ // Dont allow to change status
-                    unset($updatedData["status"]);
+                if(!$this->checkACL(64)){
+                    $ID = $this->userID;
                 }
-                
+                $condition = $this->input->post("condition");
                 $result = $this->m_account->updateAccount(
                         $ID,
                         $condition,
@@ -152,14 +153,6 @@ class C_account extends API_Controller {
                         array("account_information__account_ID" => $ID),
                         $updatedData
                         );
-                if(user_type() == 2 && $this->input->post("event_participation")){
-                    $this->load->model("M_account_event_participation");
-                    $this->M_account_event_participation->deleteAccountEventParticipation(NULL, array("account_ID" => $ID));
-                    $eventParticipation = $this->input->post("event_participation");
-                    foreach($eventParticipation as $eventParticipationValue){
-                        $this->M_account_event_participation->createAccountEventParticipation($ID, $eventParticipationValue);
-                    }
-                }
                 if($result || $result1){
                     $this->actionLog(json_encode($this->input->post()));
                     $this->responseData($result || $result1);

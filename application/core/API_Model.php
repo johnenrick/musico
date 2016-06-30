@@ -147,7 +147,6 @@ class API_Model extends CI_Model{
     }
     public function addCondition($condition = array()){
         if(is_array($condition)){
-            
             foreach($condition as $tableColumnKey => $tableColumnValue){
                 $segment = explode("__", $tableColumnKey);
                 $tableColumn = $segment[count($segment)-1];
@@ -182,7 +181,7 @@ class API_Model extends CI_Model{
                     $tableColumn = "CONCAT($tableColumnTemp)";
                 }
                 if((isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic) && ($tableColumnValue !== "")){
-                    
+                
                     $leftValue = ($passArithmetic) ? $tableColumn: "$tableName.$tableColumn";
                     $this->HASCONDITION = true;
                     switch($segment[0]){
