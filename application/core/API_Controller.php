@@ -4,6 +4,8 @@ date_default_timezone_set('Asia/Manila');
 class API_Controller extends MX_Controller{
     public $userID = 0;
     public $userType = 0;
+    public $username = NULL;
+    
     public $token = null;
     /**
      *
@@ -34,7 +36,8 @@ class API_Controller extends MX_Controller{
         if($token){
             $this->userID = $token["user_ID"];
             $this->userType = $token["user_type"];
-            $this->response["token"] = generateToken($this->userID, $this->userType);
+            $this->username = $token["username"];
+            $this->response["token"] = generateToken($this->userID, $this->userType, $this->username);
         }else if($token == -1){//Expired Token
             $this->response["token"] = $token;
             $this->responseError("1001", "Token Expired.");

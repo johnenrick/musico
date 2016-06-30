@@ -1,1 +1,5 @@
-Hello World
+<div id="sampleModule">
+    <div class="sampleModuleSampleComponent">
+        
+    </div>
+</div>

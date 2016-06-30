@@ -49,20 +49,15 @@ class C_account extends API_Controller {
                     $this->input->post("account_type_ID"),
                     $this->input->post("status")
                     );
-
             if($result){
                 $this->load->model("m_account_information");
                 $this->M_account_information->createAccountInformation(
                         $result,
                         $this->input->post("first_name"),
-                        "",
+                        $this->input->post("middle_name"),
                         $this->input->post("last_name"),
-                        0,
-                        $this->input->post("contact_number"),
                         $this->input->post("email_address"),
-                        0,
-                        0,
-                        $this->input->post("complete_address")     
+                        $this->input->post("country")     
                         );
 
                 $this->actionLog($result);
@@ -94,8 +89,7 @@ class C_account extends API_Controller {
                         $this->input->post("offset"),
                         $this->input->post("sort"),
                         $ID,
-                        $this->input->post("condition"),
-                        $this->input->post("having")
+                        $this->input->post("condition")
                         );
                 if($this->input->post("limit")){
                     $this->responseResultCount($this->m_account->retrieveAccount(
@@ -108,75 +102,10 @@ class C_account extends API_Controller {
                         ));
                 }
                 if($result){
-                    if($this->input->post("has_payment_accumulation")){
-                        $this->load->model("M_account_payment");
-                        foreach($result as $key => $value){
-                            $result[$key]["payment_accumulated"] = $this->M_account_payment->retrieveAccountPayment(false, NULL, 0, array(), NULL, array(
-                                "receiver_account_ID" => $value["account_ID"]
-//                                ,"payment_mode" => array(2, 4)
-                                ));
-                        }
-                    }
-                    if($this->input->post("has_payment")){
-                        $this->load->model("M_account_payment");
-                        foreach($result as $key => $value){
-                            $result[$key]["payment_list"] = $this->M_account_payment->retrieveAccountPayment(false, NULL, 0, array(), NULL, array(
-                                "account_ID" => $value["account_ID"]
-//                                ,"payment_mode" => array(2, 4)
-                                ));
-                        }
-                    }
-                    if($this->input->post("with_event_participation") || $this->input->post("all_information")){
-                        $this->load->model("M_account_event_participation");
-
-                        if($this->input->post("ID")){
-                            $condition = array("account_ID" => $result["account_ID"]);
-                            $result["event_participation"] = $this->M_account_event_participation->retrieveAccountEventParticipation(NULL, NULL, NULL, NULL, NULL, $condition);
-                        }
-                    }
                     $this->actionLog(json_encode($this->input->post()));
                     $this->responseData($result);
                 }else{
                     $this->responseError(2, "No Result");
-                }
-            }else{
-                if(count($this->form_validation->error_array())){
-                    $this->responseError(102, $this->form_validation->error_array());
-                }else{
-                    $this->responseError(100, "Required Fields are empty");
-                }
-            }
-        }else{
-            $this->responseError(1, "Not Authorized");
-        }
-        $this->outputResponse();
-    }
-    
-    public function confirmGroupRegistration(){
-        $this->accessNumber = 4;
-        if($this->checkACL() && (user_type() == 2 ||user_type() == 3 )){
-            $this->form_validation->set_rules('local_chapter_group_ID', 'Local Group', 'alpha_numeric|callback_is_unique_username');
-            
-            if($this->form_validation->run()){
-                $this->load->model("M_account");
-                $result = $this->m_account->retrieveAccount(
-                        NULL, NULL, 0, array(), NULL, array(
-                            "account_local_chapter_group__local_chapter_group_ID" => $this->input->post("local_chapter_group_ID")
-                        )
-                        );
-                if($result){
-                    $this->load->model("M_account_information");
-                    foreach($result as $groupMember){
-                        $this->M_account_information->updateAccountInformation(NULL, array(
-                            "account_ID" => $groupMember["account_ID"] 
-                        ), array(
-                            "confirmation" => 2
-                        ));
-                    }
-                    $this->actionLog(json_encode($this->input->post()));
-                    $this->responseData($result);
-                }else{
-                    $this->responseError(3, "Failed to Update");
                 }
             }else{
                 if(count($this->form_validation->error_array())){

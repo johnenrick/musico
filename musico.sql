@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2016 at 03:37 PM
+-- Generation Time: Jun 30, 2016 at 04:14 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `password` varchar(70) DEFAULT NULL,
   `account_type_ID` int(10) NOT NULL,
   `status` int(11) NOT NULL COMMENT '1 - active, 2 - draft, 3 - deactivated, 4 -delete'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=303 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,17 @@ CREATE TABLE IF NOT EXISTS `account_basic_information` (
 CREATE TABLE IF NOT EXISTS `account_type` (
 `ID` int(10) NOT NULL,
   `description` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `account_type`
+--
+
+INSERT INTO `account_type` (`ID`, `description`) VALUES
+(1, 'developer'),
+(2, 'visitor'),
+(3, 'user'),
+(4, 'administrator');
 
 -- --------------------------------------------------------
 
@@ -86,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `action_log` (
   `access_number_ID` int(11) NOT NULL,
   `detail` text NOT NULL,
   `datetime` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=186547 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -97,7 +107,14 @@ CREATE TABLE IF NOT EXISTS `action_log` (
 CREATE TABLE IF NOT EXISTS `api_controller` (
 `ID` int(11) NOT NULL,
   `description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `api_controller`
+--
+
+INSERT INTO `api_controller` (`ID`, `description`) VALUES
+(1, 'C_account');
 
 -- --------------------------------------------------------
 
@@ -112,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `file_uploaded` (
   `path` text NOT NULL,
   `size` double NOT NULL,
   `datetime` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=306 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -124,7 +141,15 @@ CREATE TABLE IF NOT EXISTS `group_access_control_list` (
 `ID` int(11) NOT NULL,
   `module_ID` int(11) NOT NULL,
   `group_ID` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `group_access_control_list`
+--
+
+INSERT INTO `group_access_control_list` (`ID`, `module_ID`, `group_ID`) VALUES
+(1, 1, 1),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +162,18 @@ CREATE TABLE IF NOT EXISTS `module` (
   `description` varchar(50) NOT NULL,
   `parent_ID` int(11) NOT NULL,
   `link` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `module`
+--
+
+INSERT INTO `module` (`ID`, `description`, `parent_ID`, `link`) VALUES
+(1, 'Home Page', 0, ''),
+(2, 'Browsing Page', 0, ''),
+(3, 'Profile', 0, ''),
+(4, 'Admin', 0, ''),
+(5, 'Registration', 1, '');
 
 -- --------------------------------------------------------
 
@@ -229,7 +265,7 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=303;
+MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `account_basic_information`
 --
@@ -239,32 +275,32 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `account_type`
 --
 ALTER TABLE `account_type`
-MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `action_log`
 --
 ALTER TABLE `action_log`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=186547;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `api_controller`
 --
 ALTER TABLE `api_controller`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `file_uploaded`
 --
 ALTER TABLE `file_uploaded`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=306;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `group_access_control_list`
 --
 ALTER TABLE `group_access_control_list`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `module`
 --
 ALTER TABLE `module`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `module_api_controller`
 --
@@ -303,7 +339,7 @@ ADD CONSTRAINT `action_log_account_ID` FOREIGN KEY (`ID`) REFERENCES `account` (
 -- Constraints for table `group_access_control_list`
 --
 ALTER TABLE `group_access_control_list`
-ADD CONSTRAINT `group_access_control_list_group_ID` FOREIGN KEY (`group_ID`) REFERENCES `account_type` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+ADD CONSTRAINT `group_access_control_list_group_ID` FOREIGN KEY (`group_ID`) REFERENCES `account_type` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `group_access_control_list_module_ID` FOREIGN KEY (`module_ID`) REFERENCES `module` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --

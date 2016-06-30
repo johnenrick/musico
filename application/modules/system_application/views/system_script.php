@@ -8,11 +8,7 @@
             username : null,
             user_type : null
         },
-        url : {
-            base_url : "<?=base_url()?>",
-            api_url : "<?=api_url()?>",
-            asset_url : "<?=asset_url()?>"
-        },
+        
         default : {
             module_controller : "<?=$default["module"]?>"
         },
@@ -20,8 +16,16 @@
         refresh_call : {
 
         },
-        module : {},
+        
         token : null
+    };
+    var systemApplication = {
+        module : {},
+        url : {
+            base_url : "<?=base_url()?>",
+            api_url : "<?=api_url()?>",
+            asset_url : "<?=asset_url()?>"
+        }
     };
     function user_id(){
         return system_data.account_information.user_ID;
@@ -53,13 +57,13 @@
         });
     }
     function base_url(link){
-       return system_data.url.base_url+((typeof link === "undefined") ? "" : link);
+       return systemApplication.url.base_url+((typeof link === "undefined") ? "" : link);
     }
     function api_url(link){
-       return system_data.url.api_url+link;
+       return systemApplication.url.api_url+link;
     }
     function asset_url(link){
-       return system_data.url.asset_url+link;
+       return systemApplication.url.asset_url+link;
     }
     function retrieve_access_control(){
         $.post(api_url("C_access_control_list/retrieveAccessControlList"), {}, function(data){
@@ -126,7 +130,7 @@
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
-                var moduleHolder = $("#systemComponent").find(".moduleHolder").clone();
+                var moduleHolder = $("#systemModule").find(".moduleHolder").clone();
                 moduleHolder.attr("module_link", moduleLink);
                 moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
                 moduleHolder.append(data);
@@ -184,10 +188,15 @@
      * @param {function} callBack The function called after the component is loaded. This is where the purpose of loading a component being place
      * @returns {none}
      */
-    function load_page_component(component, callBack){
+    function load_component(component, callBack){
+        var componentHolder = $("#pageComponentContainer .componentHolder").clone();
+        componentHolder.addClass(component);
         if($("."+component).length === 0 ){
-            $.post("<?=base_url()?>system_application/loadPageComponent", {component : component}, function(data){
-                $("#pageComponentContainer").append(data);
+            $.post("<?=base_url()?>component/"+component, {component : component}, function(data){
+                if($("."+component).length === 0 ){
+                    componentHolder.append(data);
+                    $("#pageComponentContainer").append(componentHolder);
+                }
                 callBack();
             });
         }else{
@@ -223,16 +232,16 @@
     function load_asset(link) {
         if (link.indexOf(".css") > -1) {
             if (!$("link[href='" + asset_url("css/" + link) + "']").length) {
-                var systemComponent = $("#systemComponent").find("link").clone();
-                systemComponent.attr("href", asset_url("css/" + link));
-                $("head").append(systemComponent);
+                var systemModule = $("#systemModule").find("link").clone();
+                systemModule.attr("href", asset_url("css/" + link));
+                $("head").append(systemModule);
                 return true;
             } else {
                 return false;
             }
         } else {
             if (!$("script[src='" + asset_url("js/" + link) + "']").length) {
-                var systemComponent = $("#systemComponent").find("script").clone();
+                var systemModule = $("#systemModule").find("script").clone();
                 var s = document.createElement("script");
                 s.type = "text/javascript";
                 s.src = asset_url("js/" + link);

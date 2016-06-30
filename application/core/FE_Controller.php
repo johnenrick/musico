@@ -38,6 +38,22 @@ class FE_Controller extends API_Controller{
             $this->load->view($moduleScript);
         }
     }
+    public function loadComponent($moduleView, $moduleScript){
+        if(is_array($moduleView)){
+            foreach($moduleView as $view){
+                $this->load->view($view);
+            }
+        }else{
+            $this->load->view($moduleView);
+        }
+        if(is_array($moduleScript)){
+            foreach($moduleScript as $script){
+                $this->load->view($script."_script");
+            }
+        }else{
+            $this->load->view($moduleScript."_script");
+        }
+    }
     public function generateResponse($data = false, $error = array()){
         return array(
             "data" => $data,
