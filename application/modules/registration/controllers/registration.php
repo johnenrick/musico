@@ -7,6 +7,7 @@ class Registration extends FE_Controller{
             $this->loadPage("registration");
         }else{
             $this->loadModule("registration", "registration_script");
+
         }
     }
 }
