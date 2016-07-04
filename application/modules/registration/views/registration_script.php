@@ -1,5 +1,33 @@
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
+
+    function show_error(elementSelected, errorList){
+        elementSelected.find(".formMessage").empty();
+        elementSelected.find(".formMessage").show();
+        errorList.forEach(function (errorValue) {
+            if (errorValue["status"] > 100 && errorValue["status"] < 1000) {/*Form Validation Error*/
+                console.log(errorValue["message"]);
+                for (var index in errorValue["message"]) {
+                var message = errorValue["message"][index];
+                elementSelected.find("#"+index).val(message);
+                console.log(index);
+                console.log(errorValue["message"][index]);
+                    elementSelected.find(".formMessage").append("* " + errorValue["message"][index] + "<br>");
+                }
+            } else if (errorValue["status"] > 1000 && errorValue["status"] < 10000) {/*System Error*/
+                console.log('system')
+                for (var x = 0; x < errorValue["message"].length; x++) {
+                    for (var index in errorValue["message"][x]) {
+                        elementSelected.find(".formMessage").append("* " + errorValue["message"][x][index] + "<br>");
+                    }
+                }
+            } else {
+                elementSelected.find(".formMessage").append("* " + errorValue["message"] + "<br>");
+            }
+        });
+        elementSelected.scrollTo(".formMessage");
+    }
+
     /*Global\ Variable for this module. This is also the moduleName*/
     var registrationModule = function(){
         registrationModule = this;
@@ -17,19 +45,24 @@
                 var username = firstname+""+lastname;
                 username = username.replace(/\s+/g, '').toLowerCase();
                 data[0].value = username;
-                console.log(username);
-                console.log(data);
             },
             success : function(data){
                 var response = JSON.parse(data);
-                console.log(response.data)
+                console.log(response)
                 if(!response["error"].length){
                     $(".hide-module:not(#success-module)").hide();
-                       $("#success-module").fadeIn();
-                       $("#registrationNumberMessage").show();
+                    $("#success-module").show();
+                    $("#first_name").val('');
+                    $("#username").val('');
+                    $("#middle_name").val('');
+                    $("#last_name").val('');
+                    $("#email_address").val('');
+                    $("#password").val('');
+                    $("#country").val('');
                 }else{
-                     show_form_error($("#registrationForm"), response["error"]);
-                console.log(response["error"]);
+                    $("#success-module").hide();
+                    console.log(response['error'])
+                    // show_error($("#registrationForm"), response["error"]);
                 }
             }
         });
@@ -43,12 +76,11 @@
     load_asset("jquery.form.min.js");
     load_asset("registration.css");
     load_asset("core/custom/materialize_modal.css");
+    load_asset("jquery.validate.min.js");
 
     $(document).ready(function(){
         var test = new registrationModule();
-    });
-
-    $(document).ready(function(){
+        $("#success-module").hide();
         $("#registrationForm").attr('action',api_url("C_account/createAccount"));
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $("#registrationModal").attr("opacity",1);
@@ -62,6 +94,44 @@
         $( "#country" ).autocomplete({
           source: countryList
         });
+
+
+        $("#registrationForm").validate({
+        rules: {
+            first_name: "required",
+            last_name: "required",
+            email_address: {
+                required: true,
+                email:true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+            country: "required",
+        },
+        //For custom messages
+        messages: {
+            first_name: "First name required",
+            last_name: "Last name required",
+            password:{
+                required: "Password required",
+                minlength: "Enter at least 6 characters"
+            },
+            email_address: "Email is invalid",
+            country : "Country required",
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertBefore(element);
+          }
+        }
+     });
+     
     });
 </script>
 
