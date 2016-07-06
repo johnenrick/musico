@@ -87,13 +87,13 @@ div.error {
 			    	<div class="row">
 				        <div class="input-field col l12 m12 s12">
 				          <label for="username">Username</label>
-				          <input id="username" type="text" name="username" data-error=".errorTxt1">
-				          <div class="errorTxt1 col l12"></div>
+				          <input id="username" type="text" name="username" data-error=".errorTxt7">
+				          <div class="errorTxt7 col l12"></div>
 				        </div>
 				        <div class="input-field col l12 m12 s12">
 				          <label for="password">Password</label>
-				          <input id="password" type="tel" name="password" data-error=".errorTxt2">
-				          <div class="errorTxt2 col l12"></div>
+				          <input id="password" type="tel" name="password" data-error=".errorTxt8">
+				          <div class="errorTxt8 col l12"></div>
 				        </div>
 				    </div>
 <!-- 			        <input id="account_type_ID" type="text" class="validate hide" name="account_type_ID" value="3">
