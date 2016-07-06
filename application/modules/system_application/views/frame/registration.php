@@ -82,15 +82,15 @@ div.error {
 			    <div class="card-panel "><a class="btn-flat"><small>SIGN UP USING TWITTER</a></small></div> -->
 			</div>
 			<div id="loginField" class="col l7 m12 s12">
-				<h5 class="center-align">Become a member</h5>
-			    <form class="col m12 s12" method="POST" action="" id="registrationForm">
+				<h5 class="center-align">Member login</h5>
+			    <form class="col m12 s12" method="POST" action="" id="loginForm">
 			    	<div class="row">
-				        <div class="input-field col l6 m12 s12">
+				        <div class="input-field col l12 m12 s12">
 				          <label for="username">Username</label>
 				          <input id="username" type="text" name="username" data-error=".errorTxt1">
 				          <div class="errorTxt1 col l12"></div>
 				        </div>
-				        <div class="input-field col l6 m12 s12">
+				        <div class="input-field col l12 m12 s12">
 				          <label for="password">Password</label>
 				          <input id="password" type="tel" name="password" data-error=".errorTxt2">
 				          <div class="errorTxt2 col l12"></div>
@@ -101,7 +101,7 @@ div.error {
 <!-- 			        <div class="col m12">
 			        	<div class="g-recaptcha" data-sitekey="6LdvvSMTAAAAABPTLBegLzB_ZcJGHBDOzv6fK3DX"></div>
 			        </div> -->
-			        <div class="col m6 s12">
+			        <div class="col m6 s12 ">
 			        	<button class="btn waves-effect waves-light red darken-1">Log In</button>
 			        </div>
 			    </form>

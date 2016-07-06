@@ -110,6 +110,30 @@
           }
         }
      });
+
+        $("#loginForm").validate({
+        rules: {
+            
+            username: "required",
+            password: "required",
+        },
+        //For custom messages
+        messages: {
+            username: "Username required",
+            password:{
+                required: "Password required"
+            },
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertBefore(element);
+          }
+        }
+     });
      
     });
 </script>
