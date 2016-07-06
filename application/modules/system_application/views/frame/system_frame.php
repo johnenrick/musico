@@ -28,8 +28,8 @@
             <a class="brand-logo">Logo</a>
             <a data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a>Log in</a></li>
-                <li><a class="waves-effect waves-dark btn white grey-text text-darken-2">Join</a></li>
+                <li><a class="headerLogin">Log in</a></li>
+                <li><a class="waves-effect waves-dark btn white grey-text text-darken-2 headerAuthentication">Join</a></li>
                 <li><a>Upload</a></li>
                 <li id="profile-btn">
                     <a class="dropdown-button" href="#!" data-activates="profile-popup"><img src="<?=asset_url()?>image/profpic.png" /></a>
