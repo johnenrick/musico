@@ -18,17 +18,16 @@ class C_account_photo extends API_Controller {
     public function createAccountPhoto(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            $this->form_validation->set_rules('account_ID', 'Account ID', 'required');
             $this->form_validation->set_rules('type', 'Type', 'required');
             
             if($this->form_validation->run()){
                 $result = $this->m_account_photo->createAccountPhoto(
-                        $this->input->post("account_ID"),
+                        $this->userID,
                         $this->input->post("type"),
                         1
                         );
                 if($result){
-                    $fileUpload = $this->uploadFile($this->input->post("account_ID"));
+                    $fileUpload = $this->uploadFile($this->userID);
                     if(!is_string($fileUpload)){
                         $this->m_account_photo->updateAccountPhoto($result, NULL, array(
                            "file_uploaded_ID" =>  $fileUpload

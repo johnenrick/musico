@@ -25,6 +25,7 @@ class API_Model extends CI_Model{
         $result = $this->db->insert_id();
         $this->db->flush_cache();
         $this->db->stop_cache();
+        
         return $result;
     }
     /**

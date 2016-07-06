@@ -33,6 +33,7 @@ class API_Controller extends MX_Controller{
         $this->load->model("api/m_action_log");
         $this->form_validation->CI =&$this;
         $token = decodeToken($this->input->post("token"));
+        $this->userID = 1;
         if($token){
             $this->userID = $token["user_ID"];
             $this->userType = $token["user_type"];
