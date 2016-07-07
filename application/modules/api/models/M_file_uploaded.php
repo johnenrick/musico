@@ -16,10 +16,10 @@ class M_file_uploaded extends API_Model{
         parent::__construct();
         $this->TABLE = "file_uploaded";
     }
-    public function createFileUploaded($type, $name, $path, $size){
+    public function createFileUploaded($description, $fileType, $path, $size){
         $newData = array(
-            "type" => $type,
-            "name" => $name,
+            "description" => $description,
+            "file_type" => $fileType,
             "path" => $path,
             "size" => $size,
             "datetime" => time()
@@ -31,7 +31,7 @@ class M_file_uploaded extends API_Model{
             
         );
         $selectedColumn = array(
-            "file_uploaded.*"
+            "file_uploaded.*, CONCAT(path, description,'.',file_type) AS full_path"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);

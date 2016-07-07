@@ -25,6 +25,7 @@ class API_Model extends CI_Model{
         $result = $this->db->insert_id();
         $this->db->flush_cache();
         $this->db->stop_cache();
+        
         return $result;
     }
     /**
@@ -46,12 +47,16 @@ class API_Model extends CI_Model{
         //Select column
         if(is_array($selectedColumn)){
             $selectedQuery = "";
+            $activeBactick = true;
             foreach($selectedColumn as $key => $column){
                 $selectedQuery.=" $column";
                 $selectedQuery.=",";
+                if (strpos($column, 'concat(') !== false) {
+                    $activeBactick = false;
+                }
             }
             $selectedQuery .= ", $this->TABLE.ID ";
-            $this->db->select($selectedQuery);
+            $this->db->select($selectedQuery, $activeBactick);
         }
         //joining table
         foreach($joinedTable as $key => $value){

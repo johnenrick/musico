@@ -31,10 +31,8 @@ class Portal extends FE_Controller{
             $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, NULL,$condition);
             $this->responseDebug($result);
             $this->responseDebug("email__detail");
-            if($result && ($result[0]["account_type_ID"]*1 == 2 || $result[0]["account_type_ID"]*1 == 3 || $result[0]["account_type_ID"]*1 == 4 || $result[0]["account_type_ID"]*1 == 8 )){
-                $this->responseDebug($result);
-                $this->createSession($result[0]["first_name"], $result[0]["last_name"], $result[0]["middle_name"], $result[0]["account_type_ID"], $result[0]["ID"], $result[0]["username"]);
-                $this->responseData(true);
+            if($result){
+                $this->responseData(generateToken($result[0]["ID"], $result[0]["account_type_ID"], $result[0]["username"]));
             }else{
                 $this->responseError(5, "Username/Email and Password Mismatch");
             }
@@ -42,7 +40,7 @@ class Portal extends FE_Controller{
            if(count($this->form_validation->error_array())){
                 $this->responseError(102, $this->form_validation->error_array());
             }else{
-                $this->responseError(100, "Required Fields are empty");
+                $this->responseError(100, "Type Username/Email and Password");
             }
         }
         $this->outputResponse();
