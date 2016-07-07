@@ -1,5 +1,6 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript">
-load_asset("jquery.form.min.js");
+load_asset("jquery.form.min.js");+
 load_asset("registration.css");
 load_asset("core/custom/materialize_modal.css");
 // $("#registrationMessage").hide();

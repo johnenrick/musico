@@ -37,7 +37,10 @@
 			          <input id="country" type="tel" class="validate">
 			          <label for="countery">Country</label>
 			        </div>
-			        <div class="col m6 offset-m6">
+			        <div class="col m6">
+			        	<div class="g-recaptcha" data-sitekey="6LdvvSMTAAAAABPTLBegLzB_ZcJGHBDOzv6fK3DX"></div>
+			        </div>
+			        <div class="col m6">
 			        <button class="btn waves-effect waves-light red darken-1">REGISTER</button>
 			        </div>
 			    </form>
@@ -46,7 +49,7 @@
 			    <div class="card-panel "><a class="btn-flat"><small>SIGN UP USING TWITTER</a></small></div> -->
 			</div>
 			<div class="image-wrapper" class="col m5">
-				<img src="../assets/images/side.png"><img>
+				<img src="../assets/images/side.png"><><img>
 			</div>
 		</div>
 	</div>

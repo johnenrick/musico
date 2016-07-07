@@ -10,7 +10,6 @@
                 content: 'Simple confirm!'
             });
         }
-
             $("#registrationForm").ajaxForm({
             beforeSubmit: function(data,$form,options){
                 var firstname = data[1].value;
@@ -113,7 +112,7 @@
 
         $("#loginForm").validate({
         rules: {
-            
+
             username: "required",
             password: "required",
         },
