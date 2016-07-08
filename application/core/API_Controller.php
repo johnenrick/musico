@@ -193,7 +193,11 @@ class API_Controller extends MX_Controller{
             $this->formValidationError[$fieldName] = "$fieldTitle is required";
         }
     }
-    
+    public function does_exist($value, $tableColumn){
+        $this->load->model("form_validation");
+        $this->form_validation->set_message('does_exist', '{field} does not exist');
+        return $this->form_validation->doesExist($tableColumn, $value);
+    }
     
 }
 

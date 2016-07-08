@@ -21,6 +21,7 @@ class M_user_video extends API_Model{
             "account_ID" => $accountID,
             "file_uploaded_ID" => $fileUploadedID,
             "video_category_ID" => $videoCategoryID,
+            "thumbnail_file_uploaded_ID" => 0,
             "title" => $title,
             "details" => $details,
             "status" => $status,

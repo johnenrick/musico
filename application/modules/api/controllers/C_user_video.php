@@ -20,9 +20,7 @@ class C_user_video extends API_Controller {
         if($this->checkACL()){
             $this->form_validation->set_rules('video_category_ID', 'Video Category', 'required');
             $this->form_validation->set_rules('title', 'Title', 'required|min_length[5]|max_length[100]|trim');
-            $this->form_validation->set_rules('details', 'Details', 'required');          
-            
-            
+            $this->form_validation->set_rules('details', 'Details', 'required'); 
             if($this->form_validation->run()){
                 $result = $this->m_user_video->createUserVideo(
                         $this->userID,
@@ -65,6 +63,43 @@ class C_user_video extends API_Controller {
         }
         $this->outputResponse();
     }
+    public function createUserVideoThumbnail(){
+        $this->accessNumber = 1;
+        if($this->checkACL()){
+            $this->form_validation->set_rules('user_video_ID', 'Video Category', 'required|callback_does_exist[user_video.ID]');   
+            
+            if($this->form_validation->run()){
+                $this->load->model("M_file_uploaded");
+                $fileUpload = $this->uploadFile($this->userID);
+                if(!is_string($fileUpload)){
+                    $userVideo = $this->m_user_vdeo->retrieveUserVideo( false, NULL, 0, array(), $this->input->post("user_video_ID"));
+                    $this->m_user_video->updateUserVideo($this->input->post("user_video_ID"), NULL, array(
+                        "thumbnail_file_uploaded_ID" =>  $fileUpload,
+                        "status" =>  1
+                    ));
+                    if($userVideo["thumbnail_file_uploaded_ID"]*1){
+                        $thumbnailFileUploaded = $this->M_file_uploaded->retrieveUserVideo( false, NULL, 0, array(), $userVideo["thumbnail_file_uploaded_ID"]);
+                        unlink($thumbnailFileUploaded["full_path"]);
+                        $this->M_file_uploaded->deleteFileUploaded($thumbnailFileUploaded["ID"]);
+                    }
+                    $this->responseData($fileUpload);
+                    $this->actionLog($fileUpload);
+                }else{
+                    $this->responseError(3, "Failed to create");
+                }
+            }else{
+                if(count($this->form_validation->error_array())){
+                    $this->responseError(102, $this->form_validation->error_array());
+                }else{
+                    $this->responseError(100, "Required Fields are empty");
+                }
+            }
+        }else{
+            $this->responseError(1, "Not Authorized");
+        }
+        $this->outputResponse();
+    }
+    
     public function retrieveUserVideo(){
         $this->accessNumber = 2;
         if($this->checkACL()){
@@ -144,6 +179,30 @@ class C_user_video extends API_Controller {
         $config['upload_path']          = $path;
         $config['allowed_types']        = 'mp4';
         $config['max_size']             = 100000;//kb
+        $config['encrypt_name']         = true;
+        $config['file_ext_tolower']     = true;
+        
+        $this->upload->initialize($config);
+        $this->load->library('upload');
+
+        if ($this->upload->do_upload()){
+            $uploadData = $this->upload->data();
+            $this->load->model("M_file_uploaded");
+            return $this->M_file_uploaded->createFileUploaded($uploadData["file_name"], $uploadData["image_type"], $uploadData["file_path"], $uploadData["file_size"]);
+        }else{
+            $error = $this->upload->display_errors("","");
+            return $error;
+        }
+    }
+    public function uploadFileThumbnail($accountID = false){
+        $this->load->library("upload");
+        $path = "assets/user_upload/$accountID/";
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        $config['upload_path']          = $path;
+        $config['allowed_types']        = 'jpg|png';
+        $config['max_size']             = 2000;//kb
         $config['encrypt_name']         = true;
         $config['file_ext_tolower']     = true;
         
