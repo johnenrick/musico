@@ -8,11 +8,13 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/system_frame.css" media="screen,projection" />
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/core/materialize.min.js"></script>
     <!--Import customized style-->
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/common.css" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/font-awesome.min.css" media="screen,projection" />
 </head>
 
 <body>

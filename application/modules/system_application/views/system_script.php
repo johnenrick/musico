@@ -64,6 +64,12 @@
     function asset_url(link){
        return systemApplication.url.asset_url+link;
     }
+    function user_video_url(uploaderAccountID, videoFilename){
+        return systemApplication.url.asset_url+"user_upload/"+uploaderAccountID+"/"+videoFilename;
+    }
+    function user_photo_url(accountID, photoFilename){
+        return systemApplication.url.asset_url+"user_upload/"+accountID+"/"+photoFilename;
+    }
     function retrieve_access_control(){
         $.post(api_url("C_access_control_list/retrieveAccessControlList"), {}, function(data){
             var response = JSON.parse(data);
