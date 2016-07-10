@@ -1,5 +1,5 @@
 
-.modal .costum .modal-content {
+.c-modal .c-costum .c-modal-content {
   position: absolute;
   height: calc(100% - 56px);
   max-height: 100%;
@@ -8,7 +8,7 @@
   padding:0;
 }
 
-.modal .costum .modal-footer {
+.c-modal .c-costum .-cmodal-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   position: absolute;
   bottom: 0;
@@ -20,15 +20,15 @@
 }
 
 
-.modal .modal-content{
+.c-modal .c-modal-content{
 	padding: 0;
 }
 
-.fix{
+.c-fix{
   padding: 30px;
 }
 
-.modal .modal-content .image-wrapper{
+.c-modal .c-modal-content .c-image-wrapper{
 	padding: 0;
 	z-index:1;
 	height: 70px;

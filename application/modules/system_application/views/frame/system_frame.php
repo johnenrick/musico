@@ -42,7 +42,7 @@
                 <li><a>Profile</a></li>
                 <li><a>Featured</a></li>
                 <li><a>Events</a></li>
-                <li><a>Contact Us</a></li>
+                <li class="contactPageLink"><a>Contact Us</a></li>
             </ul>
         </div>
     </nav>
@@ -56,7 +56,7 @@
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">home</i>Home</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">featured_play_list</i>Featured</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">event</i>Events</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="material-icons">phone</i>Contact Us</a></li>
+                <li><a href="#" class="contactPageLink valign-wrapper"><i class="material-icons">phone</i>Contact Us</a></li>
             </ul>
             <hr>
             <ul id="side-nav-large">
