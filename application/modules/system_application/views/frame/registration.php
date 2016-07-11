@@ -14,16 +14,9 @@ div.error {
     transform: translateY(0%);
 }
 </style>
-<!-- <div class="section white">
-    <div class="row">
-    	<button data-target="registrationModal" id="modal" class="btn modal-trigger waves-effect waves-light red darken-1 right" type="button" name="action">JOIN US
-	  	</button>
-    </div>
- </div> -->
-<!--  modal -->
-<div id="registrationModal" class="modal custom white">
-	<div class="modal-content white">
-		<div class="row">
+<div id="registrationModal" class="modal c-modal c-custom white">
+	<div class="c-modal-content white">
+		<div class="row marginSet">
 			<div id="registerField" class="col l7 m12 s12">
 				<h5 class="center-align">Become a member</h5>
 			    <form class="col m12 s12" method="POST" action="" id="registrationForm">
@@ -66,7 +59,7 @@ div.error {
 				    </div>
 			        <input id="account_type_ID" type="text" class="validate hide" name="account_type_ID" value="3">
 			        <input id="status" type="text" class="validate hide" name="status" value="2">
-<!-- 			        <div class="col m12">
+					<!--<div class="col m12">
 			        	<div class="g-recaptcha" data-sitekey="6LdvvSMTAAAAABPTLBegLzB_ZcJGHBDOzv6fK3DX"></div>
 			        </div> -->
 			        <div class="col m6 s12">
@@ -74,12 +67,8 @@ div.error {
 			        </div>
 			        <div class="col m6 s12">
 			        	<span class="green-text" id="success-module">Registered!</span>
-<!-- 			        	<span class="formMessage"></span> -->
 			        </div>
 			    </form>
-				<!-- <div class="card-panel "><a class="btn-flat"><small>BUTTON</small></a></div>
-			    <div class="card-panel "><a class="btn-flat"><small>SIGN UP USING FACEBOOK</small></a></div>
-			    <div class="card-panel "><a class="btn-flat"><small>SIGN UP USING TWITTER</a></small></div> -->
 			</div>
 			<div id="loginField" class="col l7 m12 s12">
 				<h5 class="center-align">Member login</h5>
@@ -96,9 +85,9 @@ div.error {
 				          <div class="errorTxt8 col l12"></div>
 				        </div>
 				    </div>
-<!-- 			        <input id="account_type_ID" type="text" class="validate hide" name="account_type_ID" value="3">
+					<!--<input id="account_type_ID" type="text" class="validate hide" name="account_type_ID" value="3">
 			        <input id="status" type="text" class="validate hide" name="status" value="2"> -->
-<!-- 			        <div class="col m12">
+					<!--<div class="col m12">
 			        	<div class="g-recaptcha" data-sitekey="6LdvvSMTAAAAABPTLBegLzB_ZcJGHBDOzv6fK3DX"></div>
 			        </div> -->
 			        <div class="col m6 s12 ">
@@ -106,8 +95,8 @@ div.error {
 			        </div>
 			    </form>
 			</div>
-			<div class="image-wrapper hide-on-med-and-down" class="col l5">
-				<img src="<?=asset_url("image/side.png")?>"><img>
+			<div class="c-image-wrapper hide-on-med-and-down" class="col l4 m4">
+				<img class="regImage" src="<?=asset_url("image/side.png")?>"><img>
 			</div>
 		</div>
 	</div>
