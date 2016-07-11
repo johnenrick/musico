@@ -17,4 +17,7 @@ class System_application extends FE_Controller{
         $this->load->view("page_component/".$this->input->post("component"));
         $this->load->view("page_component/".$this->input->post("component")."_script");
     }
+    function sendContactMessage(){
+        
+    }
 }
