@@ -1,7 +1,5 @@
 <script>
     /*Adding an asset*/
-    load_asset("jquery-confirm.min.css");
-    load_asset("jquery-confirm.min.js");
     
     /*Component Object*/
     /***
@@ -12,7 +10,7 @@
     var TableComponent = function (componentContainer) {
         var tableComponent = this;
         tableComponent.body = $("#pageComponentContainer .tableComponent").clone();//The HTML instance of the component. 
-        tableComponent.body.html("Hello World From the Component");
+        
         componentContainer.append(tableComponent.body);
     };
 </script>

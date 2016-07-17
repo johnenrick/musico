@@ -1,2 +1,2 @@
-<div id="table">
+<div id="categoryManagement">
 </div>

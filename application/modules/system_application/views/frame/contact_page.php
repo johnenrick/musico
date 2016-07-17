@@ -1,8 +1,10 @@
 <div id="contactPage" class="modal red darken-3">
     <div class="modal-content ">
-        <h4 class="white-text">We would like to hear from you!</h4>
+        
         <div class="row ">
-            <div class="col s12 m6 l6 white-text">
+            <div class="col s12 m4 l4 white-text">
+                <h4 class="white-text">We would like to hear from you!</h4>
+                <br>
                 <h6>CONTACT DETAILS</h6>
                 <div class="row">
                     <div class="col s12">
@@ -25,27 +27,40 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l6 white z-depth-2">
+            <div class="col s12 m8 l8 white z-depth-2">
                 <form id="contactPageForm" method="POST">
                     <h5>Send us a message</h5>
-                    <div class="input-field">
-                        <input id="contactPageFullName" value="" type="text" class="validate">
-                        <label for="contactPageFullName" class="active" >Name</label>
+                    <div class="row">
+                        <div class="input-field col s12 m6 l6">
+                            
+                            <input id="contactPageFullName" value="" type="text" class="validate">
+                            <label for="contactPageFullName" class="active" >Name</label>
+                        </div>
+                        <div class="input-field col s12 m6 l6">
+                            <input id="contactPageEmailAddress" value="" type="text" class="validate">
+                            <label for="contactPageEmailAddress"class="active" >Email Address</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <input id="contactPageEmailAddress" value="" type="text" class="validate">
-                        <label for="contactPageEmailAddress"class="active" >Email Address</label>
+                    <div class="row">
+                        <div class="input-field">
+                            <input id="contactPageSubject" value="" type="text" class="validate">
+                            <label for="contactPageSubject"class="active" >Subject</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <input id="contactPageSubject" value="" type="text" class="validate">
-                        <label for="contactPageSubject"class="active" >Subject</label>
+                    <div class="row">
+                        <div class="input-field">
+                            <textarea class="materialize-textarea" ></textarea>
+                            <label >Message</label>
+                        </div>
                     </div>
-                    <div class="input-field col s12">
-                        <textarea class="materialize-textarea" ></textarea>
-                        <label >Message</label>
-                        
+                    <div class="row ">
+                        <div class="col s12 center center-align">
+                            <button type="submit" class="waves-effect waves-light  red darken-3 btn"><i class="fa fa-envelope-o" aria-hidden="true"></i> Send Message</button>
+                        </div>
                     </div>
-                    <button type="submit" class="col waves-effect waves-light  red darken-3 btn">Send Message</button>
+                    <div class="progress red accent-1" style="display:none;margin:-4px 0 0 0;">
+                        <div class="indeterminate red "></div>
+                    </div>
                 </form>
             </div>
             

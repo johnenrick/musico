@@ -7,10 +7,13 @@
         $("#contactPageForm").attr("action", base_url("system_application/sendContactMessage"));
         $("#contactPageForm").ajaxForm({
             beforeSubmit : function(){
-                $("#contactPageForm button").toggleClass("disabled")
+                $("#contactPageForm button").attr("disabled","disabled");
+                $("#contactPageForm button").addClass("disabled");
+                $("#contactPageForm .progress").show();
             },
             success : function(data){
-               console.log(data);
+                $("#contactPageForm .progress").hide();
+                console.log(data);
             }
         });
     });
