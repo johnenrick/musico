@@ -1,14 +1,11 @@
 
 .c-modal .c-costum .c-modal-content {
   position: absolute;
-  height: calc(100% - 56px);
   max-height: 100%;
   width: 100%;
-  overflow: hidden;
-  padding:0;
 }
 
-.c-modal .c-costum .-cmodal-footer {
+/*.c-modal .c-costum .-cmodal-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   position: absolute;
   bottom: 0;
@@ -17,24 +14,20 @@
   padding: 4px 6px;
   height: 56px;
   width: 100%;
-}
-
-
-.c-modal .c-modal-content{
-	padding: 0;
-}
-
-.c-fix{
-  padding: 30px;
-}
+}*/
 
 .c-modal .c-modal-content .c-image-wrapper{
-	padding: 0;
 	z-index:1;
-	height: 70px;
 	overflow: hidden;
-  padding-bottom: 1000px;
-  margin-bottom: -1000px;
+  margin-bottom:0;
+}
+
+.regImage{
+  max-width: 100%;
+  max-height: calc(100%-56px); 
 }
 
 
+.marginSet{
+  margin-bottom:0;
+}

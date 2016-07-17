@@ -1,8 +1,10 @@
-
 /* Global Default */
-html, body {
+
+html,
+body {
     height: 100%;
     min-height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -14,7 +16,7 @@ body {
 }
 
 #content-container {
-    height: calc( 100% - 64px );
+    height: calc( 100% - 64px);
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -29,12 +31,11 @@ body {
 
 #page-content-container #mainContent {
     height: auto;
-    min-height: calc( 100% - 100px );
+    min-height: calc( 100% - 100px);
     padding: 0;
     margin: 0;
     position: relative;
 }
-
 
 
 /* Side Nav Large */
@@ -51,16 +52,15 @@ body {
 }
 
 #side-nav-large-container li {
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 13px;
+    line-height: 12px;
     vertical-align: middle;
     margin: 10px 0;
 }
 
-#side-nav-large-container li:hover a{
+#side-nav-large-container li:hover a {
     color: #B71C1C;
 }
-
 
 #side-nav-large-container li a {
     color: #fff;
@@ -68,7 +68,8 @@ body {
 }
 
 #side-nav-large-container li i {
-    margin-right: 10px;
+    margin-right: 14px;
+    font-size: 18px;
 }
 
 #side-nav-large-container hr {
@@ -82,7 +83,6 @@ body {
     width: 100%;
 }
 
-
 @media only screen and (max-width: 992px) {
     #side-nav-large-container {
         display: none;
@@ -92,19 +92,22 @@ body {
 
 /* Header */
 
-#profile-btn, #profile-btn a {
+#profile-btn,
+#profile-btn a {
     height: 64px;
 }
 
 #profile-btn img {
     height: 44px;
     margin-top: 10px;
+    border-radius: 50%;
 }
 
 #profile-popup {
     width: 250px !important;
     top: 64px !important;
 }
+
 
 /* Footer */
 
@@ -120,7 +123,6 @@ body {
     display: inline;
     margin-right: 10px;
 }
-
 
 #page-content-container footer .links li a {
     color: #666;
@@ -138,4 +140,124 @@ body {
 #page-content-container footer .container .row {
     padding: 0;
     margin: 0;
+}
+
+
+/* Profile */
+
+#profile-header {
+    height: 320px;
+    background-color: #888;
+    padding: 0;
+    background-image: url(../image/sample-header.jpg);
+    background-size: cover;
+    background-position: 0 60%;
+}
+
+#profile-header .pro-info {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    float: right;
+    text-align: center;
+    color: #fff;
+}
+
+#profile-header .pro-info img {
+    height: 38%;
+    margin: 8% 5% 0;
+    border-radius: 50%;
+}
+
+#profile-header .pro-info h5 {
+
+}
+
+#profile-header .pro-info p {
+    color: #ccc;
+}
+
+#profile-menu {
+    height: 55px;
+    background-color: #fff;
+    border-bottom: solid 1px #ccc;
+    padding: 0;
+}
+
+#profile-menu div.col {
+    padding: 0;
+}
+
+#profile-menu .links {
+    margin: 0;
+}
+
+#profile-menu .links li {
+    display: inline-block;
+    padding: 15px 15px;
+    box-sizing: content-box;
+    border-bottom: 2px solid #fff;
+}
+
+#profile-menu .links li:hover {
+    border-color: #C62828;
+}
+
+#profile-menu .links li:hover a {
+    color: #666;
+}
+
+#profile-menu .links li.active,
+#profile-menu .links li.active a {
+    font-weight: bold;
+    color: #000;
+}
+
+#profile-menu .m3 a {
+    margin-top: 10px;
+}
+
+#profile-list {
+    padding: 0;
+}
+
+#profile-list .col-left,
+#profile-list .col-right {
+    height: auto;
+}
+
+#profile-list .col-left {
+    background-color: #fff;
+    padding-top: 25px;
+}
+
+#profile-list .col-right {
+    background-color: #e2dede;
+}
+
+#profile-list .card.small {
+    height: auto;
+}
+
+#profile-list .card-fixed .card-image {
+    height: 165px;
+}
+
+#profile-list .card-large .card-image {
+     height: 300px;
+}
+
+#profile-list .card-large .videoDescription{
+     font-size: 22px
+}
+
+#profile-list .card-large .videoDescription{
+     font-size: 22px
+}
+
+#profile-list .album-title {
+    font-weight: bold;
+}
+
+#profile-list hr {
+    border-color: #9e9e9e ;
 }
