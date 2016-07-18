@@ -94,4 +94,19 @@
         var s = "000000000" + num;
         return s.substr(s.length - size);
     }
+    /***
+     * 
+     * @param {type} arr
+     * @returns {unresolved}
+     */
+    function removeElementByValue(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax = arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
+    }
 </script>
