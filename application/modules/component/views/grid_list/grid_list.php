@@ -3,11 +3,11 @@
         
     </div>
     <div class="prototype">
-        <div class="col s6 m3 l3 videoItem">
-            <div class="card hoverable transparent z-depth-0 small">
+        <div class="col s6 m3 l2 videoItem" style="height:200px">
+            <div class="card hoverable transparent z-depth-0">
                 <div class="card-image">
                     <a href="" >
-                        <img src="<?=  asset_url("sample_image/sample_image (1).jpg")?>">
+                        <img src="<?=  asset_url("sample_image/sample_image (1).jpg")?>" >
                     </a>
                 </div>
                 <div class="">
