@@ -16,19 +16,25 @@
         //COLUMN
         if(typeof columnConfiguration !== "undefined"){
             var columnRow = document.createElement("TR");
-           
             for(var ctr = 0; ctr < columnConfiguration.length; ctr++){
-                var tableHead = tableComponent.body.prototype.find(".tableHead");
+                var tableHead = tableComponent.body.prototype.find(".tableHead").clone();
                 tableHead.find(".columnDescription").text(columnConfiguration[ctr]["description"]);
                 if(typeof columnConfiguration[ctr]["table_column"] !== "undefined"){
                     tableHead.attr("table_column", columnConfiguration[ctr]["table_column"]);
+                }else{
+                    tableHead.attr("sort", "off");
+                    tableHead.find(".fa-sort").hide();
                 }
-                if(typeof columnConfiguration[ctr]["default_sort"] !== "undefined"){
-                    tableHead.attr("sort", columnConfiguration[ctr]["default_sort"]);
-                }
+                //TODO default sort
+//                if(typeof columnConfiguration[ctr]["default_sort"] !== "undefined"){
+//                    tableHead.attr("sort", columnConfiguration[ctr]["default_sort"]);
+//                }
                 $(columnRow).append(tableHead);
+                console.log(columnRow)
+                
             }
-            tableComponent.body.find("table").append(columnRow);
+            
+            tableComponent.body.find("table thead").append(columnRow);
         }
         var sortList = [];
         tableComponent.table.find(".tableHead").click(function(){
@@ -60,7 +66,43 @@
             beforeSubmit : function(){
             },
             success : function(data){
+                var response = JSON.parse(data);
+                tableComponent.table.find("tbody").empty();
+                if(!response["error"].length){
+                    if(typeof resultConfiguration.success !== "undefined"){
+                        tableComponent.table.find(".resultCount").text(response["result_count"]*1);
+                        resultConfiguration.success(response["data"]);
+                    }else{
+                        console.log("No Result Callback");
+                    }
+                }else{
+                    for(var x = 0; x < response["error"].length; x++){
+                        if(response["error"][x]["status"]*1 === 2){
+                            tableComponent.table.find("tbody").append("<tr><td colspan='"+columnConfiguration.length+"'>No Result</td></tr>")
+                        }
+                    }
+                }
             }
+        });
+        tableComponent.addEntry = function(newEntry){
+            tableComponent.table.find("tbody").append(newEntry);
+        }
+        tableComponent.retrieveEntry = function(){
+            tableComponent.body.find(".filterResultForm").trigger("submit");
+        };
+        tableComponent.retrieveEntry();
+        /*Filter*/
+        tableComponent.body.find(".openFilter").click(function(){
+            $(this).hide();
+            tableComponent.body.find(".filterResultForm").show("slide", { direction: "up" }, 500);
+            tableComponent.body.find(".closeFilter").show();
+            
+        });
+        tableComponent.body.find(".closeFilter").click(function(){
+            $(this).hide();
+            tableComponent.body.find(".filterResultForm").hide("slide", { direction: "up" }, 500);
+            tableComponent.body.find(".openFilter").show();
+            
         });
     };
 </script>

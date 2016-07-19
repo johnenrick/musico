@@ -25,9 +25,11 @@ class M_video_category extends API_Model{
     }
     public function retrieveVideoCategory($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
+            "video_category AS parent_video_category" => "parent_video_category.ID=video_category.parent_ID"
         );
         $selectedColumn = array(
-            "video_category.*"
+            "video_category.*",
+            "parent_video_category.description AS parent_description"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
