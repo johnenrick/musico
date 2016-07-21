@@ -90,6 +90,7 @@
                     if(typeof resultConfiguration.success !== "undefined"){
                         tableComponent.table.find(".resultCount").text((typeof response["result_count"] !== "undefined") ? response["result_count"]*1 : response["data"].length);
                         resultConfiguration.success(response["data"]);
+                        
                     }else{
                         console.log("No Result Callback");
                     }
@@ -103,8 +104,9 @@
             }
         });
         tableComponent.addEntry = function(newEntry){
+            console.log(newEntry);
             tableComponent.table.find("tbody").append(newEntry);
-        }
+        };
         tableComponent.retrieveEntry = function(){
             tableComponent.body.find(".filterResultForm").trigger("submit");
         };

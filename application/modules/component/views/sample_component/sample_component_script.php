@@ -12,7 +12,7 @@
     var SampleComponent = function (componentContainer) {
         var sampleComponent = this;
         sampleComponent.body = $("#pageComponentContainer .sampleComponent").clone();//The HTML instance of the component. 
-        sampleComponent.body.html("Hello World From the Component");
+        sampleComponent.body.html("Hello World From the Component!");
         componentContainer.append(sampleComponent.body);
     };
 </script>
