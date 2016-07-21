@@ -3,7 +3,7 @@
         
         <div class="row ">
             <div class="col s12 m4 l4 white-text">
-                <h4 class="white-text">We would like to hear from you!</h4>
+                <h4 class="white-text" style="font-style: italic">We would like to hear from you!</h4>
                 <br>
                 <h6>CONTACT DETAILS</h6>
                 <div class="row">

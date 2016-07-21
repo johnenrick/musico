@@ -1,28 +1,19 @@
 <div class="tableComponent">
-   
-    <form class="filterResultForm" method="POST" style="display:none">
-        <div class="row">
-            <div class="input-field col s12 m4 l3 ">
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12  center">
-                <button class="filterResult btn waves-light">Filter Result</button>
-            </div>
-        </div>
-    </form>
+   <div class="row no-margin-bot">
+        <form class="filterResultForm" method="POST" >
+                <input name="result_limit" type="hidden">
+                <div class="filterResultFormInput col s12 m9 l9  sameHeight">
+                </div>
+                <div class="col s12 m3 l3  valign-wrapper sameHeight" style="text-align: center">
+                    <button class="filterResult btn waves-light valign" style="margin-left:auto; margin-right:auto"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
+                </div>
+
+        </form>
+    </div>
     <div class="row">
         <div class="col s12">
-            <table>
+            <table class="tableEntry">
                 <thead>
-                    <tr>
-                        <td>
-                            <button class="btn openFilter"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
-                            <button class="btn closeFilter" style="display:none"> Close Filter</button>
-                        </td>
-                    </tr>
                 </thead>
                 <tbody>
                 </tbody>
@@ -47,5 +38,9 @@
                 </th>
             </tr>
         </table>
+        <div class="formFilterInput input-field col s12 m4 l4">
+            <input name="" type="text" class="validate" >
+            <label for="" ></label>
+        </div>
     </div>
 </div>
