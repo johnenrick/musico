@@ -10,11 +10,11 @@
            portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (3).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
            portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (4).jpg"), "Running in the morning", "Runner's Club", 1462767575, 10);
            portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (4).jpg"), "Running in the morning", "Runner's Club", 1462767575, 10);
-           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
+           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains A very long name asdasdasd asdaso a saidoaid", "The Mountain Bikers", 1462767575, 10);
            portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (2).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
            portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (3).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
            portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (4).jpg"), "Running in the morning", "Runner's Club", 1462767575, 10);
-           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (4).jpg"), "Running in the morning", "Runner's Club", 1462767575, 10);
+           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (4).jpg"), "Running in the morning Long nameeeee a asdasd", "Runner's Club", 1462767575, 10);
         });
         
     };

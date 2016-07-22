@@ -43,6 +43,7 @@ class C_video_category extends API_Controller {
         $this->outputResponse();
     }
     public function retrieveVideoCategory(){
+        $this->responseDebug($this->input->post("token"));
         $this->accessNumber = 2;
         if($this->checkACL()){
             $result = $this->m_video_category->retrieveVideoCategory(

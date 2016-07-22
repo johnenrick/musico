@@ -10,6 +10,7 @@
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/materialize.min.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/system_frame.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/positioning.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/helper.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/jquery-ui.min.css" media="screen,projection" />
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery.min.js"></script>
@@ -63,17 +64,21 @@
                 <li><a href="#" class="contactPageLink valign-wrapper"><i class="material-icons">phone</i>Contact Us</a></li>
             </ul>
             <hr>
-            <ul id="side-nav-large">
+            <ul id="side-nav-large" class="playlistSidebar">
                 <li><span class="white-text">PLAYLIST</span></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">queue_music</i>My Playlist</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">favorite_border</i>Liked Videos</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">star_border</i>Saved Artists</a></li>
             </ul>
 
-
-            <a class="waves-effect waves-light btn red darken-4 modal-trigger" href="#modal1">Sign Up</a>
-            <p class="center white-text">or</p>
-            <a class="waves-effect waves-dark btn white grey-text text-darken-2 modal-trigger" href="#modal1">Social Login</a>
+            <ul class="sidebarAuthentication no-padding ">
+                <li><a class="headerAuthentication waves-effect waves-light btn red darken-4 modal-trigger" href="#modal1">Sign Up</a></li>
+                <li><p class="center white-text">or</p></li>
+                <li><a class="headerLogin waves-effect waves-dark btn white grey-text text-darken-2 modal-trigger" href="#modal1">Login</a></li>
+            </ul>
+            
+            
+            
         </div>
 
         <div id="page-content-container" class="col m12 l10">

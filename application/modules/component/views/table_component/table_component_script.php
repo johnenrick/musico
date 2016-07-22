@@ -31,7 +31,6 @@
 //                    tableHead.attr("sort", columnConfiguration[ctr]["default_sort"]);
 //                }
                 $(columnRow).append(tableHead);
-                console.log(columnRow)
                 
             }
             
@@ -86,7 +85,6 @@
                 var response = JSON.parse(data);
                 tableComponent.table.find("tbody").empty();
                 if(!response["error"].length){
-                    console.log(response);
                     if(typeof resultConfiguration.success !== "undefined"){
                         tableComponent.table.find(".resultCount").text((typeof response["result_count"] !== "undefined") ? response["result_count"]*1 : response["data"].length);
                         resultConfiguration.success(response["data"]);
@@ -104,7 +102,6 @@
             }
         });
         tableComponent.addEntry = function(newEntry){
-            console.log(newEntry);
             tableComponent.table.find("tbody").append(newEntry);
         };
         tableComponent.retrieveEntry = function(){

@@ -32,7 +32,14 @@ class Portal extends FE_Controller{
             $this->responseDebug($result);
             $this->responseDebug("email__detail");
             if($result){
-                $this->responseData(generateToken($result[0]["ID"], $result[0]["account_type_ID"], $result[0]["username"]));
+                $data["token"] = generateToken($result[0]["ID"], $result[0]["account_type_ID"], $result[0]["username"]);
+                $data["ID"] = $result[0]["ID"];
+                $data["username"] = $result[0]["username"];
+                $data["first_name"] = $result[0]["first_name"];
+                $data["middle_name"] = $result[0]["middle_name"];
+                $data["last_name"] = $result[0]["last_name"];
+                $data["account_type_ID"] = $result[0]["account_type_ID"];
+                $this->responseData($data);
             }else{
                 $this->responseError(5, "Username/Email and Password Mismatch");
             }
@@ -44,6 +51,21 @@ class Portal extends FE_Controller{
             }
         }
         $this->outputResponse();
+    }
+    public function userInformation(){
+        $token = decodeToken($this->input->post("token"));
+        if($token){
+            $this->load->model("api/M_account");
+            $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, $token["user_ID"], array("status" => 1));
+            $this->responseDebug($result);
+            if($result){
+                $this->responseData($result);
+            }else{
+                $this->responseError(2, "Account Not Found");
+            }
+        }else{
+            $this->responseError(3, "Not Loged In");
+        }
     }
     public function refreshSession(){
         $this->responseDebug(user_id());

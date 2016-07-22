@@ -2,7 +2,7 @@
     /*Adding an asset*/
     load_asset("jquery-confirm.min.css");
     load_asset("jquery-confirm.min.js");
-    
+    load_asset("jquery.matchHeight-min.js");
     /*Component Object*/
     /***
      * A sample Component
@@ -49,6 +49,7 @@
             }
             videoItem.find(".videoAge").text(videoAge+" ago");
             gridList.body.find(".videoList").append(videoItem);
+            gridList.body.find(".videoList .videoItem").matchHeight();
         };
         
         

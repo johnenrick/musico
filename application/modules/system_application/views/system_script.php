@@ -85,44 +85,8 @@
                     }
                 }
             }
-            formSideBar();
         });
     }
-    function refresh_session(){
-        $.post(base_url("portal/refreshSession"), {}, function(data){
-            var response = JSON.parse(data);
-            if(!response["error"].length){
-                system_data.account_information.user_ID = response["data"]["ID"];
-                system_data.account_information.first_name = response["data"]["first_name"];
-                system_data.account_information.middle_name = response["data"]["middle_name"];
-                system_data.account_information.last_name = response["data"]["last_name"];
-                system_data.account_information.username = response["data"]["username"];
-                system_data.account_information.user_type = response["data"]["user_type"];
-                system_data.account_information.account_type = response["data"]["account_type_ID"];
-                
-                $("#headerUserFullName").text(user_first_name()+" "+user_last_name());
-                $("#headerUserImg").initial({name:((user_first_name()+"").charAt(0)+(user_last_name()+"").charAt(0)).toUpperCase()});
-                
-                $("#headerUserImg").height("30px");
-                $("#headerUserImg").width("30px");
-            }else{
-                window.location = base_url();
-            }
-        });
-    }
-    function formSideBar(){
-        $(".moduleNavigation").each(function(e){
-            if(typeof system_data.access_control_list[$(this).attr("module_id")] !== "undefined"){
-                $(this).show();
-            }else{
-                $(this).hide();
-            }
-        });
-    }
-    
-</script>
-<!--Modularization-->
-<script>
     /***
      * Load module to the page
      * @param {String} moduleLink Controller/Function of the module
@@ -184,9 +148,7 @@
         }
         system_data.refresh_call[moduleName].push(refreshFunction);
     }
-</script>
-<!--Component-->
-<script>
+    
     /**
      * Load a Page Component to the Document.
      * @param {string} component The name of the component to be loaded
@@ -257,17 +219,71 @@
             }
         }
     }
+    
+    /*Authentication*/
+    function setCredential(token, ID, userName, firstName, middleName, lastName, accountTypeID){
+        system_data.token = token;
+        if(token){
+            system_data.account_information.username = userName;
+            system_data.account_information.first_name = firstName;
+            system_data.account_information.middle_name = middleName;
+            system_data.account_information.last_name = lastName;
+            if(system_data.account_information.user_ID !== ID && system_data.account_information.user_type !== accountTypeID){//New Credentials
+                //TODO Reset system frame for new log in
+                system_data.account_information.user_ID = ID;
+                system_data.account_information.user_type = accountTypeID;
+                setSystemFrameCredential();
+            }
+            system_data.account_information.user_ID = ID;
+            system_data.account_information.user_type = accountTypeID;
+        }else{
+            //TODO Reset system frame for Log out/Not login
+            system_data.account_information.user_ID = null;
+            system_data.account_information.user_type = null;
+            system_data.account_information.username = null;
+            system_data.account_information.first_name = null;
+            system_data.account_information.middle_name = null;
+            system_data.account_information.last_name = null;
+        }
+    }
 </script>
 
 <!--Document Ready-->
 <script>
+    
+    $(document).ajaxSend(function( event, jqxhr, settings ) {
+        
+        settings.data += ((settings.data !== "") ? "&" :"") + "token="+system_data.token;
+    });
+    $(document).ajaxSuccess(function(event, xhr, settings){ 
+        try{
+            var response = JSON.parse(xhr.responseText);
+            if(typeof response["token"] !== "undefined"){
+                system_data.token = response["token"];
+                document.cookie = "token="+response["token"];
+                //TODO Handle system errors here
+            }
+        }catch(e){
+            
+        }
+    });
     $(document).ready(function(){
-        //set up ajax
-//        $.ajaxSetup({
-//            data: {
-//                token: system_data.token
-//            }
-//        });
+        /*Setting token*/
+        var cookieList = document.cookie.split(";");
+        for(var x = 0; x < cookieList; x++){
+            if(cookieList[x].indexOf("token")){
+                var token = cookieList[x].split("token");
+                system_data.token = token;
+                $.post(base_url("portal/userInformation"), {}, function(data){
+                    var response = JSON.parse(data);
+                });
+            }
+        }
+        //Update credential on first load
+        api_request("c_account/retrieveAccount", {}, function(data){
+            
+        });
+        
         //redirect www
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
@@ -275,5 +291,6 @@
         //load default page
         load_module(system_data.default.module_controller, "Test Page");
         retrieve_access_control();
+        
     });
 </script>
