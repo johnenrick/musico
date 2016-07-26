@@ -72,9 +72,9 @@
             </ul>
 
             <ul class="sidebarAuthentication no-padding ">
-                <li><a class="headerAuthentication waves-effect waves-light btn red darken-4 modal-trigger" href="#modal1">Sign Up</a></li>
+                <li><a class="headerAuthentication waves-effect waves-light btn red darken-4">Sign Up</a></li>
                 <li><p class="center white-text">or</p></li>
-                <li><a class="headerLogin waves-effect waves-dark btn white grey-text text-darken-2 modal-trigger" href="#modal1">Login</a></li>
+                <li><a class="headerLogin waves-effect waves-dark btn white grey-text text-darken-2">Login</a></li>
             </ul>
             
             
@@ -101,17 +101,6 @@
                     </div>
                 </div>
             </footer>
-
-            <!-- Modal Structure -->
-            <div id="modal1" class="modal">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                </div>
-            </div>
 
 
         </div>

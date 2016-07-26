@@ -244,7 +244,12 @@
             system_data.account_information.first_name = null;
             system_data.account_information.middle_name = null;
             system_data.account_information.last_name = null;
+            setSystemFrameCredential();
         }
+    }
+    function logout(){
+        document.cookie = "";//Destroy Cookie
+        setCredential(null);
     }
 </script>
 
@@ -252,7 +257,6 @@
 <script>
     
     $(document).ajaxSend(function( event, jqxhr, settings ) {
-        
         settings.data += ((settings.data !== "") ? "&" :"") + "token="+system_data.token;
     });
     $(document).ajaxSuccess(function(event, xhr, settings){ 
@@ -269,20 +273,24 @@
     });
     $(document).ready(function(){
         /*Setting token*/
+        setCredential(null);
         var cookieList = document.cookie.split(";");
-        for(var x = 0; x < cookieList; x++){
-            if(cookieList[x].indexOf("token")){
-                var token = cookieList[x].split("token");
-                system_data.token = token;
-                $.post(base_url("portal/userInformation"), {}, function(data){
-                    var response = JSON.parse(data);
-                });
+        if(cookieList.indexOf("token") !== -1){
+            for(var x = 0; x < cookieList; x++){
+                if(cookieList[x].indexOf("token") !== -1){//Update credential on first load
+                    var token = cookieList[x].split("token");
+                    system_data.token = token;
+                    $.post(base_url("portal/userInformation"), {}, function(data){
+                        var response = JSON.parse(data);
+                        if(response){
+                            setCredential(token, response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["acount_type_ID"]);
+                        }else{
+                            setCredential(null)
+                        }
+                    });
+                }
             }
         }
-        //Update credential on first load
-        api_request("c_account/retrieveAccount", {}, function(data){
-            
-        });
         
         //redirect www
         if(window.location.href.indexOf("www") === 0){

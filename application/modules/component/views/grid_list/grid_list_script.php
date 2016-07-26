@@ -33,7 +33,6 @@
             var currentTimestamp = (new Date()).getTime()/1000;
             var timestampDifference = currentTimestamp - datetimeCreated;
             var videoAge = "long ";
-            console.log(currentTimestamp)
             if(timestampDifference < 60){//seconds
                 videoAge = timestampDifference+" second"+(timestampDifference > 1 ? "s" :"");
             }else if(timestampDifference < 3600){//Minute
