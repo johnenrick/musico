@@ -259,7 +259,8 @@
     $(document).ajaxSend(function( event, jqxhr, settings ) {
         settings.data += ((settings.data !== "") ? "&" :"") + "token="+system_data.token;
     });
-    $(document).ajaxSuccess(function(event, xhr, settings){ 
+    $(document).ajaxSuccess(function(event, xhr, settings){
+        console.log(event);
         try{
             var response = JSON.parse(xhr.responseText);
             if(typeof response["token"] !== "undefined"){
@@ -291,7 +292,12 @@
                 }
             }
         }
-        
+        $(document).on('DOMNodeInserted', function(e) {
+            console.log("hey");
+            if ($(e.target).is('.MyClass')) {
+               DoSomething($(e.target));
+            }
+        });
         //redirect www
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));

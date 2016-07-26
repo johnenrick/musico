@@ -40,7 +40,7 @@ class API_Controller extends MX_Controller{
             $this->username = $token["username"];
             $this->response["token"] = generateToken($this->userID, $this->userType, $this->username);
         }else if($token == -1){//Expired Token
-            $this->response["token"] = $token;
+            $this->response["token"] = null;
             $this->responseError("1001", "Token Expired.");
             $this->outputResponse();
         }else{//no token

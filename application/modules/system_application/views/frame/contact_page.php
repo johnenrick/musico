@@ -37,8 +37,8 @@
                             <label for="contactPageFullName" class="active" >Name</label>
                         </div>
                         <div class="input-field col s12 m6 l6">
-                            <input id="contactPageEmailAddress" value="" type="text" class="validate">
-                            <label for="contactPageEmailAddress"class="active" >Email Address</label>
+                            <input id="contactPageEmailAddress" value="" type="email" class="validate">
+                            <label for="" class="active" data-error="Invalid Email" data-success="right">Email Address</label>
                         </div>
                     </div>
                     <div class="row">
