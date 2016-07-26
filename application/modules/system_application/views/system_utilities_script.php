@@ -82,7 +82,16 @@
     function remove_system_message(status) {
         $("#systemMessageContainer").find(".systemMessage[message_status='" + status + "']").remove();
     }
-    
+    function changeFieldName(mode, form){
+        form.find("input[field_name!='']").each(function(){
+            console.log("hey");
+            if(mode === "update"){
+                $(this).attr("name", "update_data["+$(this).attr("field_name")+"]");
+            }else{//create
+                $(this).attr("name", $(this).attr("field_name"));
+            }
+        });
+    }
     
     /***
      * Add leading zero to a number
