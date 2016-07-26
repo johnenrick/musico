@@ -84,7 +84,6 @@
     }
     function changeFieldName(mode, form){
         form.find("input[field_name!='']").each(function(){
-            console.log("hey");
             if(mode === "update"){
                 $(this).attr("name", "update_data["+$(this).attr("field_name")+"]");
             }else{//create

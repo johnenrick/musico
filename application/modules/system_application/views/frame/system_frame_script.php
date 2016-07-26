@@ -15,5 +15,8 @@
         }
     }
     $(document).ready(function(){
+        $(document).on('ajaxSuccess', "form", function(e) {
+            alert()
+        });
     });
 </script>
