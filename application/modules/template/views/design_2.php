@@ -76,12 +76,12 @@
                 </div>
                 <div id="profile-menu" class="col m12">
                     <div class="col m9">
-                        <ul class="links">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Videos</a></li>
-                            <li><a href="#">Playlist</a></li>
-                            <li><a href="#">Discussions</a></li>
-                            <li><a href="#">About</a></li>
+                        <ul class="links tabs">
+                            <li class="tab"><a class="active" href="#home">Home</a></li>
+                            <li class="tab"><a href="#videos">Videos</a></li>
+                            <li class="tab"><a href="#playlist">Playlist</a></li>
+                            <li class="tab"><a href="#discussions">Discussions</a></li>
+                            <li class="tab"><a href="#about">About</a></li>
                         </ul>
                     </div>
                     <div class="col m3">
@@ -89,324 +89,1321 @@
                         <span>14,321 subscribers</span>
                     </div>
                 </div>
-                <div id="profile-list" class="col m12">
-                    <div class="col m9 col-left">
-                        <div class="col s8 m8 l8 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small card-large">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s1.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                <div id="home">
+                    <div id="profile-list" class="col m12">
+                        <div class="col m9 col-left">
+                            <div class="col s8 m8 l8 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small card-large">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s1.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s2.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                       <h6 class="red-text text-darken-1 album-title">BIKE WORLD MANIA</h6>
-                       <hr>
+                           <h6 class="red-text text-darken-1 album-title">BIKE WORLD MANIA</h6>
+                           <hr>
 
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s2.jpg">
-                                    </a>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s14.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s4.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s5.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s6.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s7.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s8.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s9.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s3.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                        <div class="col m3 col-right">
+                           <h6>Popular Uploads</h6>
+
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s10.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s14.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s11.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s4.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s12.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s5.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s13.jpg">
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s6.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s7.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s8.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s4 m4 l4 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s9.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col m3 col-right">
-                       <h6>Popular Uploads</h6>
+                </div>
 
-                        <div class="col s12 m12 l12 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s10.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
+
+
+                <!-- videos -->
+                <div id="videos" class="col m12">
+                    <div id="profile-list" class="col m12">
+                        <div class="col m12 col-left">
+                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Upload</a>
+
+                            <!-- Modal Structure -->
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                                <h4>Upload</h4>
+                                <p>upload a new video</p>
+                                <form action="#">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>Upload</span>
+                                        <input type="file">
+                                      </div>
+                                      <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                      </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                        </div>
-                        <div class="col s12 m12 l12 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s11.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s12 m12 l12 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s12.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s12 m12 l12 videoItem" user_video_id="1">
-                            <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                                <div class="card-image">
-                                    <a href="">
-                                        <img src="http://localhost/musico/assets/sample_image/s13.jpg">
-                                    </a>
-                                </div>
-                                <div class="">
-                                    <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                    <div class="grey-text lighten-2">
-                                        <span class="uploadederName truncate">The Mountain Bikers</span>
-                                        <div class="thin valign " style="font-size: 11px">
-                                            <span class="videoAge">2 months ago</span>
-                                            <span class="viewCount right-aligned right">10 views</span>
-                                        </div>
-                                    </div>
-                                </div>
+
+
+                            <div class="modal-footer">
+                                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
                             </div>
                         </div>
 
+                        <hr>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s14.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s4.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s5.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s6.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s7.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s8.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s9.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- playlist -->
+                <div id="playlist" class="col m12">
+                    <div id="profile-list" class="col m12">
+                        <div class="col m12 col-left">
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s14.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s3 m3 l3 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s4.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="discussions" class="col m12">
+                    <div id="profile-list" class="col m12">
+                        <div class="col m9 col-left">
+                            <div class="col s8 m8 l8 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small card-large">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                           <h6 class="red-text text-darken-1 album-title">BIKE WORLD MANIA</h6>
+                           <hr>
+
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s14.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s4.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s5.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s6.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s7.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s8.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s9.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col m3 col-right">
+                           <h6>Popular Uploads</h6>
+
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s10.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s11.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s12.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s13.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="about" class="col m12">
+                                        <div id="profile-list" class="col m12">
+                        <div class="col m9 col-left">
+                            <div class="col s8 m8 l8 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small card-large">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s1.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                           <h6 class="red-text text-darken-1 album-title">BIKE WORLD MANIA</h6>
+                           <hr>
+
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s2.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s3.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s14.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s4.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s5.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s6.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s7.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s8.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s4 m4 l4 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s9.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col m3 col-right">
+                           <h6>Popular Uploads</h6>
+
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s10.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s11.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s12.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l12 videoItem" user_video_id="1">
+                                <div class="card hoverable transparent z-depth-0 small  card-fixed">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="http://localhost/musico/assets/sample_image/s13.jpg">
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
+                                        <div class="grey-text lighten-2">
+                                            <span class="uploadederName truncate">The Mountain Bikers</span>
+                                            <div class="thin valign " style="font-size: 11px">
+                                                <span class="videoAge">2 months ago</span>
+                                                <span class="viewCount right-aligned right">10 views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

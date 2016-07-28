@@ -18,7 +18,13 @@ class Test_page extends FE_Controller{
             $this->loadPage("Test_page/registrationForm");
         }
     }
-
+    public function memberProfile(){
+        if($this->input->post("load_module")){
+            $this->loadModule("member", "member_script");
+        }else{
+            $this->loadPage("Test_page/memberProfile");
+        }
+    }
     public function category(){
         if($this->input->post("load_module")){
             $this->loadModule("category", "category_script");

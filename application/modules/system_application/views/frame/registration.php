@@ -81,7 +81,7 @@ div.error {
 				        </div>
 				        <div class="input-field col l12 m12 s12">
 				          <label for="password">Password</label>
-				          <input id="password" type="tel" name="password" data-error=".errorTxt8">
+				          <input id="password" type="password" name="password" data-error=".errorTxt8">
 				          <div class="errorTxt8 col l12"></div>
 				        </div>
 				    </div>

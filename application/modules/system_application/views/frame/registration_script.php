@@ -38,6 +38,27 @@
                 }
             }
         });
+
+
+        $("#loginForm").ajaxForm({
+            beforeSubmit: function(data,$form,options){
+            },
+            success : function(data){
+                var response = JSON.parse(data);
+                if(!response["error"].length){
+                    $(".hide-module:not(#success-module)").hide();
+                    $("#username").val('');
+                    $("#password").val('');
+                    setCredential(response.data.token, response.data.ID, response.data.username, response.data.first_name, response.data.middle_name, response.data.last_name, response.data.account_type_ID);
+                    $('#registrationModal').closeModal();
+                }else{
+                    $("#success-module").hide();
+                    console.log(response['error']);
+                    // show_error($("#registrationForm"), response["error"]);
+                }
+            }
+        });
+
     };
     
     /*Adding an asset*/
@@ -54,6 +75,7 @@
         var test = new registrationModule();
         $("#success-module").hide();
         $("#registrationForm").attr('action',api_url("C_account/createAccount"));
+        $("#loginForm").attr('action',base_url("portal/login"));
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $("#registrationModal").attr("opacity",1);
         $(".headerAuthentication").click(function(){

@@ -21,6 +21,7 @@
 		$(function() { 
 	        $('video').bind('video_really_ready', function() {
 	            var video = this;
+	            console.log(video);
 	            $('#capture').click(function() {
 	                var canvases = $('canvas');
 	                VideoSnapper.captureAsCanvas(video, { width: 160, height: 68 }, function(canvas) {
