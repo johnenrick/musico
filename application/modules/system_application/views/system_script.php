@@ -94,6 +94,7 @@
      * @returns {undefined}
      */
     function load_module(moduleLink, moduleName){
+        
         moduleName = moduleName.toLowerCase();
         moduleLink = moduleLink.toLowerCase();
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
@@ -115,9 +116,12 @@
         }else{
             /*show page*/
             $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
-            if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
+            console.log($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible"))
+            if($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                 $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
-                refresh_call(moduleName);
+                if(typeof systemApplication.module[camelize(moduleName)].refresh){
+                    systemApplication.module[camelize(moduleName)].reload();
+                }
             }
         }
     }

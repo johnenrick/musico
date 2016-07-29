@@ -43,7 +43,7 @@
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-nav">
-                <li><a>Home</a></li>
+                <li><a class="moduleLink" moduleLink="portal" module_name="Portal">Home</a></li>
                 <li><a>Profile</a></li>
                 <li><a>Featured</a></li>
                 <li><a>Events</a></li>
@@ -58,7 +58,7 @@
 
         <div id="side-nav-large-container" class="col l2 hide-on-med-and-down">
             <ul id="side-nav-large">
-                <li><a href="#" class="valign-wrapper"><i class="material-icons">home</i>Home</a></li>
+                <li><a class="moduleLink" module_link="portal" module_name="Portal Page" href="#" class="valign-wrapper"><i class="material-icons">home</i>Home</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">featured_play_list</i>Featured</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="material-icons">event</i>Events</a></li>
                 <li><a href="#" class="contactPageLink valign-wrapper"><i class="material-icons">phone</i>Contact Us</a></li>

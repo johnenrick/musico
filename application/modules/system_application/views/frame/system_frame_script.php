@@ -15,8 +15,9 @@
         }
     }
     $(document).ready(function(){
-        $(document).on('ajaxSuccess', "form", function(e) {
-            alert()
+        //Module Redirection
+        $(".moduleLink").click(function(){
+            load_module($(this).attr("module_link"), $(this).attr("module_name"));
         });
     });
 </script>
