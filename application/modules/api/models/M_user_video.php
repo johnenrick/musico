@@ -32,13 +32,14 @@ class M_user_video extends API_Model{
     }
     public function retrieveUserVideo($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
-            "file_uploaded" => " file_uploaded.ID=user_video.file_uploaded_ID"
+            "file_uploaded" => " file_uploaded.ID=user_video.file_uploaded_ID",
+            "file_uploaded AS thumbnail_file_uploaded" => " thumbnail_file_uploaded.ID=user_video.thumbnail_file_uploaded_ID"
         );
         $selectedColumn = array(
             "user_video.*",
-            "file_uploaded.description AS file_uploaded_description, file_uploaded.datetime AS file_uploaded_datetime, file_uploaded.file_type AS file_uploaded_file_type"
+            "file_uploaded.description AS file_uploaded_description, file_uploaded.datetime AS file_uploaded_datetime, file_uploaded.file_type AS file_uploaded_file_type",
+            "thumbnail_file_uploaded.description AS thumbnail_file_uploaded_description, thumbnail_file_uploaded.datetime AS thumbnail_file_uploaded_datetime, thumbnail_file_uploaded.file_type AS thumbnail_file_uploaded_file_type"
         );
-        
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
     }
     public function updateUserVideo($ID = NULL, $condition = array(), $newData = array()) {
