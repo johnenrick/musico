@@ -36,7 +36,7 @@ class M_user_video extends API_Model{
         );
         $selectedColumn = array(
             "user_video.*",
-            "file_uploaded.*"
+            "file_uploaded.description AS file_uploaded_description, file_uploaded.datetime AS file_uploaded_datetime, file_uploaded.file_type AS file_uploaded_file_type"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
