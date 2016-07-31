@@ -11,12 +11,13 @@ function generateToken($userID, $userType, $username){
         "user_type" => $userType,
         "username" => $username
     );
-    return $CI->encryption->encrypt(json_encode($tokenContent));
+    return base64_encode($CI->encryption->encrypt(json_encode($tokenContent)));
 }
 function decodeToken($token){
     if($token){
         $CI =& get_instance();
-        $token = json_decode($CI->encryption->decrypt($token), true);
+        $token = json_decode($CI->encryption->decrypt(base64_decode($token)), true);
+        
         if((time() - $token["date_created"]*1) <= $token["max_life"]){
             return $token;
         }else{//Expired Token

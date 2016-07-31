@@ -94,7 +94,6 @@
      * @returns {undefined}
      */
     function load_module(moduleLink, moduleName){
-        
         moduleName = moduleName.toLowerCase();
         moduleLink = moduleLink.toLowerCase();
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
@@ -227,6 +226,7 @@
     /*Authentication*/
     function setCredential(token, ID, userName, firstName, middleName, lastName, accountTypeID){
         system_data.token = token;
+        document.cookie = "token="+token;
         if(token){
             system_data.account_information.username = userName;
             system_data.account_information.first_name = firstName;
@@ -252,6 +252,7 @@
         }
     }
     function logout(){
+        alert();
         document.cookie = "";//Destroy Cookie
         setCredential(null);
     }
@@ -261,7 +262,6 @@
 <script>
     
     $(document).ajaxSend(function( event, jqxhr, settings ) {
-        settings.data += ((settings.data !== "") ? "&" :"") + "token="+system_data.token;
     });
     $(document).ajaxSuccess(function(event, xhr, settings){
         try{
@@ -272,36 +272,38 @@
                 //TODO Handle system errors here
             }
         }catch(e){
-            
         }
     });
     $(document).ready(function(){
         /*Setting token*/
-        setCredential(null);
         var cookieList = document.cookie.split(";");
-        if(cookieList.indexOf("token") !== -1){
-            for(var x = 0; x < cookieList; x++){
+        console.log(cookieList.length)
+        if(document.cookie.indexOf("token") !== -1){
+            for(var x = 0; x < cookieList.length; x++){
                 if(cookieList[x].indexOf("token") !== -1){//Update credential on first load
-                    var token = cookieList[x].split("token");
-                    system_data.token = token;
+                    var token = cookieList[x].split("token=");
+                    system_data.token = token[1];
                     $.post(base_url("portal/userInformation"), {}, function(data){
+                        console.log(data);
                         var response = JSON.parse(data);
                         if(response){
+//                            document.cookie = "token="+token;
                             setCredential(token, response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["acount_type_ID"]);
                         }else{
                             setCredential(null)
                         }
                     });
+                }else{
+                    
                 }
             }
+        }else{
+            setCredential(null);
         }
         $.ajaxSetup({
-            url: "/xmlhttp/",
-            global: false,
+            global: true,
             type: "POST",
-            beforeSubmit : function(event,request, settings ){
-               console.log(event  )
-            }
+            data : {token:system_data.token}
           });
         //redirect www
         if(window.location.href.indexOf("www") === 0){

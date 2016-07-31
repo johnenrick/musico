@@ -19,7 +19,9 @@
            new SampleComponent(moduleBody.find(".sampleModuleSampleComponent"));
         });
         
-        
+        sampleModule.reload = function(){//function to run if the module is already been loaded
+            
+        }
     };
         
     $(document).ready(function(){

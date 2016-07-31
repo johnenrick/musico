@@ -29,8 +29,6 @@ class Portal extends FE_Controller{
             $condition["password"] = sha1($this->input->post("password"));
             $condition[(filter_var($this->input->post("username"), FILTER_VALIDATE_EMAIL)) ? "email__detail" : "username"] = $this->input->post("username");
             $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, NULL,$condition);
-            $this->responseDebug($result);
-            $this->responseDebug("email__detail");
             if($result){
                 $data["token"] = generateToken($result[0]["ID"], $result[0]["account_type_ID"], $result[0]["username"]);
                 $data["ID"] = $result[0]["ID"];
@@ -39,6 +37,8 @@ class Portal extends FE_Controller{
                 $data["middle_name"] = $result[0]["middle_name"];
                 $data["last_name"] = $result[0]["last_name"];
                 $data["account_type_ID"] = $result[0]["account_type_ID"];
+                $data["decoded"] = decodeToken($data["token"]);
+                echo "<br>".$data["token"]."<br>";
                 $this->responseData($data);
             }else{
                 $this->responseError(5, "Username/Email and Password Mismatch");
@@ -52,12 +52,14 @@ class Portal extends FE_Controller{
         }
         $this->outputResponse();
     }
+    public function testDecode(){
+        echo 60*60*4;
+        decodeToken("MGE2ZDU4ZWI3YjM1MmJjZWI1ODUxODMwOTBhYWMwMzcxYmVkZTBhMDdiZWMxNDgxOGNjOTdhOWYwOTg0YjM1MTg0Mzc3NTJiYzE5OWMzMmFiZWEyMDY2NmU5MDYzODE4ZTg2MGE1N2I1NjM0NGM1M2UxZjU2MDhmZGJhMDFkNmJ4Q1g1K3FEdWFYUFRiWEdjQU1qZzQzaWJZOWdRVW14c3Q5VCsyUUZ0ek9YYm1USnZBRlhGa05MRzM2cU5iNnY5UlgvQm9QakhWdS9BYzNLYVhleVJ4NEJjZHBnRFZER2hZSWFSVnhqbTJzanVpSVYwVUFXbGozaXRzbWJqcUJKRWZhVkdDa2tJUHliRHRnYk9BakJyOFBpNWo4VVV3d3ZFcVFTR2U0dS9vYnZqWmhoOHJDZjZZNEJDaUN5NG51dkE=");
+    }
     public function userInformation(){
-        $token = decodeToken($this->input->post("token"));
-        if($token){
+        if($this->userID){
             $this->load->model("api/M_account");
-            $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, $token["user_ID"], array("status" => 1));
-            $this->responseDebug($result);
+            $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, $this->userID, array("status" => 1));
             if($result){
                 $this->responseData($result);
             }else{
@@ -66,6 +68,7 @@ class Portal extends FE_Controller{
         }else{
             $this->responseError(3, "Not Loged In");
         }
+        $this->outputResponse();
     }
     public function refreshSession(){
         $this->responseDebug(user_id());
