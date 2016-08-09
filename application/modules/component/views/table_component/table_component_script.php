@@ -10,6 +10,7 @@
      */
     var TableComponent = function (componentContainer, resultConfiguration, columnConfiguration, filterConfiguration) {
         var tableComponent = this;
+        
         tableComponent.body = $("#pageComponentContainer .tableComponent").clone();//The HTML instance of the component. 
         tableComponent.body.prototype = tableComponent.body.find(".prototype");
         tableComponent.table = tableComponent.body.find(".tableEntry");

@@ -87,43 +87,7 @@
             }
         });
     }
-    /***
-     * Load module to the page
-     * @param {String} moduleLink Controller/Function of the module
-     * @param {String} moduleName Name of the module
-     * @returns {undefined}
-     */
-    function load_module(moduleLink, moduleName){
-        moduleName = moduleName.toLowerCase();
-        moduleLink = moduleLink.toLowerCase();
-        if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
-            $.post(base_url(moduleLink), {load_module : true}, function(data){
-                /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
-                var moduleHolder = $("#systemModule").find(".moduleHolder").clone();
-                moduleHolder.attr("module_link", moduleLink);
-                moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
-                moduleHolder.append(data);
-                $("#mainContent").append(moduleHolder);
-                /*show page*/
-                $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
-                if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
-                    $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
-                    refresh_call(moduleName);
-                }
-
-            });
-        }else{
-            /*show page*/
-            $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
-            console.log($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible"))
-            if($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
-                $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
-                if(typeof systemApplication.module[camelize(moduleName)].refresh){
-                    systemApplication.module[camelize(moduleName)].reload();
-                }
-            }
-        }
-    }
+    
     /***
      * Call the refresh function of the module
      * @param {String} moduleName Name of the module to be refreshed
@@ -159,11 +123,11 @@
      * @returns {none}
      */
     function load_component(component, callBack){
-        var componentHolder = $("#pageComponentContainer .componentHolder").clone();
-        componentHolder.addClass(component);
-        if($("."+component).length === 0 ){
+        if($("#pageComponentContainer ."+component).length === 0 ){
             $.post("<?=base_url()?>component/"+component, {component : component}, function(data){
-                if($("."+component).length === 0 ){
+                if($("#pageComponentContainer ."+component).length === 0 ){
+                    var componentHolder = $("#pageComponentContainerPrototype .componentHolder").clone();
+                    componentHolder.addClass(component);
                     componentHolder.append(data);
                     $("#pageComponentContainer").append(componentHolder);
                 }
@@ -226,7 +190,9 @@
     /*Authentication*/
     function setCredential(token, ID, userName, firstName, middleName, lastName, accountTypeID){
         system_data.token = token;
-        document.cookie = "token="+token;
+        if(token !== null){
+            document.cookie = "token="+token;
+        }
         if(token){
             system_data.account_information.username = userName;
             system_data.account_information.first_name = firstName;
@@ -235,7 +201,7 @@
             if(system_data.account_information.user_ID !== ID && system_data.account_information.user_type !== accountTypeID){//New Credentials
                 //TODO Reset system frame for new log in
                 system_data.account_information.user_ID = ID;
-                system_data.account_information.user_type = accountTypeID;
+                system_data.account_information.user_type = accountTypeID*1;
                 setSystemFrameCredential();
             }
             system_data.account_information.user_ID = ID;
@@ -252,8 +218,7 @@
         }
     }
     function logout(){
-        alert();
-        document.cookie = "";//Destroy Cookie
+        document.cookie = "token"+ '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';//Destroy Cookie
         setCredential(null);
     }
 </script>
@@ -267,8 +232,10 @@
         try{
             var response = JSON.parse(xhr.responseText);
             if(typeof response["token"] !== "undefined"){
-                system_data.token = response["token"];
-                document.cookie = "token="+response["token"];
+                if(system_data.token){
+                    system_data.token = response["token"];
+                    document.cookie = "token="+response["token"];
+                }
                 //TODO Handle system errors here
             }
         }catch(e){
@@ -277,18 +244,15 @@
     $(document).ready(function(){
         /*Setting token*/
         var cookieList = document.cookie.split(";");
-        console.log(cookieList.length)
         if(document.cookie.indexOf("token") !== -1){
             for(var x = 0; x < cookieList.length; x++){
                 if(cookieList[x].indexOf("token") !== -1){//Update credential on first load
                     var token = cookieList[x].split("token=");
                     system_data.token = token[1];
                     $.post(base_url("portal/userInformation"), {}, function(data){
-                        console.log(data);
                         var response = JSON.parse(data);
                         if(response){
-//                            document.cookie = "token="+token;
-                            setCredential(token, response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["acount_type_ID"]);
+                            setCredential(token, response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["account_type_ID"]);
                         }else{
                             setCredential(null)
                         }
@@ -310,7 +274,7 @@
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
         }
         //load default page
-        load_module(system_data.default.module_controller, "Test Page");
+        
         retrieve_access_control();
         
     });

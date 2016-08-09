@@ -63,9 +63,6 @@
     
     /*Adding an asset*/
     load_asset("jquery.form.min.js");
-    load_asset("core/jquery-ui.min.js");
-    load_asset("core/jquery-ui.min.css");
-    load_asset("core/jquery-ui.theme.min.css");
     load_asset("jquery.form.min.js");
     load_asset("registration.css");
     load_asset("core/custom/materialize_modal.css");
