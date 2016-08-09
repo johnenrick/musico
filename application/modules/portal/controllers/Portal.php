@@ -38,7 +38,6 @@ class Portal extends FE_Controller{
                 $data["last_name"] = $result[0]["last_name"];
                 $data["account_type_ID"] = $result[0]["account_type_ID"];
                 $data["decoded"] = decodeToken($data["token"]);
-                echo "<br>".$data["token"]."<br>";
                 $this->responseData($data);
             }else{
                 $this->responseError(5, "Username/Email and Password Mismatch");
