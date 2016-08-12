@@ -5,9 +5,9 @@
     <div class="prototype">
         <div class="col s12 m4 l3 videoItem">
             <div class="card hoverable transparent z-depth-0">
-                <div class="card-image">
+                <div class="card-image" style="height:136px;overflow: hidden">
                     <a href="" >
-                        <img src="<?=  asset_url("sample_image/sample_image (1).jpg")?>" style="height:150px" >
+                        <img src="<?=  asset_url("sample_image/sample_image (1).jpg")?>"  style="width:100%">
                     </a>
                 </div>
                 <div class="">

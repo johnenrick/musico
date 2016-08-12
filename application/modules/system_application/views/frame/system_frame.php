@@ -33,11 +33,11 @@
     <nav id="page-header">
         <div class="nav-wrapper red darken-3">
             <a class="brand-logo">Logo</a>
-            <a data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a data-activates="mobile-nav" class="button-collapse">&nbsp; <i class="fa fa-align-justify" aria-hidden="true"></i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a class="headerLogin">Log in</a></li>
                 <li><a class="waves-effect waves-dark btn white grey-text text-darken-2 headerAuthentication">Join</a></li>
-                <li><a>Upload</a></li>
+                <li><a><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
                 <li id="profile-btn">
                     <a class="dropdown-button" href="#!" data-activates="profile-popup"><img src="<?=asset_url()?>image/profpic.png" /></a>
                 </li>
@@ -58,20 +58,26 @@
 
         <div id="side-nav-large-container" class="col l2 hide-on-med-and-down">
             <ul id="side-nav-large">
-                <li><a class="moduleLink" module_link="portal" module_name="Portal Page" href="#" class="valign-wrapper"><i class="material-icons">home</i>Home</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="material-icons">featured_play_list</i>Featured</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="material-icons">event</i>Events</a></li>
-                <li><a href="#" class="contactPageLink valign-wrapper"><i class="material-icons">phone</i>Contact Us</a></li>
+                <li><a class="moduleLink" module_link="portal" module_name="Portal Page" href="#" class="valign-wrapper"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+                <li><a href="#" class="valign-wrapper"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Featured</a></li>
+                <li><a href="#" class="valign-wrapper"><i class="fa fa-calendar-o" aria-hidden="true"></i>Events</a></li>
+                <li><a href="#" class="contactPageLink valign-wrapper"><i class="fa fa-phone" aria-hidden="true"></i>Contact Us</a></li>
             </ul>
             <hr>
-            <ul id="side-nav-large" class="playlistSidebar">
+            <ul id="side-nav-large" class="playlistSidebar" style="display:none">
                 <li><span class="white-text">PLAYLIST</span></li>
-                <li><a href="#" class="valign-wrapper"><i class="material-icons">queue_music</i>My Playlist</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="material-icons">favorite_border</i>Liked Videos</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="material-icons">star_border</i>Saved Artists</a></li>
+                <li><a href="#" class="valign-wrapper"><i class="fa fa-indent" aria-hidden="true"></i>My Playlist</a></li>
+                <li><a href="#" class="valign-wrapper"><i class="fa fa-heart-o" aria-hidden="true"></i>Liked Videos</a></li>
+                <li><a href="#" class="valign-wrapper"><i class="fa fa-star-o" aria-hidden="true"></i>Saved Artists</a></li>
+            </ul>
+            <hr>
+            <ul id="side-nav-large" class="adminSidebar" style="display:none">
+                <li><span class="white-text">ADMIN</span></li>
+                <li><a class="moduleLink" module_link="user_management" module_name="User Management" href="#" class="valign-wrapper"><i class="fa fa-users" aria-hidden="true"></i>Admin User</a></li>
+                <li><a class="moduleLink" module_link="video_category" module_name="Video Category" href="#" class="valign-wrapper"><i class="fa fa-th-list" aria-hidden="true"></i>Video Category</a></li>
             </ul>
 
-            <ul class="sidebarAuthentication no-padding ">
+            <ul class="sidebarAuthentication no-padding " style="display:none">
                 <li><a class="headerAuthentication waves-effect waves-light btn red darken-4">Sign Up</a></li>
                 <li><p class="center white-text">or</p></li>
                 <li><a class="headerLogin waves-effect waves-dark btn white grey-text text-darken-2">Login</a></li>
@@ -83,7 +89,7 @@
 
         <div id="page-content-container" class="col m12 l10">
 
-            <div id="mainContent" class="row">
+            <div id="mainContent">
 
             </div>
             <footer class="page-footer">

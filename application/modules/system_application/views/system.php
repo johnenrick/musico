@@ -3,6 +3,10 @@
     <div class="moduleHolder"></div>
 </div>
 <div id="pageComponentContainer" style="display:none">
+    
+    
+</div>
+<div id="pageComponentContainerPrototype">
     <div class="componentHolder"></div>
 </div>
     

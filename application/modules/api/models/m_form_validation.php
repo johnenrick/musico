@@ -11,11 +11,11 @@
  *
  * @author johnenrick
  */
-class form_validation extends API_Model{
+class M_form_validation extends API_Model{
     public function doesExist($tableColumn, $value){
         $table = explode(".", $tableColumn);
         $this->db->where($table[1], $value);
-        $result = $this->db->get($table);
+        $result = $this->db->get($table[0]);
         if($result->num_rows()){
             return true;
         }else{
