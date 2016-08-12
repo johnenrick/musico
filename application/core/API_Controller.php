@@ -194,9 +194,13 @@ class API_Controller extends MX_Controller{
         }
     }
     public function does_exist($value, $tableColumn){
-        $this->load->model("form_validation");
-        $this->form_validation->set_message('does_exist', '{field} does not exist');
-        return $this->form_validation->doesExist($tableColumn, $value);
+        if($value){
+            $this->load->model("m_form_validation");
+            $this->form_validation->set_message('does_exist', '{field} does not exist');
+            return $this->m_form_validation->doesExist($tableColumn, $value);
+        }else{
+            return false;
+        }
     }
     
 }

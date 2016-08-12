@@ -1,0 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08 9, 16, 8:51:28 PM
+    Author     : johnenrick
+*/
+.card-image-description{
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    color:white;
+    padding :20px;
+}

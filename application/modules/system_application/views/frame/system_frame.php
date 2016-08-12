@@ -33,11 +33,11 @@
     <nav id="page-header">
         <div class="nav-wrapper red darken-3">
             <a class="brand-logo">Logo</a>
-            <a data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a data-activates="mobile-nav" class="button-collapse">&nbsp; <i class="fa fa-align-justify" aria-hidden="true"></i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a class="headerLogin">Log in</a></li>
                 <li><a class="waves-effect waves-dark btn white grey-text text-darken-2 headerAuthentication">Join</a></li>
-                <li><a>Upload</a></li>
+                <li><a><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
                 <li id="profile-btn">
                     <a class="dropdown-button" href="#!" data-activates="profile-popup"><img src="<?=asset_url()?>image/profpic.png" /></a>
                 </li>
@@ -89,7 +89,7 @@
 
         <div id="page-content-container" class="col m12 l10">
 
-            <div id="mainContent" class="row">
+            <div id="mainContent">
 
             </div>
             <footer class="page-footer">

@@ -66,7 +66,7 @@ class C_user_video extends API_Controller {
     public function createUserVideoThumbnail(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            $this->form_validation->set_rules('user_video_ID', 'Video Category', 'required|callback_does_exist[user_video.ID]');   
+            $this->form_validation->set_rules('user_video_ID', 'Video ID', 'required|callback_does_exist[user_video.ID]');   
             
             if($this->form_validation->run()){
                 $this->load->model("M_file_uploaded");

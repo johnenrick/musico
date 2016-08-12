@@ -1,0 +1,52 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08 10, 16, 6:57:37 PM
+    Author     : johnenrick
+*/
+.mainVideo{
+    /*padding-right:0!important;*/
+}
+.mainVideo .card{
+    height:100%;
+}
+.mainVideo .card-image{
+    height:295px!important; 
+    overflow: hidden;
+    min-width:100%;
+    min-height:100%;
+    width:auto;
+    /*height:auto;*/
+
+}
+.mainVideo .card-image img{
+    min-height:295px!important;
+    min-width:100%
+}
+/*.mainVideo .card-image  img{
+    position:absolute;
+    top:50%;
+    min-height:100%;
+    display:block;
+    left:50%;
+    -webkit-transform: translate(-50%, -50%);
+    min-width:100%;
+}*/
+
+
+
+.subVideoList .card-image{
+    height:135px; 
+    overflow: hidden
+}
+.subVideoList .card-image img{
+    min-height:135px!important;
+    min-width:100%
+}
+
+.subVideoList .col{
+    /*padding-left:0;*/
+}
