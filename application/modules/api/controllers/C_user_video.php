@@ -78,8 +78,10 @@ class C_user_video extends API_Controller {
                         "status" =>  1
                     ));
                     if($userVideo["thumbnail_file_uploaded_ID"]*1){
-                        $thumbnailFileUploaded = $this->M_file_uploaded->retrieveUserVideo( false, NULL, 0, array(), $userVideo["thumbnail_file_uploaded_ID"]);
-                        unlink($thumbnailFileUploaded["full_path"]);
+                        $thumbnailFileUploaded = $this->M_file_uploaded->retrieveFileUploaded( false, NULL, 0, array(), $userVideo["thumbnail_file_uploaded_ID"]);
+                        if(file_exists($thumbnailFileUploaded["full_path"])){
+                            unlink($thumbnailFileUploaded["full_path"]);
+                        }
                         $this->M_file_uploaded->deleteFileUploaded($thumbnailFileUploaded["ID"]);
                     }
                     $this->responseData($fileUpload);
@@ -188,7 +190,6 @@ class C_user_video extends API_Controller {
         if ($this->upload->do_upload()){
             $uploadData = $this->upload->data();
             $this->load->model("M_file_uploaded");
-            
             return $this->M_file_uploaded->createFileUploaded($uploadData["file_name"], $uploadData["image_type"], $uploadData["file_path"], $uploadData["file_size"]);
         }else{
             $error = $this->upload->display_errors("","");

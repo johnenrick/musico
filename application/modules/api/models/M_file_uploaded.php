@@ -31,7 +31,7 @@ class M_file_uploaded extends API_Model{
             
         );
         $selectedColumn = array(
-            "file_uploaded.*, CONCAT(path, description,'.',file_type) AS full_path"
+            "file_uploaded.*, CONCAT(`path`, description,'.', file_type ) AS full_path"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);

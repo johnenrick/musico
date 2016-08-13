@@ -51,7 +51,7 @@ class API_Model extends CI_Model{
             foreach($selectedColumn as $key => $column){
                 $selectedQuery.=" $column";
                 $selectedQuery.=",";
-                if (strpos($column, 'concat(') !== false) {
+                if (strpos($column, 'CONCAT(') !== false) {
                     $activeBactick = false;
                 }
             }
