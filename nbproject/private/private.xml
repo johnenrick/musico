@@ -11,8 +11,11 @@
             <file>file:/C:/xampp/htdocs/musico/application/modules/portal/views/portal_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/assets/css/core/custom/card.css</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/system_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/system.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/grid_list/grid_list_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/system.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/core/API_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_user_video.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/api/models/m_form_validation.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/video_list_banner/video_list_banner.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/frame/system_frame_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/assets/css/component/video_list_banner.css</file>
