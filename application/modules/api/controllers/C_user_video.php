@@ -42,7 +42,7 @@ class C_user_video extends API_Controller {
                         $this->responseData($result);
                     }else{//failed reverse
                         $this->M_file_uploaded->deleteFileUploaded($result);
-                        $this->responseError(4, $fileUpload);
+                        $this->responseError(4, $uploadData);
                     }
                     
                     
@@ -70,9 +70,9 @@ class C_user_video extends API_Controller {
             
             if($this->form_validation->run()){
                 $this->load->model("M_file_uploaded");
-                $fileUpload = $this->uploadFile($this->userID);
+                $fileUpload = $this->uploadFileThumbnail($this->userID);
                 if(!is_string($fileUpload)){
-                    $userVideo = $this->m_user_vdeo->retrieveUserVideo( false, NULL, 0, array(), $this->input->post("user_video_ID"));
+                    $userVideo = $this->m_user_video->retrieveUserVideo( false, NULL, 0, array(), $this->input->post("user_video_ID"));
                     $this->m_user_video->updateUserVideo($this->input->post("user_video_ID"), NULL, array(
                         "thumbnail_file_uploaded_ID" =>  $fileUpload,
                         "status" =>  1
@@ -188,6 +188,7 @@ class C_user_video extends API_Controller {
         if ($this->upload->do_upload()){
             $uploadData = $this->upload->data();
             $this->load->model("M_file_uploaded");
+            
             return $this->M_file_uploaded->createFileUploaded($uploadData["file_name"], $uploadData["image_type"], $uploadData["file_path"], $uploadData["file_size"]);
         }else{
             $error = $this->upload->display_errors("","");
