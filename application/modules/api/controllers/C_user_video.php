@@ -87,7 +87,7 @@ class C_user_video extends API_Controller {
                     $this->responseData($fileUpload);
                     $this->actionLog($fileUpload);
                 }else{
-                    $this->responseError(3, "Failed to create");
+                    $this->responseError(3, "Failed to create. ".$fileUpload);
                 }
             }else{
                 if(count($this->form_validation->error_array())){
