@@ -1,15 +1,59 @@
-<script>
+<script type="text/javascript">
+
+        var uploadModule = function(){
+        uploadModule = this;
+        function testing(){
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Simple confirm!'
+            });
+        }
+
+        $("#uploadForm").ajaxForm({
+            beforeSubmit: function(data,$form,options){
+                console.log(data);
+            },
+            success : function(data){
+                var response = JSON.parse(data);
+                console.log(response)
+                if(!response["error"].length){
+                    $(".hide-module:not(#success-module)").hide();
+                    $("#title").val('');
+                    $("#details").val('');
+                    $("#video_id").val(2);
+                }else{
+                    $("#success-module").hide();
+                    console.log(response['error']);
+                    // show_error($("#registrationForm"), response["error"]);
+                }
+            }
+        });
+
+        // $("#thumbnailForm").ajaxForm({
+        //     beforeSubmit: function(data,$form,options){
+        //         console.log(data);
+        //         alert(data);
+        //     },
+        //     success : function(data){
+        //         var response = JSON.parse(data);
+        //         if(!response["error"].length){
+
+        //         }else{
+        //             $("#success-module").hide();
+        //         }
+        //     }
+        // });
+    };
+
 load_asset("jquery.form.min.js");
 load_asset("core/jquery.min.js");
 load_asset("core/jquery-ui.min.js");
 load_asset("core/jquery-ui.min.css");
 load_asset("core/jquery-ui.theme.min.css");
 $(document).ready(function(){
-
-
+    var test = new uploadModule();
     $.post(api_url("C_user_video/retrieveUserVideo"), {id:user_id()}, function(data){
         var response = JSON.parse(data);
-            console.log(response);
             // asset_url("user_video/"+user_id()+"/"+file_name)
             if(!response["error"].length){
                 $.each( response.data, function( i, val ) {
@@ -32,6 +76,7 @@ $(document).ready(function(){
 
     $("#upload").attr("opacity",1);
     $("#uploadForm").attr('action',api_url("C_user_video/createUserVideo"));
+    $("#thumbnailForm").attr('action',api_url("C_user_video/createUserVideoThumbnail"));
     $('select').material_select();
     //upload and preview file
     'use strict'
@@ -73,53 +118,49 @@ $(document).ready(function(){
         var canvases = $('canvas');
         VideoSnapper.captureAsCanvas(video, { width: 160, height: 68 }, function(canvas) {
             $('#screen').html(canvas); 
-            $('#save').show();                       
+            $('canvas').attr('id','canvas');
+            $('#save').show();          
+            var canvas = document.getElementById("canvas"); 
+            $('#thumbnail').val(canvas.toDataURL("image/png"));             
         })
     }); 
 
-    $('#save').click(function(){
-        var canvas = document.getElementById('canvas');
-        canvas.toDataURL("image/png");
-    })
+// $("#uploadForm").ajaxForm({
+//             beforeSubmit: function(data,$form,options){
+//             },
+//             success : function(data){
+//                 var response = JSON.parse(data);
+//                 if(!response["error"].length){
+//                     $(".hide-module:not(#success-module)").hide();
+//                     console.log(response);
+//                     $("#title").val('');
+//                     $("#details").val('');
+//                     $("#video_id").val(4);
+//                     var canvas = document.getElementById("canvas"); 
+//                     $('#thumbnail').val(canvas.toDataURL("image/png"));
+//                     $('#thumbnailForm').trigger('submit');
 
+//                 }else{
+//                     $("#success-module").hide();
+//                     console.log(response['error']);
+//                     // show_error($("#registrationForm"), response["error"]);
+//                 }
+//             }
+//         });
 
-$("#uploadForm").ajaxForm({
-            beforeSubmit: function(data,$form,options){
-                console.log(data);
+// $("#thumbnailForm").ajaxForm({
+//             beforeSubmit: function(data,$form,options){
+//                 console.log(data);
+//             },
+//             success : function(data){
+//                 var response = JSON.parse(data);
+//                 if(!response["error"].length){
 
-            },
-            success : function(data){
-                var response = JSON.parse(data);
-                if(!response["error"].length){
-                    $(".hide-module:not(#success-module)").hide();
-                    $("#title").val('');
-                    $("#details").val('');
-                    uploadThumbnail(response.data);
-                    // $('#registrationModal').closeModal();
-                }else{
-                    $("#success-module").hide();
-                    console.log(response['error']);
-                    // show_error($("#registrationForm"), response["error"]);
-                }
-            }
-        });
-    
-    function uploadThumbnail(id){
-        var canvas = document.getElementById('canvas');
-        canvas.toDataURL("image/png");
-        console.log(canvas);
-        $.post(api_url("createUserVideoThumbnail"), {user_video_ID:id}, function(data){
-        var response = JSON.parse(data);
-            console.log(response);
-
-            if(!response["error"].length){
-
-            }else{
-                $("#success-module").hide();
-                console.log(response['error']);
-            }
-        });
-    }
+//                 }else{
+//                     $("#success-module").hide();
+//                 }
+//             }
+//         });
 });
 
 </script>

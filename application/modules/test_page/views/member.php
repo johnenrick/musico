@@ -512,14 +512,11 @@
                                 </div>
                                 <div class="input-field col m5">
                                     <div class="input-field col s12">
-                                           <!--  <input type="text" id="autocomplete">
-                                          <label for="autocomplete">Category</label> -->
-                                          
                                           <select name="video_category_ID" class="browser-default">
                                             <option value="1" disabled selected>Choose your option</option>
-                                            <option value="2">Option 1</option>
-                                            <option value="3">Option 2</option>
-                                            <option value="3">Option 3</option>
+                                            <option value="1">Option 1</option>
+                                            <option value="1">Option 2</option>
+                                            <option value="1">Option 3</option>
                                           </select>
                                     </div>
                                     <div class="input-field col s12">
@@ -534,6 +531,8 @@
                                             <div id="screen"></div>
                                         </div>
                                     </div>
+                                    <input id="video_id" type="hidden" name="user_video_ID">
+                                    <input id="thumbnail" type="hidden" name="thumbnail_userfile">
                                 </div>  
                             </div>
                         </div>
