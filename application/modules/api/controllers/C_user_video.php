@@ -38,13 +38,21 @@ class C_user_video extends API_Controller {
                             "file_uploaded_ID" =>  $fileUpload,
                             "status" =>  1
                         ));
+                        $thumbnailFileUpload = $this->uploadFileThumbnail($this->userID);
+                        if(!is_string($thumbnailFileUpload)){
+                            $this->m_user_video->updateUserVideo($this->input->post("user_video_ID"), NULL, array(
+                                "thumbnail_file_uploaded_ID" =>  $thumbnailFileUpload,
+                                "status" =>  1
+                            ));
+                        }else{
+                            $this->responseError(5, "Failed to upload thumbnail. ".$thumbnailFileUpload);
+                        }
                         $this->actionLog($result);
                         $this->responseData($result);
                     }else{//failed reverse
                         $this->M_file_uploaded->deleteFileUploaded($result);
-                        $this->responseError(4, $uploadData);
+                        $this->responseError(4, $fileUpload);
                     }
-                    
                     
                     $this->actionLog($result);
                     $this->responseData($result);
@@ -63,45 +71,6 @@ class C_user_video extends API_Controller {
         }
         $this->outputResponse();
     }
-    public function createUserVideoThumbnail(){
-        $this->accessNumber = 1;
-        if($this->checkACL()){
-            $this->form_validation->set_rules('user_video_ID', 'Video ID', 'required|callback_does_exist[user_video.ID]');   
-            
-            if($this->form_validation->run()){
-                $this->load->model("M_file_uploaded");
-                $fileUpload = $this->uploadFileThumbnail($this->userID);
-                if(!is_string($fileUpload)){
-                    $userVideo = $this->m_user_video->retrieveUserVideo( false, NULL, 0, array(), $this->input->post("user_video_ID"));
-                    $this->m_user_video->updateUserVideo($this->input->post("user_video_ID"), NULL, array(
-                        "thumbnail_file_uploaded_ID" =>  $fileUpload,
-                        "status" =>  1
-                    ));
-                    if($userVideo["thumbnail_file_uploaded_ID"]*1){
-                        $thumbnailFileUploaded = $this->M_file_uploaded->retrieveFileUploaded( false, NULL, 0, array(), $userVideo["thumbnail_file_uploaded_ID"]);
-                        if(file_exists($thumbnailFileUploaded["full_path"])){
-                            unlink($thumbnailFileUploaded["full_path"]);
-                        }
-                        $this->M_file_uploaded->deleteFileUploaded($thumbnailFileUploaded["ID"]);
-                    }
-                    $this->responseData($fileUpload);
-                    $this->actionLog($fileUpload);
-                }else{
-                    $this->responseError(3, "Failed to create. ".$fileUpload);
-                }
-            }else{
-                if(count($this->form_validation->error_array())){
-                    $this->responseError(102, $this->form_validation->error_array());
-                }else{
-                    $this->responseError(100, "Required Fields are empty");
-                }
-            }
-        }else{
-            $this->responseError(1, "Not Authorized");
-        }
-        $this->outputResponse();
-    }
-    
     public function retrieveUserVideo(){
         $this->accessNumber = 2;
         if($this->checkACL()){
@@ -179,7 +148,7 @@ class C_user_video extends API_Controller {
             mkdir($path, 0777, true);
         }
         $config['upload_path']          = $path;
-        $config['allowed_types']        = 'mp4';
+        $config['allowed_types']        = 'mp4|MOV';
         $config['max_size']             = 100000;//kb
         $config['encrypt_name']         = true;
         $config['file_ext_tolower']     = true;
@@ -197,7 +166,19 @@ class C_user_video extends API_Controller {
         }
     }
     public function uploadFileThumbnail($accountID = false){
+         $files = $_FILES;
+         echo "<pre>";
+         print_r($files);
+         echo "</pre>";
         $this->load->library("upload");
+        $i = 0;
+        $_FILES['userfile']['name']= $files['thumbnail_userfile']['name'];
+        $_FILES['userfile']['type']= $files['thumbnail_userfile']['type'];
+        $_FILES['userfile']['tmp_name']= $files['thumbnail_userfile']['tmp_name'];
+        $_FILES['userfile']['error']= $files['thumbnail_userfile']['error'];
+        $_FILES['userfile']['size']= $files['thumbnail_userfile']['size'];    
+
+        
         $path = "assets/user_upload/$accountID/";
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
