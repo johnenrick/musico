@@ -202,6 +202,20 @@ class API_Controller extends MX_Controller{
             return false;
         }
     }
+    public function is_unique($value, $tableColumn){
+        if($value){
+            $this->load->model("m_form_validation");
+            $this->form_validation->set_message('does_exist', '{field} already exist');
+            $doesExist = $this->m_form_validation->doesExist($tableColumn, $value);
+            if($doesExist){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+    }
     
 }
 

@@ -41,7 +41,7 @@ class C_account extends API_Controller {
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|callback_alpha_dash_space');
         ($this->input->post("middle_name")) ? $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|callback_alpha_dash_space') : null;
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|callback_alpha_dash_space');
-        $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');
+        $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email|callback_is_unique[account_information.email_address]');
         $this->form_validation->set_rules('country', 'Country', 'required');
         if($this->form_validation->run()){
             $result = $this->m_account->createAccount(
@@ -133,7 +133,7 @@ class C_account extends API_Controller {
             ($this->input->post('updated_data[first_name]')) ? $this->form_validation->set_rules('updated_data[first_name]', 'First Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[last_name]')) ? $this->form_validation->set_rules('updated_data[last_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[middle_name]')) ? $this->form_validation->set_rules('updated_data[middle_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
-            ($this->input->post('updated_data[email_address]')) ? $this->form_validation->set_rules('updated_data[email_address]', 'Email Address', 'trim|valid_email') : null;
+            ($this->input->post('updated_data[email_address]')) ? $this->form_validation->set_rules('updated_data[email_address]', 'Email Address', 'trim|valid_email|callback_is_unique[account_information.email_address]') : null;
             ($this->input->post('updated_data[country]')) ? $this->form_validation->set_rules('updated_data[country]', 'Country', 'trim|callback_alpha_dash_space') : null;
             if($this->form_validation->run()){
                 $updatedData = $this->input->post('updated_data');

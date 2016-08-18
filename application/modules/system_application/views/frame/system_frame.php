@@ -12,6 +12,8 @@
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/positioning.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/helper.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/jquery-ui.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/materialize_icon.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/positioning.css" media="screen,projection" />
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery-ui.min.js"></script>
@@ -63,14 +65,14 @@
                 <li><a href="#" class="valign-wrapper"><i class="fa fa-calendar-o" aria-hidden="true"></i>Events</a></li>
                 <li><a href="#" class="contactPageLink valign-wrapper"><i class="fa fa-phone" aria-hidden="true"></i>Contact Us</a></li>
             </ul>
-            <hr>
+            <hr class="playlistSidebar">
             <ul id="side-nav-large" class="playlistSidebar" style="display:none">
                 <li><span class="white-text">PLAYLIST</span></li>
                 <li><a href="#" class="valign-wrapper"><i class="fa fa-indent" aria-hidden="true"></i>My Playlist</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="fa fa-heart-o" aria-hidden="true"></i>Liked Videos</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="fa fa-star-o" aria-hidden="true"></i>Saved Artists</a></li>
             </ul>
-            <hr>
+            <hr class="adminSidebar">
             <ul id="side-nav-large" class="adminSidebar" style="display:none">
                 <li><span class="white-text">ADMIN</span></li>
                 <li><a class="moduleLink" module_link="user_management" module_name="User Management" href="#" class="valign-wrapper"><i class="fa fa-users" aria-hidden="true"></i>Admin User</a></li>
@@ -92,8 +94,8 @@
             <div id="mainContent">
 
             </div>
-            <footer class="page-footer">
-                <div class="container">
+            <footer class="page-footer footer-copyright white">
+                <div class="container ">
                     <div class="row">
                         <div class="col l12 s12">
                             <h5>Logo</h5>

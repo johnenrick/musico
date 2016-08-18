@@ -1,6 +1,6 @@
 <div class="videoListBanner">
     <div class="videoList">
-        <div class="mainVideo col s12 m12 l6 pull-left">
+        <div class="mainVideo col s12 m12 l12 pull-left">
             <div class="card hoverable transparent z-depth-0">
                 <div class="card-image" style="">
                     <a href="" >

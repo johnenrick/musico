@@ -14,3 +14,18 @@ and open the template in the editor.
 .no-margin-bot{
     margin-bottom : 0px;
 }
+.margin-right-5{
+    margin-right:5px
+}
+@media only screen and (min-width: 993px){
+    .border-space-left-5{
+        border-left-style: solid;
+        border-width: 5px;
+        border-color: #f0f0f0;
+    }
+    .border-space-right-5{
+        border-right-style: solid;
+        border-width: 5px;
+        border-color: #f0f0f0;
+    }
+} 

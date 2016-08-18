@@ -137,6 +137,12 @@
             callBack();
         }
     }
+    function load_sub_module(moduleLink, callBack, data){
+        data = (typeof data === "undefined") ? {}: data;
+        $.post(base_url(moduleLink), data,function(data){
+            callBack(data);
+        })
+    }
     /***
      * Send an API request. This is to be use instead for $.post for trapping different cases
      * @param {String} link the controller and function of the api

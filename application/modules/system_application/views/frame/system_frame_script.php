@@ -32,7 +32,6 @@
             
             $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
-                console.log("tae");
                 var moduleHolder = $("#systemModule").find(".moduleHolder").clone();
                 moduleHolder.attr("module_link", moduleLink);
                 moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));

@@ -13,12 +13,12 @@
     var VideoListBanner = function (componentContainer) {
         var videoListBanner = this;
         videoListBanner.body = $("#pageComponentContainer .videoListBanner").clone();//The HTML instance of the component. 
-        
+        componentContainer.empty();
         componentContainer.append(videoListBanner.body);
         
         videoListBanner.addItem = function(userVideoID, userVideoThumbnailLink, videoDescription, uploaderFullName, datetimeCreated, viewCount, mainVideo){
             var videoItem = (mainVideo === true) ?  videoListBanner.body.find(".videoContainer") : videoListBanner.body.find(".prototype .videoItem").clone();
-            
+         
             videoItem.attr("user_video_id", userVideoID);
             videoItem.find("img").attr("src", userVideoThumbnailLink);
             videoItem.find(".videoDescription").text(videoDescription);
@@ -42,6 +42,20 @@
             }
             videoItem.find(".videoAge").text(videoAge+" ago");
             videoListBanner.body.find(".videoList").append(videoItem);
+            //mainVideo width
+            
+            videoListBanner.body.find(".mainVideo").removeClass("l6 l8 l12 ");
+            videoListBanner.body.find(".videoList .subVideoList").removeClass("l3 l4");
+            var subVideoCount = videoListBanner.body.find(".videoList .subVideoList").length;
+            if(subVideoCount === 0){
+                videoListBanner.body.find(".mainVideo").addClass("l12");
+            }else if(subVideoCount === 1 || subVideoCount === 2 ){
+                videoListBanner.body.find(".mainVideo").addClass("l8");
+                videoListBanner.body.find(".videoList .subVideoList").addClass("l4");
+            }else if(subVideoCount > 2){
+                videoListBanner.body.find(".mainVideo").addClass("l6");
+                videoListBanner.body.find(".videoList .subVideoList").addClass("l3");
+            }
         };
     };
 </script>

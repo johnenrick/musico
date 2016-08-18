@@ -6,7 +6,7 @@
     load_asset("jquery-confirm.min.js");
     
     /*Module Object*/
-    var sampleModule  = function(){
+    var SampleModule  = function(){
         var sampleModule = this;//instance of the module
         var moduleBody = sampleModule.body = $("#sampleModule");
         load_component("sample_component", function(){
@@ -26,7 +26,7 @@
         
     $(document).ready(function(){
         if(typeof systemApplication.module.portalPage === "undefined"){
-            systemApplication.module.sampleModule = new sampleModule();
+            systemApplication.module.sampleModule = new SampleModule();
         }else{
             //TODO refresh function if the module is revisited
             
