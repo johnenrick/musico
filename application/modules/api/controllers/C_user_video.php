@@ -166,10 +166,10 @@ class C_user_video extends API_Controller {
         }
     }
     public function uploadFileThumbnail($accountID = false){
-         $files = $_FILES;
-         echo "<pre>";
-         print_r($files);
-         echo "</pre>";
+        $files = $_FILES;
+        if(!isset($files['thumbnail_userfile'])){
+            return "No Video Thumbnail";
+        } 
         $this->load->library("upload");
         $i = 0;
         $_FILES['userfile']['name']= $files['thumbnail_userfile']['name'];

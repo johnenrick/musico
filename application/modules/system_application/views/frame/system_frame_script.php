@@ -27,7 +27,7 @@
     function load_module(moduleLink, moduleName){
         moduleName = moduleName.toLowerCase();
         moduleLink = moduleLink.toLowerCase();
-        
+        window.history.pushState('Object', 'Title', base_url(moduleLink));
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             
             $.post(base_url(moduleLink), {load_module : true}, function(data){
