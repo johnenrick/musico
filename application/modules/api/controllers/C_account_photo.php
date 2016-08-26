@@ -17,7 +17,7 @@ class C_account_photo extends API_Controller {
     }
     public function createAccountPhoto(){
         $this->accessNumber = 1;
-        if($this->checkACL()){
+        if($this->checkACL() && $this->userID){
             $this->form_validation->set_rules('type', 'Type', 'required');
             
             if($this->form_validation->run()){
@@ -29,13 +29,21 @@ class C_account_photo extends API_Controller {
                 if($result){
                     $fileUpload = $this->uploadFile($this->userID);
                     if(!is_string($fileUpload)){
+                        
                         $this->m_account_photo->updateAccountPhoto($result, NULL, array(
                            "file_uploaded_ID" =>  $fileUpload
                         ));
+//                        $this->m_account_photo->deleteAccountPhoto(NULL, array(//remove previous entry
+//                            "account_photo__type" => $this->input->post("type"),
+//                            "account_photo__account_ID" => $this->userID,
+//                            "not__account_photo__ID" => $result
+//                        ));
+                        $this->responseDebug($this->input->post("type"));
+                        $this->responseDebug($this->userID);
                         $this->actionLog($result);
                         $this->responseData($result);
                     }else{//failed reverse
-                        $this->m_account_photo->deleteFileUploaded($result);
+                        $this->m_account_photo->deleteAccountPhoto($result);
                         $this->responseError(4, $fileUpload);
                     }
                     
@@ -131,11 +139,11 @@ class C_account_photo extends API_Controller {
             mkdir($path, 0777, true);
         }
         $config['upload_path']          = $path;
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 100;//kb
+        $config['allowed_types']        = 'png|jpg';
+        $config['max_size']             = 2000;//kb
         $config['encrypt_name']         = true;
         $config['file_ext_tolower']     = true;
-        
+        $this->responseDebug($_FILES['userfile']['type']);
         $this->upload->initialize($config);
         $this->load->library('upload');
 
@@ -144,6 +152,7 @@ class C_account_photo extends API_Controller {
             $this->load->model("M_file_uploaded");
             return $this->M_file_uploaded->createFileUploaded($uploadData["file_name"], $uploadData["image_type"], $uploadData["file_path"], $uploadData["file_size"]);
         }else{
+            $this->responseDebug($this->upload->data());
             $error = $this->upload->display_errors("","");
             return $error;
         }

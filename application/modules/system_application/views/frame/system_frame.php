@@ -14,6 +14,11 @@
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/jquery-ui.min.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/materialize_icon.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/positioning.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/text_style.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/button.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/label.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/modal.css" media="screen,projection" />
+
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery-ui.min.js"></script>

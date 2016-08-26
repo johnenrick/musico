@@ -14,3 +14,25 @@ and open the template in the editor.
     color :#B71C1C;
     border-width: 1px;
 }
+.yellow-outline{
+    border-style:solid;
+    border-color:#fbc02d !important;
+    color :#fbc02d!important;
+    border-width: 1px;
+    background: white;
+}
+.btn-sm{
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    outline: 0;
+    padding: 0 1rem;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    color:white
+}
+.red-darken-4-transparent{
+    background-color: rgba(0, 0, 0, 0.65)!important
+}

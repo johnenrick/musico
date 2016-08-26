@@ -27,7 +27,8 @@
     function load_module(moduleLink, moduleName){
         moduleName = moduleName.toLowerCase();
         moduleLink = moduleLink.toLowerCase();
-        window.history.pushState('Object', 'Title', base_url(moduleLink));
+        var section = window.location.href.split("#");
+        window.history.pushState('Object', 'Title', base_url(moduleLink)+(section.length >1  ? "#"+section[1] : ""));
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             
             $.post(base_url(moduleLink), {load_module : true}, function(data){
@@ -59,10 +60,9 @@
     $(document).ready(function(){
         //Module Redirection
         $(".moduleLink").click(function(){
-            
             load_module($(this).attr("module_link"), $(this).attr("module_name"));
         });
-        load_module(system_data.default.module_controller, "Test Page");
+        
     });
     
 </script>

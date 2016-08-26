@@ -6,12 +6,18 @@
      * @returns {undefined}
      */
     function show_form_error(elementSelected, errorList) {
+        clear_form_error(elementSelected);
         elementSelected.find(".formMessage").empty();
         elementSelected.find(".formMessage").show();
+        elementSelected.find(".formLabelIndicator.label-danger").show();
         errorList.forEach(function (errorValue) {
             if (errorValue["status"] > 100 && errorValue["status"] < 1000) {/*Form Validation Error*/
                 for (var index in errorValue["message"]) {
-                    elementSelected.find(".formMessage").append("* " + errorValue["message"][index] + "<br>");
+                    
+                    var inputField = elementSelected.find("input[name='"+index+"'], textarea[name='"+index+"'], select[name='"+index+"'] ").parent();
+                    inputField.find("input,textarea, select").addClass("invalid");
+                    inputField.find("label").attr("data-error", errorValue["message"][index]);
+                    
                 }
             } else if (errorValue["status"] > 1000 && errorValue["status"] < 10000) {/*System Error*/
                 for (var x = 0; x < errorValue["message"].length; x++) {
@@ -20,15 +26,18 @@
                     }
                 }
             } else {
-                elementSelected.find(".formMessage").append("* " + errorValue["message"] + "<br>");
+                var alertContainer = $(".prototype .alert").clone();
+                alertContainer.addClass("alert-danger");
+                    alertContainer.append("<strong>*</strong> " + errorValue["message"] + "<br>");
+                elementSelected.find(".formMessage").append(alertContainer);
             }
         });
-        elementSelected.scrollTo(".formMessage");
     }
     function clear_form_error(elementSelected) {
+        
         elementSelected.find(".formMessage").empty();
-        elementSelected.find(".formMessage").hide();
-        elementSelected.find(".has-error").removeClass(".has-error");
+        elementSelected.find(".invalid").removeClass("invalid");
+        elementSelected.find(".formLabelIndicator").hide();
     }
     /**
      * Show a system message at the bottom of the interface
@@ -83,11 +92,14 @@
         $("#systemMessageContainer").find(".systemMessage[message_status='" + status + "']").remove();
     }
     function changeFieldName(mode, form){
-        form.find("input[field_name!='']").each(function(){
-            if(mode === "update"){
-                $(this).attr("name", "update_data["+$(this).attr("field_name")+"]");
-            }else{//create
-                $(this).attr("name", $(this).attr("field_name"));
+        form.find("input[field_name!=''], select[field_name!=''], textarea[field_name!='']").each(function(){
+            if(typeof $(this).attr("field_name") !== "undefined"){
+                if(mode === "update"){
+                    $(this).attr("name", "updated_data["+$(this).attr("field_name")+"]");
+                }else{//create
+                    $(this).attr("name", $(this).attr("field_name"));
+                }
+            }else{
             }
         });
     }
@@ -122,5 +134,14 @@
         return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (letter, index) {
             return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
         }).replace(/\s+/g, '');
+    }
+    function removeFormDataValue(fieldName, data){
+        for(var x = 0; x < data.length; x++){
+            if(fieldName === data[x]["name"]){
+                console.log(x)
+                data.splice(x,1);
+            }
+        }
+        return data;
     }
 </script>

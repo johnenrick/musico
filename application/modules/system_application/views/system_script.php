@@ -24,6 +24,9 @@
             base_url : "<?=base_url()?>",
             api_url : "<?=api_url()?>",
             asset_url : "<?=asset_url()?>"
+        },
+        url_parameter : {
+            
         }
     };
     function user_id(){
@@ -141,21 +144,22 @@
         data = (typeof data === "undefined") ? {}: data;
         $.post(base_url(moduleLink), data,function(data){
             callBack(data);
-        })
+        });
     }
     /***
      * Send an API request. This is to be use instead for $.post for trapping different cases
      * @param {String} link the controller and function of the api
      * @param {Object} data parameter of the request
      * @param {Function} callbackFn Callback function if the request is successful
+     * @param {Boolean} tokenRequired Require token for this request. Default true
      * @returns {undefined}
      */
-    function api_request(link, data, callbackFn){
+    function api_request(link, data, callbackFn, tokenRequired){
+        tokenRequired = typeof tokenRequired === "undefined" ? true : tokenRequired;
         $.post(api_url(link), data, function(data){
             var response = JSON.parse(data);
             //Check token
-            system_data.token = response["token"];
-            if(response["token"]){
+            if(response["token"] || tokenRequired === false){
                 callbackFn(response);
             }else if(response["token"] === -1){//expired token
                 //Show log in, then call the callbackFn if log in is successful
@@ -195,10 +199,7 @@
     
     /*Authentication*/
     function setCredential(token, ID, userName, firstName, middleName, lastName, accountTypeID){
-        system_data.token = token;
-        if(token !== null){
-            document.cookie = "token="+token;
-        }
+        setToken(token);
         if(token){
             system_data.account_information.username = userName;
             system_data.account_information.first_name = firstName;
@@ -206,12 +207,14 @@
             system_data.account_information.last_name = lastName;
             if(system_data.account_information.user_ID !== ID && system_data.account_information.user_type !== accountTypeID){//New Credentials
                 //TODO Reset system frame for new log in
-                system_data.account_information.user_ID = ID;
+                system_data.account_information.user_ID = ID*1;
                 system_data.account_information.user_type = accountTypeID*1;
+                console.log(user_id())
                 setSystemFrameCredential();
             }
-            system_data.account_information.user_ID = ID;
-            system_data.account_information.user_type = accountTypeID;
+            
+            system_data.account_information.user_ID = ID*1;
+            system_data.account_information.user_type = accountTypeID*1;
         }else{
             //TODO Reset system frame for Log out/Not login
             system_data.account_information.user_ID = null;
@@ -224,23 +227,38 @@
         }
     }
     function logout(){
-        document.cookie = "token"+ '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';//Destroy Cookie
         setCredential(null);
+    }
+    function setToken(token){
+        document.cookie = "token"+ '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';//Destroy Cookie
+        if(token !== null){
+            document.cookie = "token="+token;
+        }
+    }
+    function getCookie(cookieKey){
+        var cookieList = document.cookie.split(";");
+        if(document.cookie.indexOf(cookieKey) !== -1){
+            for(var x = 0; x < cookieList.length; x++){
+                if(cookieList[x].indexOf(cookieKey) !== -1){
+                    var token = cookieList[x].split(cookieKey+"="); 
+                    return (token[1] === "null") ? null : token[1];
+                }
+            }
+            return null;
+        }else{
+            return null;
+        }
     }
 </script>
 
 <!--Document Ready-->
 <script>
-    
-    $(document).ajaxSend(function( event, jqxhr, settings ) {
-    });
     $(document).ajaxSuccess(function(event, xhr, settings){
         try{
             var response = JSON.parse(xhr.responseText);
             if(typeof response["token"] !== "undefined"){
-                if(system_data.token){
-                    system_data.token = response["token"];
-                    document.cookie = "token="+response["token"];
+                if(getCookie("token") !== null){
+                    setToken(response["token"]);
                 }
                 //TODO Handle system errors here
             }
@@ -248,39 +266,35 @@
         }
     });
     $(document).ready(function(){
-        /*Setting token*/
-        var cookieList = document.cookie.split(";");
-        if(document.cookie.indexOf("token") !== -1){
-            for(var x = 0; x < cookieList.length; x++){
-                if(cookieList[x].indexOf("token") !== -1){//Update credential on first load
-                    var token = cookieList[x].split("token=");
-                    system_data.token = token[1];
-                    $.post(base_url("portal/userInformation"), {}, function(data){
-                        var response = JSON.parse(data);
-                        if(response){
-                            setCredential(token, response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["account_type_ID"]);
-                        }else{
-                            setCredential(null)
-                        }
-                    });
-                }else{
-                    
-                }
-            }
-        }else{
-            setCredential(null);
-        }
         $.ajaxSetup({
             global: true,
             type: "POST",
-            data : {token:system_data.token}
-          });
+//            data : {token: getCookie("token")}
+            headers : {
+                token: getCookie("token")
+            }
+        });
+        /*Setting token*/
+        var token = getCookie("token");
+        if(token !== null ){
+            $.post(base_url("portal/userInformation"), {}, function (data) {
+                var response = JSON.parse(data);
+                if (!response["error"].length) {
+                    setCredential(response["token"], response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["account_type_ID"]);
+                } else {
+                    setCredential(null);
+                }
+                load_module(system_data.default.module_controller, "Test Page");
+            });
+        } else {
+            setCredential(null);
+            load_module(system_data.default.module_controller, "Test Page");
+        }
+        
         //redirect www
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
         }
-        //load default page
-        
         retrieve_access_control();
         
     });

@@ -18,9 +18,9 @@ class C_sample_template extends API_Controller {
     public function createSampleTemplate(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            $this->form_validation->set_rules('first_parameter', 'First Parameter', 'required');
+            $this->formValidationSetRule('first_parameter', 'First Parameter', 'required');
             
-            if($this->form_validation->run()){
+            if($this->formValidationRun){
                 $result = $this->m_sample_template->createSampleTemplate(
                         $this->input->post("first_parameter")
                         );
@@ -31,8 +31,8 @@ class C_sample_template extends API_Controller {
                     $this->responseError(3, "Failed to create");
                 }
             }else{
-                if(count($this->form_validation->error_array())){
-                    $this->responseError(102, $this->form_validation->error_array());
+                if(count($this->formValidationError())){
+                    $this->responseError(102, $this->formValidationError());
                 }else{
                     $this->responseError(100, "Required Fields are empty");
                 }

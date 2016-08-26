@@ -14,7 +14,7 @@ class FE_Controller extends API_Controller{
             "module" => $module
         );
         $this->load->view("system_application/frame/system_frame");
-        $this->load->view("system_application/system", $data);
+        $this->load->view("system_application/system", array( "default" => array("module" => $module), "extraData" => json_encode($data)) );
         $this->load->view("system_application/system_script");
         $this->load->view("system_application/frame/system_frame_script");
         $this->load->view("system_application/system_utilities_script");
@@ -26,13 +26,13 @@ class FE_Controller extends API_Controller{
     /***
      * Load a module request from already loaded page
      */
-    public function loadModule($moduleView, $moduleScript){
+    public function loadModule($moduleView, $moduleScript, $extraData = array()){
         if(is_array($moduleView)){
             foreach($moduleView as $view){
-                $this->load->view($view);
+                $this->load->view($view, $extraData);
             }
         }else{
-            $this->load->view($moduleView);
+            $this->load->view($moduleView, $extraData);
         }
         if(is_array($moduleScript)){
             foreach($moduleScript as $script){

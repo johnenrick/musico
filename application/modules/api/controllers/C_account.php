@@ -89,7 +89,9 @@ class C_account extends API_Controller {
                         $this->input->post("offset"),
                         $this->input->post("sort"),
                         $ID,
-                        $this->input->post("condition")
+                        $this->input->post("condition"),
+                        NULL,
+                        $this->input->post("additional_data")
                         );
                 if($this->input->post("limit")){
                     $this->responseResultCount($this->m_account->retrieveAccount(
@@ -98,7 +100,9 @@ class C_account extends API_Controller {
                         NULL,
                         NULL,
                         $ID, 
-                        $this->input->post("condition")
+                        $this->input->post("condition"),
+                        NULL,
+                        $this->input->post("additional_data")
                         ));
                 }
                 if($result){
@@ -147,17 +151,28 @@ class C_account extends API_Controller {
                         $condition,
                         $updatedData
                         );
-                $condition["account_ID"] = $ID;
                 $result1 = $this->M_account_information->updateAccountInformation(
                         NULL,
                         array("account_information__account_ID" => $ID),
                         $updatedData
                         );
                 if($result || $result1){
-                    $this->actionLog(json_encode($this->input->post()));
+                    if ($this->input->post("condition[account_biography__ID]")*1) {//update biography
+                        $this->responseDebug($this->input->post("condition[account_biography__ID]"));
+                        $this->load->model("m_account_biography");
+                        $this->m_account_biography->updateAccountBiography($this->input->post("condition[account_biography__ID]"), NULL,$updatedData);
+                    } else if ($this->input->post("updated_data[account_biography__detail]")) {//create biography
+                        $this->load->model("m_account_biography");
+                        $this->m_account_biography->createAccountBiography($this->userID, $this->input->post("updated_data[account_biography__detail]"));
+                    }
+                    
                     $this->responseData($result || $result1);
+                    $this->actionLog(json_encode($this->input->post()));
+                    
                 }else{
                     $this->responseError(3, "Failed to Update");
+                    $this->responseDebug($condition);
+                    $this->responseDebug($updatedData);
                 }
             }else{
                 if(count($this->form_validation->error_array())){

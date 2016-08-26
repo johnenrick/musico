@@ -32,19 +32,21 @@ class API_Controller extends MX_Controller{
         $this->load->model("api/m_access_control_list");
         $this->load->model("api/m_action_log");
         $this->form_validation->CI =&$this;
-        $token = decodeToken($this->input->post("token"));
-        $this->userID = 1;
-        if($token){
+        $token = decodeToken($this->input->get_request_header("token"));
+        if($token != 0 && $token != -1){
             $this->userID = $token["user_ID"];
             $this->userType = $token["user_type"];
             $this->username = $token["username"];
             $this->response["token"] = generateToken($this->userID, $this->userType, $this->username);
         }else if($token == -1){//Expired Token
             $this->response["token"] = null;
-            $this->responseError("1001", "Token Expired.");
-            $this->outputResponse();
+            if($this->APICONTROLLERID != 0){
+                $this->responseError("1001", "Token Expired.");
+                $this->outputResponse();
+            }
+
         }else{//no token
-            
+            $this->responseDebug("no token");
         }
         //sleep(2);//Simulate slow internet connection
     }
@@ -109,7 +111,7 @@ class API_Controller extends MX_Controller{
     }
     public function actionLog($detail){
         //check module with parent
-        return $this->m_action_log->createActionLog(user_id(), $this->APICONTROLLERID, $this->accessNumber, $detail);
+        return $this->m_action_log->createActionLog(($this->userID) ? $this->userID: 0 , $this->APICONTROLLERID, $this->accessNumber, $detail);
     }
     public function printR($data){
         echo "<pre>";
@@ -172,11 +174,12 @@ class API_Controller extends MX_Controller{
     
     /*** Customer Validation Function ***/
     public $formValidationError = array();
+    public $formValidationRules = array();
     /***
      * return the error in form validation
      */
     public function formValidationRun(){
-        return (count($this->formValidationError) > 0) ? false : $this->form_validation->run();
+        return (count($this->formValidationError) > 0) ? false :  ((count($this->formValidationRules)) ? $this->form_validation->run() : true);
     }
     /***
      * This is an alternative for getting errors from validation. This is used to get errors from custom validation error
@@ -189,17 +192,9 @@ class API_Controller extends MX_Controller{
      */
     public function formValidationSetRule($fieldName, $fieldTitle, $rule){
         $this->form_validation->set_rules($fieldName, $fieldTitle, $rule);
+        $this->formValidationRules[] = array($fieldName, $fieldTitle, $rule);
         if(substr_count($rule, "required") && !$this->input->post($fieldName)){
             $this->formValidationError[$fieldName] = "$fieldTitle is required";
-        }
-    }
-    public function does_exist($value, $tableColumn){
-        if($value){
-            $this->load->model("m_form_validation");
-            $this->form_validation->set_message('does_exist', '{field} does not exist');
-            return $this->m_form_validation->doesExist($tableColumn, $value);
-        }else{
-            return false;
         }
     }
     public function is_unique($value, $tableColumn){

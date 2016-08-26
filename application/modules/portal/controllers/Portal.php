@@ -15,7 +15,7 @@ class Portal extends FE_Controller{
     //put your code here
     function index(){
         if($this->input->post("load_module")){
-            $this->loadModule("portal", "portal_script");
+            $this->loadModule(array("portal"), "portal_script");
         }else{
             $this->loadPage("Portal");
         }
@@ -39,6 +39,7 @@ class Portal extends FE_Controller{
                 $data["account_type_ID"] = $result[0]["account_type_ID"];
                 $data["decoded"] = decodeToken($data["token"]);
                 $this->responseData($data);
+                $this->response["token"] = $data["token"];
             }else{
                 $this->responseError(5, "Username/Email and Password Mismatch");
             }

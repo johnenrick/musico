@@ -1,7 +1,8 @@
 <script>
     load_asset("module/member_profile_home_tab.css");
-    var MemberProfileHomeTab = function(moduleBody){
+    var MemberProfileHomeTab = function(memberProfile){
         var memberProfileHomeTab = this;
+        var moduleBody = memberProfile.body;
         var subModuleBody = moduleBody.find("#memberProfileHomeTab");
         $('ul.tabs').tabs();
         load_component("video_list_banner", function(){

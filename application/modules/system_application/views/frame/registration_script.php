@@ -45,6 +45,7 @@
             },
             success : function(data){
                 var response = JSON.parse(data);
+                console.log(response);
                 if(!response["error"].length){
                     $(".hide-module:not(#success-module)").hide();
                     $("#username").val('');
@@ -53,7 +54,6 @@
                     $('#registrationModal').closeModal();
                 }else{
                     $("#success-module").hide();
-                    console.log(response['error']);
                     // show_error($("#registrationForm"), response["error"]);
                 }
             }

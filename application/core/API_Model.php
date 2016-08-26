@@ -65,10 +65,10 @@ class API_Model extends CI_Model{
         
         //Filtering entry
         if($ID === NULL){
-            $this->addCondition($condition);
-        }else{
             $this->db->where("$this->TABLE.ID", $ID);
         }
+        $this->addCondition($condition);
+
         //Having Clause
         if($having){
             $this->addHaving($having);
@@ -133,13 +133,16 @@ class API_Model extends CI_Model{
         if(count($newData) > 0 && (($ID !== NULL) || $this->HASCONDITION)){
             $updatedData = array();
             foreach($newData as $newDataKey => $newDataValue){
-                if(isset($this->DATABASETABLE[$this->TABLE][$newDataKey] )){
-                    $updatedData[$newDataKey] = $newDataValue;
+                $column = explode("__", $newDataKey);
+                if(isset($this->DATABASETABLE[$this->TABLE][(count($column ) == 1 ? $column[ 0 ] : $column[1]) ] )){
+                    if((count($column ) == 1 ? $column[ 0 ] : $column[1]) != "ID"){
+                        $updatedData[(count($column ) == 1 ? $column[ 0 ] : $column[1])] = $newDataValue;
+                    }
+                }else{
                 }
             }
             if(count($updatedData)){
                 $result = $this->db->update($this->TABLE, $updatedData);
-               
             }else{
                 $this->db->get($this->TABLE);
             }
@@ -151,6 +154,7 @@ class API_Model extends CI_Model{
         return $result;
     }
     public function addCondition($condition = array()){
+        
         if(is_array($condition)){
             foreach($condition as $tableColumnKey => $tableColumnValue){
                 $segment = explode("__", $tableColumnKey);
@@ -185,11 +189,14 @@ class API_Model extends CI_Model{
                     }
                     $tableColumn = "CONCAT($tableColumnTemp)";
                 }
-                if((isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic) && ($tableColumnValue !== "")){
                 
+                if((isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic) && ($tableColumnValue !== "")){
+                  
                     $leftValue = ($passArithmetic) ? $tableColumn: "$tableName.$tableColumn";
                     $this->HASCONDITION = true;
+                    
                     switch($segment[0]){
+                        
                         case "like":
                             if(is_array($tableColumnValue)){
                                 foreach($tableColumnValue as $tableColumnValueValue){
@@ -296,11 +303,14 @@ class API_Model extends CI_Model{
     public function deleteTableEntry($ID = NULL, $condition = array(), $joinedTable = array()){
         $this->db->start_cache();
         $this->db->flush_cache();
+        $this->initializeTableColumn($joinedTable);
         foreach($joinedTable as $key => $value){
             $this->db->join($key, $value, "left");
         }
         $this->addCondition($condition);
-        $this->db->where("$this->TABLE.ID", $ID);
+        if($ID){
+            $this->db->where("$this->TABLE.ID", $ID);
+        }
         $result = $this->db->delete("$this->TABLE");
         $this->db->flush_cache();
         $this->db->stop_cache();
@@ -345,12 +355,14 @@ class API_Model extends CI_Model{
         $this->DATABASETABLE = array();
         $this->HASCONDITION = false;
         foreach($joinedTable as $joinedTableKey => $joinedTableValue){
-            $tableName = explode(" AS ", $joinedTableKey); 
-            $this->db->start_cache();
-            $this->db->flush_cache();
-            $this->DATABASETABLE[$tableName[(count($tableName) > 1) ? 1 : 0]] = array_flip($this->db->list_fields($tableName[0]));
-            $this->db->flush_cache();
-            $this->db->stop_cache();
+            if(strpos($joinedTableKey, "select ") === false){
+                $tableName = explode(" AS ", $joinedTableKey); 
+                $this->db->start_cache();
+                $this->db->flush_cache();
+                $this->DATABASETABLE[$tableName[(count($tableName) > 1) ? 1 : 0]] = array_flip($this->db->list_fields($tableName[0]));
+                $this->db->flush_cache();
+                $this->db->stop_cache();
+            }
         }
         $this->DATABASETABLE[$this->TABLE] = array_flip($this->db->list_fields($this->TABLE));
         return true;

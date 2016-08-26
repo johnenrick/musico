@@ -30,11 +30,6 @@
     };
         
     $(document).ready(function(){
-        if(typeof systemApplication.module.portalPage === "undefined"){
-            systemApplication.module.portalPage = new Portal();
-        }else{
-            //TODO refresh
-            alert();
-        }
+        systemApplication.module.portalPage = new Portal();
     });
 </script>
