@@ -4,7 +4,6 @@
         var memberProfileAboutTab = this;
         var moduleBody = memberProfile.body;
         var subModuleBody = moduleBody.find("#memberProfileAboutTab");
-        $('ul.tabs').tabs();
         if(memberProfile.accountID === user_id()){//viewing own profile
             subModuleBody.find(".profileSetting").show();
         }else{
@@ -34,14 +33,15 @@
             retrieveAccountDetail();
             clear_form_error(subModuleBody.find(".profileSettingForm"));
         });
-        retrieveAccountDetail();
+        
+        
         function retrieveAccountDetail(){
             changeFieldName("update", subModuleBody.find(".profileSetting form"));
             memberProfile.body.find(".profileFullName").text("");
             memberProfile.body.find(".profileEmail").text("");
             memberProfile.body.find(".profileCountry").text("");
             memberProfile.body.find(".profileBiography").text("");
-            api_request("c_account/retrieveAccount", {ID: memberProfile.accountID, additional_data : {account_biography : true, account_cover_photo : true}}, function(response){
+            api_request("c_account/retrieveAccount", {ID: memberProfile.accountID, additional_data : {account_biography : true, account_cover_photo : true, account_profile_photo : true}}, function(response){
                 if(!response["error"].length){
                     console.log(response);
                     /*Profile Setting*/
@@ -56,14 +56,24 @@
                     subModuleBody.find(".profileSetting textarea[field_name=account_biography__detail]").val(response["data"]["account_biography_detail"]);
                     /*Profile View*/
                     memberProfile.body.find(".profileFullName").text(response["data"]["first_name"]+" "+response["data"]["middle_name"]+" "+response["data"]["last_name"]);
-                    memberProfile.body.find("#profile-header").css("background-image", "url("+asset_url("user_upload/"+response["data"]["ID"]+"/"+response["data"]["account_cover_photo_file_uploaded_description"])+")");
                     memberProfile.body.find(".profileEmail").text(response["data"]["email_address"]);
                     memberProfile.body.find(".profileCountry").text(response["data"]["country"]);
                     memberProfile.body.find(".profileBiography").text(response["data"]["account_biography_ID"]*1 ? response["data"]["account_biography_detail"] : "");
+                    if(response["data"]["account_cover_photo_ID"]*1){
+                        memberProfile.body.find("#profile-header").css("background-image", "url("+asset_url("user_upload/"+response["data"]["ID"]+"/"+response["data"]["account_cover_photo_file_uploaded_description"])+")");
+                    }
+                    if(response["data"]["account_profile_photo_ID"]*1){
+                        memberProfile.body.find("#profile-header  .pro-info img").attr("src", asset_url("user_upload/"+response["data"]["ID"]+"/"+response["data"]["account_profile_photo_file_uploaded_description"]))
+                    }
                 }else{
                     
                 }
             }, false);
+        }
+        memberProfileAboutTab.retrieveAccountDetail = retrieveAccountDetail;
+        
+        memberProfileAboutTab.reload = function(){
+            retrieveAccountDetail();
         }
     };
 </script>

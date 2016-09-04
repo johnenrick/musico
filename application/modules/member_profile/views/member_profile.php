@@ -1,8 +1,10 @@
 <div id="memberProfile" >
     <div class="row no-margin-bot ">
         <div id="profile-header" class="col m12 valign-wrapper">
-            <div class="col m9 ">
-                <button class="changeProfileCover btn btn-large transparent red-darken-4-transparent c-center valign"><i class="fa fa-edit" aria-hidden="true"></i> Change Background</button>
+            <div class="col m9 valign center-align">
+                <button class="changeProfileCover btn btn-large transparent red-darken-4-transparent c-center  no-display"><i class="fa fa-edit" aria-hidden="true"></i> Change Cover</button>
+                <button class="changeProfilePhoto btn btn-large transparent red-darken-4-transparent c-center no-display"><i class="fa fa-user" aria-hidden="true"></i> Change Profile</button>
+                
             </div>
             <div class="col m3 pro-info">
                 
@@ -11,21 +13,22 @@
                 <p class="profileBiography">
                     Lorem ipsum dolor sit amet, adhuc illud splendide mei ea. Ut has etiam lobortis consequuntur, ex harum veniam feugait has.
                 </p>
+                
             </div>
         </div>
     </div>
     <div id="profile-menu" class="row white">
             <div class="col m9">
-                <ul class="links tabs">
-                    <li class="tab"><a class="active" href="#memberProfileHomeTab">Home</a></li>
+                <ul class="links tabs" style="overflow-x: hidden">
+                    <li class="tab"><a href="#memberProfileHomeTab">Home</a></li>
                     <li class="tab"><a href="#memberProfileVideoTab">Videos</a></li>
                     <li class="tab"><a href="#playlist">Playlist</a></li>
                     <li class="tab"><a href="#memberProfileAboutTab">About</a></li>
                 </ul>
             </div>
-            <div class="col m3 center-align">
-                <a class="waves-effect waves-light btn red darken-4 ">Subscribe</a>
-                <span>14,321 subscribers</span>
+            <div class="col m3 center-align" >
+                <a class="subscriptionButton waves-effect waves-light btn red darken-4 ">Subscribe <span class="subscriptionCount" style="font-size:11px"></span></a>
+                <a class="unSubscriptionButton waves-effect waves-light btn red-outline white darken-4 ">Unsubscribe <span class="subscriptionCount" style="font-size:11px"></span></a>
             </div>
     </div>
     <div class=" clearfix row">
@@ -66,24 +69,64 @@
 
     </div>
     <div id="profileCoverPhotoModal" class="modal modal-lg modal-fixed-footer">
-        <div class="modal-content">
+        <div class="modal-content ">
             <h4>Cover Photo <i class="fa fa-picture-o" aria-hidden="true"></i></h4>
             <div class="row">
-                <div class="col s12 center-align">
+                <div class="col s12 file-field input-field left">
+                    <div class="btn">
+                      <span><i class="fa fa-upload" aria-hidden="true"></i> Upload Image</span>
+                      <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col s12 center-align ">
                     <div id="coverPhotoPreview" class="fixed-dragger-cropper">
                         <img src="<?=  asset_url("image/sample-header.jpg")?>"   style="width:100%">
                     </div>
                 </div>
             </div>
-            <form accept-charset="utf-8" enctype="multipart/form-data" method="POST">
-                <input type="hidden" value="2">
-                <input name="userfile" type="file">
-            </form>
         </div>
         
         <div class="modal-footer">
-            <button class="btn left"><i class="fa fa-upload" aria-hidden="true"></i> Upload Image</button>
+            
             <button class="saveCover btn green"><i class="fa fa-check" aria-hidden="true"></i> Save Cover</button>
+            <a  class=" modal-action btn-flat label-danger no-display">Fail</a>
+            <a  class="label-info modal-action btn-flat no-display">Please wait...</a>
+        </div>
+    </div>
+    
+    <div id="profilePhotoModal" class="modal modal-lg modal-fixed-footer">
+        <div class="modal-content ">
+            <h4>Profile Photo <i class="fa fa-picture-o" aria-hidden="true"></i></h4>
+            <div class="row">
+                <div class="col s12 file-field input-field left">
+                    <div class="btn">
+                      <span><i class="fa fa-upload" aria-hidden="true"></i> Upload Image</span>
+                      <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col s12 center-align ">
+                    <div id="profilePhotoPreview" class="fixed-dragger-cropper">
+                        <img src="<?=  asset_url("image/sample-header.jpg")?>"   style="width:100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            
+            <button class="savePhoto btn green"><i class="fa fa-check" aria-hidden="true"></i> Save Photo</button>
+            <a  class=" modal-action btn-flat label-danger no-display">Fail</a>
+            <a  class="label-info modal-action btn-flat no-display">Please wait...</a>
         </div>
     </div>
 

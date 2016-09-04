@@ -64,7 +64,7 @@ class API_Model extends CI_Model{
         }
         
         //Filtering entry
-        if($ID === NULL){
+        if($ID != NULL){
             $this->db->where("$this->TABLE.ID", $ID);
         }
         $this->addCondition($condition);

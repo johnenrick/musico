@@ -26,7 +26,6 @@
      */
     function load_module(moduleLink, moduleName){
         moduleName = moduleName.toLowerCase();
-        moduleLink = moduleLink.toLowerCase();
         var section = window.location.href.split("#");
         window.history.pushState('Object', 'Title', base_url(moduleLink)+(section.length >1  ? "#"+section[1] : ""));
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){

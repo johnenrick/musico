@@ -24,6 +24,19 @@
 //           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
            
         });
+        if(user_id()){
+            moduleBody.find(".signUpButton").hide();
+        }
+        moduleBody.find(".signUpButton").click(function(){
+            $(".headerAuthentication").trigger("click");
+        });
+        moduleBody.find(".uploadVideo").click(function(){
+            if(user_id()){
+                load_module("member_profile/index/"+user_id()+"#memberProfileVideoTab", "MemberProfile");
+            }else{
+                $(".headerLogin").trigger("click");
+            }
+        });
         portalPage.reload = function(){
             console.log("reload");
         };

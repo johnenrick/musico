@@ -144,4 +144,19 @@
         }
         return data;
     }
+    function iReplace( line, word, replacement)
+    {
+         var regex = new RegExp( '(' + word + ')', 'gi' );
+         return line.replace( regex, replacement );
+    }
+    String.prototype.spliceInsert = function(index, startIndex, str) {
+        return this.slice(0, index) + str + this.slice(index + Math.abs(startIndex));
+    };
+    function getURLParameter(moduleLink){
+        var remainingLink = iReplace(window.location.href.replace("http://", ""), (base_url(moduleLink.toLowerCase())).replace("http://",""), "");
+        var sectionSplit = remainingLink.split("#");
+        var parameter = sectionSplit[0].split("/");
+        parameter.splice(0,1);
+        return (parameter.length) >= 1 ? parameter : false;
+    }
 </script>

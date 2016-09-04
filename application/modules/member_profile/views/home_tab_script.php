@@ -4,7 +4,7 @@
         var memberProfileHomeTab = this;
         var moduleBody = memberProfile.body;
         var subModuleBody = moduleBody.find("#memberProfileHomeTab");
-        $('ul.tabs').tabs();
+        
         load_component("video_list_banner", function(){
            memberProfileHomeTab.featuredVideoList = new VideoListBanner(subModuleBody.find(".latestVideo"));
            memberProfileHomeTab.featuredVideoList.addItem(1, asset_url("sample_image/s1.jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10, true);

@@ -10,6 +10,6 @@ and open the template in the editor.
 
 .modal-lg{
     width:90%;
-    height: 80%!important;
+    /*height: 80%!important;*/
     max-height: 80%;
 }

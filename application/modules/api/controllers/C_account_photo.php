@@ -33,11 +33,13 @@ class C_account_photo extends API_Controller {
                         $this->m_account_photo->updateAccountPhoto($result, NULL, array(
                            "file_uploaded_ID" =>  $fileUpload
                         ));
-//                        $this->m_account_photo->deleteAccountPhoto(NULL, array(//remove previous entry
-//                            "account_photo__type" => $this->input->post("type"),
-//                            "account_photo__account_ID" => $this->userID,
-//                            "not__account_photo__ID" => $result
-//                        ));
+                        $this->m_account_photo->deleteAccountPhoto(NULL, array(//remove previous entry
+                            "account_photo__type" => $this->input->post("type"),
+                            "account_photo__account_ID" => $this->userID,
+                            "not__account_photo__ID" => $result
+                        ), array(
+                            "status" => 2
+                        ));
                         $this->responseDebug($this->input->post("type"));
                         $this->responseDebug($this->userID);
                         $this->actionLog($result);
@@ -140,16 +142,32 @@ class C_account_photo extends API_Controller {
         }
         $config['upload_path']          = $path;
         $config['allowed_types']        = 'png|jpg';
-        $config['max_size']             = 2000;//kb
+        
+        $config['maintain_ratio']       = TRUE;
+        
         $config['encrypt_name']         = true;
         $config['file_ext_tolower']     = true;
+        if($this->input->post("type") == 2){
+            $config['max_height']       = 320;
+            $config['max_size']             = 3000;//kb
+        }
         $this->responseDebug($_FILES['userfile']['type']);
         $this->upload->initialize($config);
         $this->load->library('upload');
-
         if ($this->upload->do_upload()){
             $uploadData = $this->upload->data();
             $this->load->model("M_file_uploaded");
+            if($this->input->post("type") == 1){//resize profile picture
+                $resize['source_image'] = $uploadData["file_path"].$uploadData["file_name"];
+                $resize['new_image'] = $uploadData["file_path"];
+                $resize['file_path'] = $uploadData["file_path"].$uploadData["file_name"];
+                $resize['create_thumb'] = false;
+                $resize['maintain_ratio'] = true;
+                $resize['width'] = 200;
+                $resize['overwrite'] = TRUE;
+                $this->load->library('image_lib', $resize);
+                $this->image_lib->resize();
+            }
             return $this->M_file_uploaded->createFileUploaded($uploadData["file_name"], $uploadData["image_type"], $uploadData["file_path"], $uploadData["file_size"]);
         }else{
             $this->responseDebug($this->upload->data());

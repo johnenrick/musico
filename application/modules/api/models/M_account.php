@@ -38,11 +38,14 @@ class M_account extends API_Model{
             $selectedColumn[] = "account_biography.ID AS account_biography_ID, account_biography.detail as account_biography_detail";
         }
         if(isset($additionalData["account_cover_photo"])){
-            $joinedTable["(select MAX( account_photo.ID ) AS latest_ID, account_photo.*  from account_photo) AS latest_account_cover_photo"] = "latest_account_cover_photo.account_ID=account_information.account_ID AND latest_account_cover_photo.type=2";
-            $joinedTable["account_photo AS account_cover_photo"] = "account_cover_photo.account_ID=account_information.account_ID AND account_cover_photo.type=2 AND account_cover_photo.ID=latest_account_cover_photo.latest_ID";
+            $joinedTable["account_photo AS account_cover_photo"] = "account_cover_photo.account_ID=account_information.account_ID AND account_cover_photo.type=2 AND account_cover_photo.status=1";
             $joinedTable["file_uploaded AS account_cover_photo_file_uploaded"] = "account_cover_photo_file_uploaded.ID=account_cover_photo.file_uploaded_ID";
             $selectedColumn[] = "account_cover_photo.ID AS account_cover_photo_ID, account_cover_photo_file_uploaded.description AS account_cover_photo_file_uploaded_description";
-//            $condition["account_cover_photo__ID"] = "MAX(account_cover_photo.ID)";
+        }
+        if(isset($additionalData["account_profile_photo"])){
+            $joinedTable["account_photo AS account_profile_photo"] = "account_profile_photo.account_ID=account_information.account_ID AND account_profile_photo.type=1 AND account_profile_photo.status=1";
+            $joinedTable["file_uploaded AS account_profile_photo_file_uploaded"] = "account_profile_photo_file_uploaded.ID=account_profile_photo.file_uploaded_ID";
+            $selectedColumn[] = "account_profile_photo.ID AS account_profile_photo_ID, account_profile_photo_file_uploaded.description AS account_profile_photo_file_uploaded_description";
         }
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable, $having);

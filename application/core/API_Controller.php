@@ -34,8 +34,8 @@ class API_Controller extends MX_Controller{
         $this->form_validation->CI =&$this;
         $token = decodeToken($this->input->get_request_header("token"));
         if($token != 0 && $token != -1){
-            $this->userID = $token["user_ID"];
-            $this->userType = $token["user_type"];
+            $this->userID = $token["user_ID"]*1;
+            $this->userType = $token["user_type"]*1;
             $this->username = $token["username"];
             $this->response["token"] = generateToken($this->userID, $this->userType, $this->username);
         }else if($token == -1){//Expired Token
@@ -44,7 +44,6 @@ class API_Controller extends MX_Controller{
                 $this->responseError("1001", "Token Expired.");
                 $this->outputResponse();
             }
-
         }else{//no token
             $this->responseDebug("no token");
         }
@@ -206,6 +205,20 @@ class API_Controller extends MX_Controller{
                 return false;
             }else{
                 return true;
+            }
+        }else{
+            return false;
+        }
+    }
+    function in_table($value, $tableColumn){
+        if($value){
+            $this->load->model("m_form_validation");
+            $this->form_validation->set_message('does_not_exist', '{field} does not exist');
+            $doesExist = $this->m_form_validation->doesExist($tableColumn, $value);
+            if($doesExist){
+                return true;
+            }else{
+                return false;
             }
         }else{
             return false;

@@ -209,7 +209,6 @@
                 //TODO Reset system frame for new log in
                 system_data.account_information.user_ID = ID*1;
                 system_data.account_information.user_type = accountTypeID*1;
-                console.log(user_id())
                 setSystemFrameCredential();
             }
             
@@ -284,11 +283,13 @@
                 } else {
                     setCredential(null);
                 }
-                load_module(system_data.default.module_controller, "Test Page");
+                var moduleLink = window.location.href.replace(base_url(), "").split("/");
+                load_module(system_data.default.module_controller, moduleLink[0]);
             });
         } else {
             setCredential(null);
-            load_module(system_data.default.module_controller, "Test Page");
+            var moduleLink = window.location.href.replace(base_url(), "").split("/");
+            load_module(system_data.default.module_controller, moduleLink[0]);
         }
         
         //redirect www

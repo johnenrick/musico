@@ -1,28 +1,33 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_sample_template extends API_Controller {
+class C_subscription extends API_Controller {
     /*
      * Access Control List
-     * 1    - createSampleTemplate
-     * 2    - retrieveSampleTemplate
-     * 4    - updateSampleTemplate
-     * 8    - deleteSampleTemplate
-     * 16   - batchCreateSampleTemplate
+     * 1    - createSubscription
+     * 2    - retrieveSubscription
+     * 4    - updateSubscription
+     * 8    - deleteSubscription
+     * 16   - batchCreateSubscription
      */
     public function __construct() {
         parent::__construct();
-        $this->load->model("m_sample_template");
+        $this->load->model("m_subscription");
         $this->APICONTROLLERID = 1;
     }
-    public function createSampleTemplate(){
+    public function createSubscription(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            $this->formValidationSetRule('first_parameter', 'First Parameter', 'required');
+            $this->formValidationSetRule('subscribed_account_ID', 'First Parameter', 'required');
             
             if($this->formValidationRun()){
-                $result = $this->m_sample_template->createSampleTemplate(
-                        $this->input->post("first_parameter")
+                $this->m_subscription->deleteSubscription(NULL, array(
+                    "subscribed_account_ID" => $this->input->post("subscribed_account_ID"),
+                    "subscriber_account_ID" => $this->userID
+                ));
+                $result = $this->m_subscription->createSubscription(
+                        $this->input->post("subscribed_account_ID"),
+                        $this->userID
                         );
                 if($result){
                     $this->actionLog($result);
@@ -42,10 +47,10 @@ class C_sample_template extends API_Controller {
         }
         $this->outputResponse();
     }
-    public function retrieveSampleTemplate(){
+    public function retrieveSubscription(){
         $this->accessNumber = 2;
         if($this->checkACL()){
-            $result = $this->m_sample_template->retrieveSampleTemplate(
+            $result = $this->m_subscription->retrieveSubscription(
                     $this->input->post("retrieve_type"),
                     $this->input->post("limit"),
                     $this->input->post("offset"), 
@@ -54,7 +59,7 @@ class C_sample_template extends API_Controller {
                     $this->input->post("condition")
                     );
             if($this->input->post("limit")){
-                $this->responseResultCount($this->m_sample_template->retrieveSampleTemplate(
+                $this->responseResultCount($this->m_subscription->retrieveSubscription(
                     1,
                     NULL,
                     NULL,
@@ -74,11 +79,11 @@ class C_sample_template extends API_Controller {
         }
         $this->outputResponse();
     }
-    public function updateSampleTemplate(){
+    public function updateSubscription(){
         $this->accessNumber = 4;
         if($this->checkACL()){
             
-            $result = $this->m_sample_template->updateSampleTemplate(
+            $result = $this->m_subscription->updateSubscription(
                     $this->input->post("ID"),
                     $this->input->post("condition"),
                     $this->input->post("updated_data")
@@ -94,12 +99,16 @@ class C_sample_template extends API_Controller {
         }
         $this->outputResponse();
     }
-    public function deleteSampleTemplate(){
+    public function deleteSubscription(){
         $this->accessNumber = 8;
         if($this->checkACL()){
-            $result = $this->m_sample_template->deleteSampleTemplate(
+            $condition = $this->input->post("condition");
+            if($condition){
+                $condition["subscriber_account_ID"] = $this->userID;
+            }
+            $result = $this->m_subscription->deleteSubscription(
                     $this->input->post("ID"), 
-                    $this->input->post("condition")
+                    $condition
                     );
             if($result){
                 $this->actionLog(json_encode($this->input->post()));
