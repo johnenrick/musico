@@ -51,6 +51,12 @@
             gridList.body.find(".videoList").append(videoItem);
             gridList.body.find(".videoList .videoItem").matchHeight();
         };
+        gridList.onCardClick = function(cardCallBack){
+            gridList.onCardClickFn = cardCallBack;
+        };
+        gridList.body.find(".videoList").on("click", ".card", function(){
+            gridList.onCardClickFn($(this));
+        });
         gridList.empty = function(){
             gridList.body.find(".videoList").empty();
         };
