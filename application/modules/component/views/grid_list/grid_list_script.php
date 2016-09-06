@@ -51,11 +51,11 @@
             gridList.body.find(".videoList").append(videoItem);
             gridList.body.find(".videoList .videoItem").matchHeight();
         };
-        gridList.onCardClick = function(cardCallBack){
-            gridList.onCardClickFn = cardCallBack;
+        gridList.onVideoItemClick = function(cardCallBack){
+            gridList.onVideoItemClickFn = cardCallBack;
         };
-        gridList.body.find(".videoList").on("click", ".card", function(){
-            gridList.onCardClickFn($(this));
+        gridList.body.find(".videoList").on("click", ".videoItem", function(){
+            gridList.onVideoItemClickFn($(this));
         });
         gridList.empty = function(){
             gridList.body.find(".videoList").empty();
