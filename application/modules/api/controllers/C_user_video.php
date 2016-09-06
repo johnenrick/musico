@@ -149,7 +149,7 @@ class C_user_video extends API_Controller {
         }
         $config['upload_path']          = $path;
         $config['allowed_types']        = 'mp4|MOV';
-        $config['max_size']             = 100000;//kb
+        $config['max_size']             = 500000;//kb
         $config['encrypt_name']         = true;
         $config['file_ext_tolower']     = true;
         
