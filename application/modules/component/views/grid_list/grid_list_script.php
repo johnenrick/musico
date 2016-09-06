@@ -51,7 +51,7 @@
             gridList.body.find(".videoList").append(videoItem);
             gridList.body.find(".videoList .videoItem").matchHeight();
         };
-        gridList.empty() = function(){
+        gridList.empty = function(){
             gridList.body.find(".videoList").empty();
         }
         
