@@ -40,7 +40,7 @@ class C_user_video extends API_Controller {
                         ));
                         $thumbnailFileUpload = $this->uploadFileThumbnail($this->userID);
                         if(!is_string($thumbnailFileUpload)){
-                            $this->m_user_video->updateUserVideo($this->input->post("user_video_ID"), NULL, array(
+                            $this->m_user_video->updateUserVideo($result, NULL, array(
                                 "thumbnail_file_uploaded_ID" =>  $thumbnailFileUpload,
                                 "status" =>  1
                             ));
