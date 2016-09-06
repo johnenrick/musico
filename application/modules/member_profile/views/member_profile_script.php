@@ -160,6 +160,7 @@
             }
             var file=new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
             var formData = new FormData();
+            
             formData.append('userfile', file, "tae.jpg");
             formData.append('type', 1);
             
