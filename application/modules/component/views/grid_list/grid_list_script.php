@@ -13,7 +13,7 @@
         var gridList = this;
         gridList.body = $("#pageComponentContainer .gridList").clone();//The HTML instance of the component.
         componentContainer.append(gridList.body);
-        gridList.empty();
+        
         /**
          * 
          * @param {int} userVideoID ID of the user video
@@ -53,8 +53,8 @@
         };
         gridList.empty = function(){
             gridList.body.find(".videoList").empty();
-        }
-        
+        };
+        gridList.empty();
         
     };
 </script>
