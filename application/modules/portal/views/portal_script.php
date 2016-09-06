@@ -37,7 +37,7 @@
                 $(".headerLogin").trigger("click");
             }
         });
-        portalPage.reload = function(){
+        portalPage.ready = function(){
             console.log("reload");
         };
     };

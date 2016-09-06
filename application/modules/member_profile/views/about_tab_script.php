@@ -4,11 +4,7 @@
         var memberProfileAboutTab = this;
         var moduleBody = memberProfile.body;
         var subModuleBody = moduleBody.find("#memberProfileAboutTab");
-        if(memberProfile.accountID === user_id()){//viewing own profile
-            subModuleBody.find(".profileSetting").show();
-        }else{
-            subModuleBody.find(".profileView").show();
-        }
+        
         subModuleBody.find(".profileSettingForm").attr("action", api_url("c_account/updateAccount"));
         subModuleBody.find(".profileSettingForm").ajaxForm({
             beforeSubmit: function(data,$form,options){
@@ -20,7 +16,6 @@
             },
             success : function(data){
                 var response = JSON.parse(data);
-
                 if(!response["error"].length){
                     retrieveAccountDetail();
                     subModuleBody.find(".profileSettingForm .formLabelIndicator.label-success").show();
@@ -43,7 +38,6 @@
             memberProfile.body.find(".profileBiography").text("");
             api_request("c_account/retrieveAccount", {ID: memberProfile.accountID, additional_data : {account_biography : true, account_cover_photo : true, account_profile_photo : true}}, function(response){
                 if(!response["error"].length){
-                    console.log(response);
                     /*Profile Setting*/
                     subModuleBody.find(".profileSetting input[name=ID]").val(response["data"]["ID"]);
                     subModuleBody.find(".profileSetting input[field_name=first_name]").val(response["data"]["first_name"]);
@@ -71,9 +65,58 @@
             }, false);
         }
         memberProfileAboutTab.retrieveAccountDetail = retrieveAccountDetail;
-        
-        memberProfileAboutTab.reload = function(){
+        subModuleBody.find(".modifyPassword").click(function(){
+            subModuleBody.find(".passwordModification").show();
+            subModuleBody.find(".modifyPassword").hide();
+        });
+        subModuleBody.find("button.passwordModification").click(function(){
+            if($(this).attr("action_id")*1 === 1){//save
+                
+            }else{//cancel
+                subModuleBody.find(".passwordModification").hide();
+                subModuleBody.find(".passwordModification input").val("");
+                subModuleBody.find(".modifyPassword").show();
+            }
+        });
+        subModuleBody.find(".passwordModification input").keyup(function(e){
+            if(subModuleBody.find(".passwordModification input[field_name=account__password]").val() !== subModuleBody.find(".passwordModification input[field_name=account__verify_password]").val() && subModuleBody.find(".passwordModification input[field_name=account__verify_password]").val() !== ""){
+                $(this).addClass("invalid");
+                
+            }else{
+                subModuleBody.find(".passwordModification input").removeClass("invalid");
+            }
+            console.log(subModuleBody.find(".passwordModification input[field_name=account__password]").val() +"==="+subModuleBody.find(".passwordModification input[field_name=account__verify_password]").val())
+        });
+        subModuleBody.find(".accountAuthentication form").attr("action", api_url("C_account/updateAccount"));
+        subModuleBody.find(".accountAuthentication form").ajaxForm({
+            beforeSubmit : function(data,$form,options){
+                if(subModuleBody.find(".passwordModification input[field_name=account__password]").val() !== subModuleBody.find(".passwordModification input[field_name=account__verify_password]").val()){
+                    subModuleBody.find(".passwordModification input[field_name=account__verify_password]").addClass("invalid");
+                    return false;
+                }
+                data.splice(0,1);
+                data.push({
+                    name : "ID",
+                    value : user_id()
+                });
+            },
+            success : function(data){
+                var response = JSON.parse(data);
+                if(!response["error"].length){
+                    subModuleBody.find(".accountAuthentication .formLabelIndicator.label-success").show();
+                }else{
+                    show_form_error(subModuleBody.find(".accountAuthentication form"), response["error"]);
+                }
+            }
+        })
+        memberProfileAboutTab.ready = function(){
+            if(memberProfile.accountID === user_id()){//viewing own profile
+                subModuleBody.find(".profileSetting").show();
+            }else{
+                subModuleBody.find(".profileView").show();
+            }
             retrieveAccountDetail();
+            subModuleBody.find(".passwordModification").hide();
         }
     };
 </script>

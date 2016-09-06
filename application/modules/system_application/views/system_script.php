@@ -294,7 +294,7 @@
         
         //redirect www
         if(window.location.href.indexOf("www") === 0){
-            window.history.pushState('Object', 'Title', window.location.href.replace("www."));
+            window.history.pushState('Object', 'Title', window.location.href.replace("www.", ""));
         }
         retrieve_access_control();
         

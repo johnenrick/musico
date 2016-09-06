@@ -133,7 +133,7 @@ class C_account extends API_Controller {
             if($this->input->post("updated_data[username]") && $this->input->post("updated_data[username]") != $this->username){
                 $this->form_validation->set_rules('updated_data[username]', 'Username', 'alpha_numeric|callback_is_unique_username');
             }
-            $this->form_validation->set_rules('updated_data[password]', 'Password', 'min_length[6]');
+            ($this->input->post('updated_data[account__password]')) ? $this->form_validation->set_rules('updated_data[account__password]', 'Password', 'min_length[6]') : null;
             ($this->input->post('updated_data[first_name]')) ? $this->form_validation->set_rules('updated_data[first_name]', 'First Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[last_name]')) ? $this->form_validation->set_rules('updated_data[last_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
             ($this->input->post('updated_data[middle_name]')) ? $this->form_validation->set_rules('updated_data[middle_name]', 'Last Name', 'trim|callback_alpha_dash_space') : null;
@@ -146,6 +146,7 @@ class C_account extends API_Controller {
                     $ID = $this->userID;
                 }
                 $condition = $this->input->post("condition");
+                $this->responseDebug($ID);
                 $result = $this->m_account->updateAccount(
                         $ID,
                         $condition,

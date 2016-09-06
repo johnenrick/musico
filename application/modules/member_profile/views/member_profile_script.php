@@ -10,40 +10,32 @@
         var memberProfile = this;//instance of the module
         var moduleBody = memberProfile.body = $("#memberProfile");
         
-        var defaultTab = window.location.href.split("#");
-        $('ul.tabs').tabs();
-        moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
+        
         var readyFlag = 0;
         var readyFlagValue = 7;
         /*Load Tabs*/
         load_sub_module("member_profile/homeTab", function(data){
             moduleBody.find(".tabContent").append(data);
             new MemberProfileHomeTab(memberProfile);
-            $('ul.tabs').tabs();
-            moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
             readyFlag += 1;
             if(readyFlag === readyFlagValue){
-                memberProfile.reload();
+                memberProfile.ready();
             }
         });
         load_sub_module("member_profile/aboutTab", function(data){
             moduleBody.find(".tabContent").append(data);
             memberProfile.aboutTab =  new MemberProfileAboutTab(memberProfile);
-            $('ul.tabs').tabs();
-            moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
             readyFlag += 2;
             if(readyFlag === readyFlagValue){
-                memberProfile.reload();
+                memberProfile.ready();
             }
         });
         load_sub_module("member_profile/videoTab", function(data){
             moduleBody.find(".tabContent").append(data);
             new MemberProfileVideoTab(memberProfile);
-            $('ul.tabs').tabs();
-            moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
             readyFlag += 4;
             if(readyFlag === readyFlagValue){
-                memberProfile.reload();
+                memberProfile.ready();
             }
         });
         /*Profile Cover*/
@@ -284,12 +276,17 @@
         
         /**/
         
-        memberProfile.reload = function(){//function to run if the module is already been loaded
+        memberProfile.ready = function(){//function to run if the module is already been loaded
+            var defaultTab = window.location.href.split("#");
+            $('ul.tabs').tabs();
+            moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
             var urlParameter = getURLParameter("member_profile/index");
-            memberProfile.accountID = urlParameter ? urlParameter[0]*1 : 0;
+            console.log(urlParameter[0])
+            memberProfile.accountID = urlParameter !== false ? urlParameter[0]*1 : 0;
             memberProfile.accountID = (memberProfile.accountID*1 === 0 ) ? user_id() : memberProfile.accountID;
+            console.log(memberProfile.accountID)
             subscriptionDetail();
-            memberProfile.aboutTab.reload();
+            memberProfile.aboutTab.ready();
         };
     };
         

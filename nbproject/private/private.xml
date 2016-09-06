@@ -3,16 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/member_profile.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_subscription.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_sample_template.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/about_tab_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/portal/views/portal.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/portal/views/portal_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/portal/controllers/Portal.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/member_profile_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/about_tab.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/api/models/M_subscription.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/frame/system_frame_script.php</file>
         </group>
     </open-files>
 </project-private>

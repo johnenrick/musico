@@ -51,7 +51,7 @@
             if($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                 $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
                 if(typeof systemApplication.module[camelize(moduleName)].reload !== "undefined"){
-                    systemApplication.module[camelize(moduleName)].reload();
+                    systemApplication.module[camelize(moduleName)].ready();
                 }
             }
         }

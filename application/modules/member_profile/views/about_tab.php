@@ -75,26 +75,38 @@
             
         </form>
     </div>
-    <div class="row profileSetting no-display">
+    <div class="row profileSetting no-display accountAuthentication">
         <div class="col s12 m6 l6  white ">
-            <div class="section">
-                <h5 class="red-text text-darken-1" ><i class="fa fa-lock" aria-hidden="true"></i> Log In Credential</h5>
-                <div class="row ">
-                    <div class="input-field col s12">
-                        <input  field_name="email_address" type="text" class="validate">
-                        <label class="active">Email</label>
-                    </div>
-                    <div class="input-field col s12 no-display">
-                        <input  field_name="account__password" type="text" class="validate">
-                        <label class="active">Password</label>
+            <form method="POST">
+                <div class="section">
+                    <h5 class="red-text text-darken-1" ><i class="fa fa-lock" aria-hidden="true"></i> Log In Credential</h5>
+                    <div class="row ">
+                        <div class="input-field col s12">
+                            <input  field_name="email_address" type="text" class="validate">
+                            <label class="active">Email</label>
+                        </div>
+                        <div class="passwordModification input-field col s12">
+                            <input  field_name="account__password" type="password" class="validate">
+                            <label class="active" data-error="Password and Verify Password should be the same">Password</label>
+                        </div>
+                        <div class="passwordModification input-field col s12">
+                            <input  field_name="account__verify_password" type="password" class="validate">
+                            <label class="active" data-error="Password and Verify Password should be the same">Verify Password</label>
+                        </div>
+                        
 
                     </div>
-                    <div class="col s12 align-center">
-                        <button type="button" class="btn-sm waves-effect waves-light yellow darken-2 yellow"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</button>
+                    <div class="row ">
+                        <div class="col s12 align-center">
+                            <label class="formLabelIndicator label-danger right-align no-display">Failed !</label>
+                            <label class="formLabelIndicator label-success right-align no-display">Success !</label>
+                            <button type="button" class="modifyPassword btn-sm waves-effect waves-light yellow darken-2"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</button>
+                            <button type="submit" action_id="1" class="passwordModification btn-sm waves-effect waves-light green darken-2"><i class="fa fa-lock" aria-hidden="true"></i> Save New Password</button>
+                            <button type="button" action_id="2" class="passwordModification btn-sm waves-effect waves-light red darken-2">Cancel</button>
+                        </div>
                     </div>
-
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
