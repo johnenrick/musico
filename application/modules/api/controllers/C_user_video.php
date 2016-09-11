@@ -113,6 +113,13 @@ class C_user_video extends API_Controller {
                     $this->input->post("updated_data")
                     );
             if($result){
+                $thumbnailFileUpload = $this->uploadFileThumbnail($this->userID);
+                if(!is_string($thumbnailFileUpload)){
+                    $this->m_user_video->updateUserVideo($result, NULL, array(
+                        "thumbnail_file_uploaded_ID" =>  $thumbnailFileUpload,
+                        "status" =>  1
+                    ));
+                }
                 $this->actionLog(json_encode($this->input->post()));
                 $this->responseData($result);
             }else{

@@ -22,6 +22,7 @@ class FE_Controller extends API_Controller{
         $this->load->view("system_application/frame/registration");
         $this->load->view("system_application/frame/contact_page");
         $this->load->view("system_application/frame/contact_page_script");
+        $this->load->view("system_application/helper/common_form");
     }
     /***
      * Load a module request from already loaded page
