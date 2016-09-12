@@ -33,12 +33,36 @@
                 limit : 5
             };
             videoCategory.tableCategory = new TableComponent(moduleBody.find('.videoCategoryTable'), resultConfiguration, columnConfiguration, filterConfiguration);
-           
         });
-        /*Events*/
+        
         videoCategory.categoryDetailForm = commonFormHandler(moduleBody.find("#videoCategoryDetail form"), "c_video_category/createVideoCategory", "c_video_category/updateVideoCategory", "c_video_category/deleteVideoCategory");
         videoCategory.categoryDetailForm.reset();
-        
+        moduleBody.find(".videoCategoryTable").on("click", ".viewCategoryDetail", function(){
+            var categoryID = $(this).parent().parent().attr("category_ID");
+            var parentCategoryRequest = listParentCategory();
+            parentCategoryRequest.done(function(){
+                
+                viewCategoryDetail(categoryID);
+            })
+        });
+        /*Events*/
+        videoCategory.categoryDetailForm.submitCreateSuccess = function(response){
+            if(!response["error"].length){
+                moduleBody.find("#videoCategoryDetail").hide();
+                moduleBody.find("#createVideoCategory").parent().parent().show();
+                videoCategory.tableCategory.retrieveEntry();
+            }
+        };
+        videoCategory.categoryDetailForm.submitUpdateSuccess = function(response){
+            if(!response["error"].length){
+                videoCategory.tableCategory.retrieveEntry();
+            }
+        };
+        videoCategory.categoryDetailForm.submitDeleteSuccess = function(){
+            moduleBody.find("#videoCategoryDetail").hide();
+                moduleBody.find("#createVideoCategory").parent().parent().show();
+            videoCategory.tableCategory.retrieveEntry();
+        };
         moduleBody.find("#createVideoCategory").click(function(){
             $(this).parent().parent().hide();
             moduleBody.find("#videoCategoryDetail").show();
@@ -59,8 +83,7 @@
             moduleBody.find("#videoCategoryDetail select[field_name=parent_ID]").material_select('destroy');
             moduleBody.find("#videoCategoryDetail select[field_name=parent_ID]").empty();
             moduleBody.find("#videoCategoryDetail select[field_name=parent_ID]").append("<option value='"+0+"' >"+"No Parent"+"</option>");
-            api_request("C_video_category/retrieveVideoCategory", {}, function(response){
-                console.log(response);
+            var request = api_request("C_video_category/retrieveVideoCategory", {}, function(response){
                 if(!response["error"].length){
                     for(var x = 0; x < response["data"].length; x++){
                         moduleBody.find("#videoCategoryDetail select[field_name=parent_ID]").append("<option value='"+response["data"][x]["ID"]+"' >"+response["data"][x]["description"]+"</option>");
@@ -68,10 +91,28 @@
                 }   
                 moduleBody.find("#videoCategoryDetail select[field_name=parent_ID]").material_select();
             });
+            return request;
+        }
+        function viewCategoryDetail(ID){
+            videoCategory.categoryDetailForm.updateForm();
+            var request = api_request("C_video_category/retrieveVideoCategory", {ID : ID}, function(response){
+                if(!response["error"].length){
+                    moduleBody.find("#videoCategoryDetail form input[name=ID]").val(response["data"]["ID"]);
+                    moduleBody.find("#videoCategoryDetail form input[field_name=description]").val(response["data"]["description"]);
+                    moduleBody.find("#videoCategoryDetail form select[field_name=parent_ID]").val(response["data"]["parent_ID"]);
+                    moduleBody.find("#createVideoCategory").parent().parent().hide();
+                    moduleBody.find("#videoCategoryDetail").show();
+                    moduleBody.find("#videoCategoryDetail select[field_name=parent_ID]").material_select();
+                }
+                
+            });
+            
+            return request;
         }
         function listCategory(data){
             for(var x = 0; x < data.length; x++){
                 var newEntry = moduleBody.find(".prototype .videoCategoryEntry").clone();
+                newEntry.attr("category_ID", data[x]["ID"]);
                 newEntry.find(".description").text(data[x]["description"]);
                 newEntry.find(".parentCategory").text((data[x]["parent_ID"]*1) ? data[x]["parent_description"] : "N/A");
                 videoCategory.tableCategory.addEntry(newEntry);

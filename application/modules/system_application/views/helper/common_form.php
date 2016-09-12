@@ -53,20 +53,17 @@
             formHandler.reset();
             formElement.attr("action", api_url(createLink));
             changeFieldName("create", formElement);
+            formElement.find(".formActionButton button[action=delete]").hide();
             formHandler.formMode = "create";
         };
         formHandler.updateForm = function(){
             formHandler.reset();
-            formHandler.attr("action", api_url(updateLink));
+            formElement.attr("action", api_url(updateLink));
             changeFieldName("update", formElement);
+            formElement.find(".formActionButton button[action=delete]").show();
             formHandler.formMode = "update";
         };
-        formHandler.deleteForm = function(){
-            api_request(deleteLink, {ID : formElement.find("input[name=ID]").val()}, function(data){
-                var response = JSON.parse(data);
-                
-            });
-        };
+        
         
         formHandler.submitBeforeSubmit = function(data){
             
@@ -77,10 +74,21 @@
         formHandler.submitUpdateSuccess = function(response){
             
         };
-        function deleteForm = function(){
+        formHandler.submitDeleteSuccess = function(response){
+            
+        }
+        function deleteForm(){
             formElement.find(".formActionButton button").attr("disabled", true);
-            api_request(api_request(deleteLink), {}, function(data){
-                var response = JSON.oarse(data);
+            api_request(deleteLink, {ID : formElement.find("input[name=ID]").val()}, function(response){
+                if(!response["error"].length){
+                    formHandler.submitDeleteSuccess(response);
+                }else{
+                    formElement.find(".formActionButton .label-danger").show()
+                }
+                formElement.find(".formActionButton button[action=delete_yes]").hide();
+                formElement.find(".formActionButton button[action=delete_no]").hide();
+                formElement.find(".formActionButton button[action=delete]").show();
+                formElement.find(".formActionButton label[action=delete_confirmation]").hide();
                 formElement.find(".formActionButton button").attr("disabled", false);
             });
         }

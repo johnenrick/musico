@@ -35,6 +35,9 @@ and open the template in the editor.
 .margin-top-15{
     margin-top: 15px;
 }
+.margin-bottom-20{
+    margin-bottom: 20px;
+}
 .no-display{
     display:none;
 }

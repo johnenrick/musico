@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <input field_name="description" placeholder="Placeholder" type="text" class="validate">
-                    <label class="active" for="first_name">Description</label>
+                    <label class="active" >Description</label>
                 </div>
                 <div class="input-field col s6"> 
                     <select field_name="parent_ID" class="validate">
@@ -27,15 +27,16 @@
                     <label class="formLabelIndicator label-success" style="position: relative">Success !</label>
                     <label class="formLabelIndicator label-danger " style="position: relative">Fail !</label>
                     <button action="submit" type="submit" class="btn waves-effect waves-light green darken-1 "><i class="fa fa-save" aria-hidden="true"></i> Save </button>
-                    <button action="cancel" type="reset" class="btn waves-effect waves-light white darken-1 red-outline"><i class="fa fa-remove" aria-hidden="true"></i> Cancel </button>
+                    <button action="cancel" type="reset" class="btn waves-effect waves-light white darken-1 red-outline"><i class="fa fa-remove" aria-hidden="true"></i> Close </button>
                     
                 </div>
             </div>
         </form>
     </div>
-    <div class="row ">
-        <div class="input-field  col s12 right-align">
-            <button id="createVideoCategory" class="waves-effect waves-light btn red darken-3"><i class="fa fa-plus" aria-hidden="true"></i> Create Category</button>
+    <div class="row white">
+        <div class="input-field  col s12 right-align ">
+            <button id="createVideoCategory" class="waves-effect waves-light btn red darken-3 margin-bottom-20"><i class="fa fa-plus" aria-hidden="true"></i> Create Category</button>
+            
         </div>
     </div>
     <div class="row">
@@ -44,21 +45,13 @@
             </div>
         </div>
     </div>
-    <div id="videoCategoryDetailModal" class="modal modal-fixed-footer">
-        <div class="modal-content modal-lg">
-            
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-    </div>
     <div class="prototype">
         <table>
             <tr class="videoCategoryEntry">
                 <td class="description"></td>
                 <td class="parentCategory"></td>
                 <td class="viewCategory">
-                    <button type="reset" class="btn btn-sm waves-effect waves-light blue darken-1 "><i class="fa fa-search" aria-hidden="true"></i> View </button>
+                    <button type="reset" class="viewCategoryDetail btn btn-sm waves-effect waves-light blue darken-1 "><i class="fa fa-search" aria-hidden="true"></i> View </button>
                 </td>
             </tr>
         </table>

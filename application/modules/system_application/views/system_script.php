@@ -156,7 +156,7 @@
      */
     function api_request(link, data, callbackFn, tokenRequired){
         tokenRequired = typeof tokenRequired === "undefined" ? true : tokenRequired;
-        $.post(api_url(link), data, function(data){
+        var request = $.post(api_url(link), data, function(data){
             var response = JSON.parse(data);
             //Check token
             if(response["token"] || tokenRequired === false){
@@ -166,6 +166,7 @@
             }
             
         });
+        return request;
     }
     /*** Functions for requesting***/
     /***

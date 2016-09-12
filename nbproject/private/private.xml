@@ -4,9 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/musico/application/core/FE_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/video_category/views/video_category_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/video_category/views/video_category.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/video_category/views/video_category_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/system_utilities_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/about_tab_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/helper/common_form.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_video_category.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_user_video.php</file>
