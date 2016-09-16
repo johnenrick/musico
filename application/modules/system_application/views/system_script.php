@@ -91,18 +91,7 @@
         });
     }
     
-    /***
-     * Call the refresh function of the module
-     * @param {String} moduleName Name of the module to be refreshed
-     * @returns {undefined}
-     */
-    function refresh_call(moduleName){
-        if(typeof system_data.refresh_call[moduleName] !== "undefined"){
-            for(var x = 0; x < system_data.refresh_call[moduleName].length; x++){
-                system_data.refresh_call[moduleName][x]();
-            }
-        }
-    }
+    
     /**
      * Add functions that needs to be called everytime the module is viewed
      * @param {string} moduleName name of the module in underscore format

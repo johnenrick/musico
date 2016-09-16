@@ -17,7 +17,7 @@ class Portal extends FE_Controller{
         if($this->input->post("load_module")){
             $this->loadModule(array("portal"), "portal_script");
         }else{
-            $this->loadPage("Portal");
+            $this->loadPage("portal");
         }
     }
     function login(){

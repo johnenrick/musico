@@ -29,7 +29,7 @@
         var section = window.location.href.split("#");
         window.history.pushState('Object', 'Title', base_url(moduleLink)+(section.length >1  ? "#"+section[1] : ""));
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
-            
+            console.log(moduleLink);
             $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
                 var moduleHolder = $("#systemModule").find(".moduleHolder").clone();
@@ -41,7 +41,7 @@
                 $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
                 if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                     $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
-                    refresh_call(moduleName);
+                    systemApplication.module[camelize(moduleName)].ready();
                 }
 
             });
@@ -50,9 +50,22 @@
             $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
             if($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                 $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
-                if(typeof systemApplication.module[camelize(moduleName)].reload !== "undefined"){
+                console.log(moduleName)
+                if(typeof systemApplication.module[camelize(moduleName)].ready !== "undefined"){
                     systemApplication.module[camelize(moduleName)].ready();
                 }
+            }
+        }
+    }
+    /***
+     * Call the refresh function of the module
+     * @param {String} moduleName Name of the module to be refreshed
+     * @returns {undefined}
+     */
+    function refresh_call(moduleName){
+        if(typeof system_data.refresh_call[moduleName] !== "undefined"){
+            for(var x = 0; x < system_data.refresh_call[moduleName].length; x++){
+                system_data.refresh_call[moduleName][x]();
             }
         }
     }
