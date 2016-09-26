@@ -15,6 +15,7 @@
                 for (var index in errorValue["message"]) {
                     
                     var inputField = elementSelected.find("input[name='"+index+"'], textarea[name='"+index+"'], select[name='"+index+"'] ").parent();
+                    
                     inputField.find("input,textarea, select").addClass("invalid");
                     inputField.find("label").attr("data-error", errorValue["message"][index]);
                     

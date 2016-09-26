@@ -24,8 +24,14 @@
      * @param {String} moduleName Name of the module
      * @returns {undefined}
      */
+    var isloadingModule = false;
     function load_module(moduleLink, moduleName){
-        moduleName = moduleName.toLowerCase();
+        if(isloadingModule){
+            return false;
+        }else{
+            isloadingModule = true;
+        }
+        moduleName = moduleName.replace("#","");
         var section = window.location.href.split("#");
         window.history.pushState('Object', 'Title', base_url(moduleLink)+(section.length >1  ? "#"+section[1] : ""));
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){

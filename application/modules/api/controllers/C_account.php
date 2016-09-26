@@ -244,4 +244,5 @@ class C_account extends API_Controller {
         $response = json_decode($result, true);
         return $response["success"];*/
     }
+    
 }
