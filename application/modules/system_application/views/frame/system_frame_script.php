@@ -9,13 +9,21 @@
             if(user_type() === 4){
                 $(".adminSidebar").show();//Admin sidebar
             }
-            
+            var imageLink = asset_url("image/profpic.jpg");
+            if(system_data.account_information.profile_photo_link){
+                imageLink = asset_url("user_upload/"+user_id()+"/"+system_data.account_information.profile_photo_link);
+            }
+            $(".profilePhoto").attr("src", imageLink);
+            $(".userFullName").text(user_first_name()+" "+user_middle_name()+" "+user_last_name());
+            $("#profile-btn").show();
+           
         }else{//Log Out
             $(".headerLogin").show();//Header Log In button
             $(".headerAuthentication").show();//Header Join button
             $(".sidebarAuthentication").show();//Sidebar athentication
             $(".playlistSidebar").hide();//Playlist sidebar
             $(".adminSidebar").hide();//Admin sidebar
+            $("#profile-btn").hide();
         }
     }
     /***
@@ -26,6 +34,7 @@
      */
     var isloadingModule = false;
     function load_module(moduleLink, moduleName){
+        
         if(isloadingModule){
             return false;
         }else{
@@ -35,7 +44,6 @@
         var section = window.location.href.split("#");
         window.history.pushState('Object', 'Title', base_url(moduleLink)+(section.length >1  ? "#"+section[1] : ""));
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
-            console.log(moduleLink);
             $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
                 var moduleHolder = $("#systemModule").find(".moduleHolder").clone();
@@ -49,6 +57,7 @@
                     $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
                     systemApplication.module[camelize(moduleName)].ready();
                 }
+                isloadingModule = false
 
             });
         }else{
@@ -56,11 +65,11 @@
             $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
             if($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                 $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
-                console.log(moduleName)
                 if(typeof systemApplication.module[camelize(moduleName)].ready !== "undefined"){
                     systemApplication.module[camelize(moduleName)].ready();
                 }
             }
+            isloadingModule = false
         }
     }
     /***
@@ -80,7 +89,12 @@
         $(".moduleLink").click(function(){
             load_module($(this).attr("module_link"), $(this).attr("module_name"));
         });
-        
+        $("#viewProfile").click(function(){
+            load_module("member_profile/index/"+user_id(), "Member Profile");
+        });
+        $(".logout").click(function(){
+            logout();
+        })
     });
     
 </script>

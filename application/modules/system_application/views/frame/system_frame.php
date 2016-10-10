@@ -32,9 +32,29 @@
 <body>
 
 
-    <div id="profile-popup" class="dropdown-content grey-text text-darken-3">
-        <h4>Profile</h4>
-        <p>sdasdasdasdasd</p>
+    <div id="profile-popup" class="no-line-height dropdown-content grey-text text-darken-3">
+        <div class="row valign-wrapper no-margin-bot">
+            <div class="col s4">
+                <img class="profilePhoto" src="<?=  asset_url()?>image/profpic.jpg" alt="" class="circle responsive-img pull-left" style="max-height:160px"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s8 valign red-text text-darken-1 ">
+                <h6 class="userFullName">TEST LANG</h6>
+            </div>
+            
+        </div>
+        <div class="row no-margin-bot center-align">
+            <div class="col s12">
+                <hr class="red-outline">
+            </div>
+        </div>
+        <div class="row center-align no-line-height margin-bottom-10">
+            <div class="col s6">
+                <button id="viewProfile" class="waves-effect waves-light btn btn-sm red-outline white darken-4"><span> Profile</span></button>
+            </div>
+            <div class="col s6">
+                <button class="logout waves-effect waves-light btn btn-sm grey-outline white darken-4"><span> Log Out</span></button>
+            </div>
+        </div>
     </div>
     <!-- Navbar goes here -->
     <nav id="page-header">
@@ -46,7 +66,7 @@
                 <li><a class="waves-effect waves-dark btn white grey-text text-darken-2 headerAuthentication">Join</a></li>
                 <li><a><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
                 <li id="profile-btn">
-                    <a class="dropdown-button" href="#!" data-activates="profile-popup"><img src="<?=asset_url()?>image/profpic.png" /></a>
+                    <a class="dropdown-button" href="#!" data-activates="profile-popup"><img class="profilePhoto" src="<?=asset_url()?>image/profpic.png" /></a>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-nav">

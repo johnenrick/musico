@@ -59,7 +59,7 @@ class Portal extends FE_Controller{
     public function userInformation(){
         if($this->userID){
             $this->load->model("api/M_account");
-            $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, $this->userID, array("in__account__status" => array(1,2)));
+            $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, $this->userID, array("in__account__status" => array(1,2)), null, array("account_profile_photo" => true));
             if($result){
                 $this->responseData($result);
             }else{

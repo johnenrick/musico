@@ -188,13 +188,14 @@
     }
     
     /*Authentication*/
-    function setCredential(token, ID, userName, firstName, middleName, lastName, accountTypeID){
+    function setCredential(token, ID, userName, firstName, middleName, lastName, accountTypeID, profilePhotoLink){
         setToken(token);
         if(token){
             system_data.account_information.username = userName;
             system_data.account_information.first_name = firstName;
             system_data.account_information.middle_name = middleName;
             system_data.account_information.last_name = lastName;
+            system_data.account_information.profile_photo_link = profilePhotoLink;
             if(system_data.account_information.user_ID !== ID && system_data.account_information.user_type !== accountTypeID){//New Credentials
                 //TODO Reset system frame for new log in
                 system_data.account_information.user_ID = ID*1;
@@ -204,6 +205,8 @@
             
             system_data.account_information.user_ID = ID*1;
             system_data.account_information.user_type = accountTypeID*1;
+            
+            
         }else{
             //TODO Reset system frame for Log out/Not login
             system_data.account_information.user_ID = null;
@@ -212,7 +215,16 @@
             system_data.account_information.first_name = null;
             system_data.account_information.middle_name = null;
             system_data.account_information.last_name = null;
+            system_data.account_information.profile_photo_link = null;
             setSystemFrameCredential();
+        }
+        refreshModule()
+    }
+    function refreshModule(){
+        for(var key in systemApplication.module){
+            if(typeof systemApplication.module[key].ready !== "undefined"){
+                typeof systemApplication.module[key].ready();
+            }
         }
     }
     function logout(){
@@ -269,7 +281,8 @@
             $.post(base_url("portal/userInformation"), {}, function (data) {
                 var response = JSON.parse(data);
                 if (!response["error"].length) {
-                    setCredential(response["token"], response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["account_type_ID"]);
+                    console.log(response);
+                    setCredential(response["token"], response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["account_type_ID"], response["data"]["account_profile_photo_file_uploaded_description"]);
                 } else {
                     setCredential(null);
                 }

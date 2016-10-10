@@ -112,9 +112,12 @@
         memberProfileAboutTab.ready = function(){
             if(memberProfile.accountID === user_id()){//viewing own profile
                 subModuleBody.find(".profileSetting").show();
+                subModuleBody.find(".profileView").hide();
             }else{
                 subModuleBody.find(".profileView").show();
+                subModuleBody.find(".profileSetting").hide();
             }
+            console.log(memberProfile.accountID+" === "+user_id());
             retrieveAccountDetail();
             subModuleBody.find(".passwordModification").hide();
         }

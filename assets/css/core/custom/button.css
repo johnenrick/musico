@@ -14,6 +14,12 @@ and open the template in the editor.
     color :#B71C1C;
     border-width: 1px;
 }
+.grey-outline{
+    border-style:solid;
+    border-color:#757575  !important;
+    color :#757575 ;
+    border-width: 1px;
+}
 .yellow-outline{
     border-style:solid;
     border-color:#fbc02d !important;
@@ -22,7 +28,7 @@ and open the template in the editor.
     background: white;
 }
 .btn-sm{
-    border: none;
+    /*border: none;*/
     border-radius: 2px;
     display: inline-block;
     height: 25px;
@@ -31,7 +37,7 @@ and open the template in the editor.
     padding: 0 1rem;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
-    color:white
+    /*color:white*/
 }
 .red-darken-4-transparent{
     background-color: rgba(0, 0, 0, 0.65)!important
