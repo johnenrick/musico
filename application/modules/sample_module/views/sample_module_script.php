@@ -9,17 +9,13 @@
     var SampleModule  = function(){
         var sampleModule = this;//instance of the module
         var moduleBody = sampleModule.body = $("#sampleModule");
+        /*Initiation*/
         load_component("sample_component", function(){
            new SampleComponent(moduleBody.find(".sampleModuleSampleComponent"));
         });
-        load_component("sample_component", function(){
-           new SampleComponent(moduleBody.find(".sampleModuleSampleComponent"));
-        });
-        load_component("sample_component", function(){
-           new SampleComponent(moduleBody.find(".sampleModuleSampleComponent"));
-        });
+        /*Event*/
         
-        sampleModule.reload = function(){//function to run if the module is already been loaded
+        sampleModule.ready = function(){//function to run if the module is already been loaded or reloaded
             
         }
     };

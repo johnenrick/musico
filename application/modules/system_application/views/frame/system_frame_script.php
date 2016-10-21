@@ -42,7 +42,8 @@
         }
         moduleName = moduleName.replace("#","");
         var section = window.location.href.split("#");
-        window.history.pushState('Object', 'Title', base_url(moduleLink)+(section.length >1  ? "#"+section[1] : ""));
+        moduleLink = moduleLink.replace("#","");
+        window.history.pushState('Object', 'Title', base_url(moduleLink)+((section.length >1 ) ? "#"+section[1] : ""));
         if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
@@ -55,8 +56,10 @@
                 $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
                 if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                     $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
-                    systemApplication.module[camelize(moduleName)].ready();
                 }
+//                if(typeof systemApplication.module[camelize(moduleName)].ready !== "undefined"){
+//                    systemApplication.module[camelize(moduleName)].ready();
+//                }
                 isloadingModule = false
 
             });

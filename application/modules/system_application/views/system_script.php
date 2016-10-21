@@ -218,7 +218,7 @@
             system_data.account_information.profile_photo_link = null;
             setSystemFrameCredential();
         }
-        refreshModule()
+        refreshModule();
     }
     function refreshModule(){
         for(var key in systemApplication.module){
@@ -258,7 +258,7 @@
         try{
             var response = JSON.parse(xhr.responseText);
             if(typeof response["token"] !== "undefined"){
-                if(getCookie("token") !== null){
+                if(getCookie("token") !== null && response["token"] !== null){
                     setToken(response["token"]);
                 }
                 //TODO Handle system errors here
@@ -275,13 +275,13 @@
                 token: getCookie("token")
             }
         });
+        system_data.default.module_controller = window.location.href.replace(base_url(), "");
         /*Setting token*/
         var token = getCookie("token");
         if(token !== null ){
             $.post(base_url("portal/userInformation"), {}, function (data) {
                 var response = JSON.parse(data);
                 if (!response["error"].length) {
-                    console.log(response);
                     setCredential(response["token"], response["data"]["ID"], response["data"]["username"], response["data"]["first_name"], response["data"]["middle_name"], response["data"]["last_name"], response["data"]["account_type_ID"], response["data"]["account_profile_photo_file_uploaded_description"]);
                 } else {
                     setCredential(null);

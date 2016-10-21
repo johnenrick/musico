@@ -9,8 +9,6 @@
     var MemberProfile  = function(){
         var memberProfile = this;//instance of the module
         var moduleBody = memberProfile.body = $("#memberProfile");
-        
-        
         var readyFlag = 0;
         var readyFlagValue = 7;
         /*Load Tabs*/
@@ -260,7 +258,6 @@
         });
         moduleBody.find(".unSubscriptionButton").click(function(){
             var dataFilter = {
-                    
                     condition : {
                         subscribed_account_ID : memberProfile.accountID,
                         subscriber_account_ID : user_id()*1
@@ -278,14 +275,13 @@
         /**/
         
         memberProfile.ready = function(){//function to run if the module is already been loaded
+            
             var defaultTab = window.location.href.split("#");
             $('ul.tabs').tabs();
             moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
             var urlParameter = getURLParameter("member_profile/index");
-            console.log(urlParameter[0])
             memberProfile.accountID = urlParameter !== false ? urlParameter[0]*1 : 0;
             memberProfile.accountID = (memberProfile.accountID*1 === 0 ) ? user_id() : memberProfile.accountID;
-            console.log(memberProfile.accountID)
             subscriptionDetail();
             memberProfile.aboutTab.ready();
         };

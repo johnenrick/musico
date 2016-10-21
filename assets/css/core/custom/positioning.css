@@ -12,10 +12,23 @@ and open the template in the editor.
     margin-left : auto;
 }
 .no-margin-bot{
-    margin-bottom : 0px;
+    margin-bottom : 0px!important;
+}
+.no-margin-top{
+    margin-top:0px;
 }
 .margin-right-5{
     margin-right:5px
+}
+.no-padding-left{
+    padding-left: 0px!important;
+}
+.no-padding-right{
+    padding-left: 0px!important;
+}
+.no-padding-side{
+    padding-left: 0px!important;
+    padding-right: 0px!important;
 }
 @media only screen and (min-width: 993px){
     .border-space-left-5{
@@ -29,6 +42,21 @@ and open the template in the editor.
         border-color: #f0f0f0;
     }
 } 
+@media only screen and (min-width: 600px){//medium to large
+    .pull-md-right{
+        float:right;
+    }
+}
+@media only screen and (max-width: 600px){
+    .right-align-sm{
+        text-align: right;
+        float:right;
+    }
+    .left-align-sm{
+        text-align: left;
+        float:left;
+    }
+}
 .padding-20{
     padding: 20px
 }

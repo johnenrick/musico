@@ -18,22 +18,31 @@ class C_subscription extends API_Controller {
     public function createSubscription(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            $this->formValidationSetRule('subscribed_account_ID', 'First Parameter', 'required');
+            $this->formValidationSetRule('subscribed_account_ID', 'Subscribed Acount', 'required');
             
-            if($this->formValidationRun()){
-                $this->m_subscription->deleteSubscription(NULL, array(
+            if($this->formValidationRun() && $this->input->post("subscribed_account_ID") != $this->userID && $this->userID){
+                $alreadyExist = $this->m_subscription->retrieveSubscription(NULL, NULL, NULL, NULL, NULL, array(
                     "subscribed_account_ID" => $this->input->post("subscribed_account_ID"),
                     "subscriber_account_ID" => $this->userID
                 ));
-                $result = $this->m_subscription->createSubscription(
-                        $this->input->post("subscribed_account_ID"),
-                        $this->userID
-                        );
-                if($result){
-                    $this->actionLog($result);
-                    $this->responseData($result);
+                if(!$alreadyExist){
+                    $this->m_subscription->deleteSubscription(NULL, array(
+                        "subscribed_account_ID" => $this->input->post("subscribed_account_ID"),
+                        "subscriber_account_ID" => $this->userID
+                    ));
+                    $result = $this->m_subscription->createSubscription(
+                            $this->input->post("subscribed_account_ID"),
+                            $this->userID
+                            );
+
+                    if($result){
+                        $this->actionLog($result);
+                        $this->responseData($result);
+                    }else{
+                        $this->responseError(3, "Failed to create");
+                    }
                 }else{
-                    $this->responseError(3, "Failed to create");
+                    $this->responseError(4, "Already Subscribed");
                 }
             }else{
                 if(count($this->formValidationError())){

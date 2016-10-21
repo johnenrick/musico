@@ -80,7 +80,8 @@ class C_user_video extends API_Controller {
                     $this->input->post("offset"), 
                     $this->input->post("sort"),
                     $this->input->post("ID"), 
-                    $this->input->post("condition")
+                    $this->input->post("condition"),
+                    $this->input->post("additional_data")
                     );
             if($this->input->post("limit")){
                 $this->responseResultCount($this->m_user_video->retrieveUserVideo(

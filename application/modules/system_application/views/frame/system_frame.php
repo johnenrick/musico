@@ -17,7 +17,10 @@
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/text_style.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/button.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/label.css" media="screen,projection" />
-        <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/modal.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/modal.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/collection.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/input.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/core/custom/card.css" media="screen,projection" />
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery.min.js"></script>
@@ -94,7 +97,7 @@
             <ul id="side-nav-large" class="playlistSidebar" style="display:none">
                 <li><span class="white-text">PLAYLIST</span></li>
                 <li><a href="#" class="valign-wrapper"><i class="fa fa-indent" aria-hidden="true"></i>My Playlist</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="fa fa-heart-o" aria-hidden="true"></i>Liked Videos</a></li>
+                <li><a href="#" class="valign-wrapper"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>Liked Videos</a></li>
                 <li><a href="#" class="valign-wrapper"><i class="fa fa-star-o" aria-hidden="true"></i>Saved Artists</a></li>
             </ul>
             <hr class="adminSidebar">

@@ -132,6 +132,7 @@
     }
     
     function camelize(str) {
+        str = str.replace("_", " ");
         return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (letter, index) {
             return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
         }).replace(/\s+/g, '');
@@ -139,7 +140,6 @@
     function removeFormDataValue(fieldName, data){
         for(var x = 0; x < data.length; x++){
             if(fieldName === data[x]["name"]){
-                console.log(x)
                 data.splice(x,1);
             }
         }
@@ -160,4 +160,5 @@
         parameter.splice(0,1);
         return (parameter.length) >= 1 ? parameter : false;
     }
+    
 </script>

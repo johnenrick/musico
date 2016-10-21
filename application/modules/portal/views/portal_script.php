@@ -38,7 +38,6 @@
             }
         });
         portalPage.ready = function(){
-            console.log("reload");
         };
     };
         

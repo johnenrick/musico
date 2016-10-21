@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10 13, 16, 7:21:30 PM
+    Author     : johnenrick
+*/
+
+/* label focus color */
+.primary-input.input-field input[type=text]:focus + label {
+    color: #C62828 ;
+}
+/* label underline focus color */
+.primary-input.input-field input[type=text]:focus {
+    border-bottom: 1px solid #C62828 ;
+    box-shadow: 0 1px 0 0 #C62828 ;
+    padding-left: 5px!important;
+}

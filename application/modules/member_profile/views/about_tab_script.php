@@ -85,7 +85,6 @@
             }else{
                 subModuleBody.find(".passwordModification input").removeClass("invalid");
             }
-            console.log(subModuleBody.find(".passwordModification input[field_name=account__password]").val() +"==="+subModuleBody.find(".passwordModification input[field_name=account__verify_password]").val())
         });
         subModuleBody.find(".accountAuthentication form").attr("action", api_url("C_account/updateAccount"));
         subModuleBody.find(".accountAuthentication form").ajaxForm({
@@ -117,7 +116,6 @@
                 subModuleBody.find(".profileView").show();
                 subModuleBody.find(".profileSetting").hide();
             }
-            console.log(memberProfile.accountID+" === "+user_id());
             retrieveAccountDetail();
             subModuleBody.find(".passwordModification").hide();
         }

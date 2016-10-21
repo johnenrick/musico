@@ -6,12 +6,17 @@
             <file>file:/C:/xampp/htdocs/musico/application/modules/api/models/M_account.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/frame/system_frame.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/grid_list/grid_list.php</file>
-            <file>file:/C:/xampp/htdocs/musico/assets/css/core/custom/button.css</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/about_tab_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/assets/css/core/custom/positioning.css</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_subscription.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/system_utilities_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/browse_video/views/browse_video.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/video_list/video_list_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_user_video_like.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/api/models/M_user_video.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/now_playing/views/now_playing_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/video_list/video_list.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/now_playing/views/now_playing.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/browse_video/views/browse_video_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/portal/controllers/Portal.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/system_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/member_profile_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/frame/system_frame_script.php</file>
         </group>
     </open-files>

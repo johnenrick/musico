@@ -21,15 +21,23 @@ class C_user_video_view extends API_Controller {
             $this->form_validation->set_rules('user_video_ID', 'User Video', 'required');
             
             if($this->form_validation->run()){
-                $result = $this->m_user_video_view->createUserVideoView(
-                        $this->userID,
-                        $this->input->post("user_video_ID")
-                        );
-                if($result){
-                    $this->actionLog($result);
-                    $this->responseData($result);
+                $alreadyExist = $this->m_user_video_view->retrieveUserVideoView(NULL, NULL, NULL, NULL, NULL, array(
+                    "account_ID" => $this->userID,
+                    "user_video_ID" => $this->input->post("user_video_ID"),
+                ));
+                if(!$alreadyExist){
+                    $result = $this->m_user_video_view->createUserVideoView(
+                            $this->userID,
+                            $this->input->post("user_video_ID")
+                            );
+                    if($result){
+                        $this->actionLog($result);
+                        $this->responseData($result);
+                    }else{
+                        $this->responseError(3, "Failed to create");
+                    }
                 }else{
-                    $this->responseError(3, "Failed to create");
+                    $this->responseError(4, "Already created!");
                 }
             }else{
                 if(count($this->form_validation->error_array())){

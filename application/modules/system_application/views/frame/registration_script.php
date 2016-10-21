@@ -20,7 +20,6 @@
             },
             success : function(data){
                 var response = JSON.parse(data);
-                console.log(response)
                 if(!response["error"].length){
                     $(".hide-module:not(#success-module)").hide();
                     $("#success-module").show();
@@ -33,7 +32,6 @@
                     $("#country").val('');
                 }else{
                     $("#success-module").hide();
-                    console.log(response['error']);
                     // show_error($("#registrationForm"), response["error"]);
                 }
             }
@@ -45,7 +43,7 @@
             },
             success : function(data){
                 var response = JSON.parse(data);
-                console.log(response);
+                
                 if(!response["error"].length){
                     $(".hide-module:not(#success-module)").hide();
                     $("#username").val('');
@@ -129,7 +127,7 @@
         }
      });
 
-        $("#loginForm").validate({
+    $("#loginForm").validate({
         rules: {
 
             username: "required",
@@ -138,20 +136,20 @@
         //For custom messages
         messages: {
             username: "Username required",
-            password:{
+            password: {
                 required: "Password required"
             },
         },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertBefore(element);
-          }
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertBefore(element);
+            }
         }
-     });
+    });
      
     });
 </script>

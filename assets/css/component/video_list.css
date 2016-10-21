@@ -1,0 +1,34 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10 11, 16, 7:16:53 PM
+    Author     : johnenrick
+*/
+.videoList .videoItem{
+    max-height: 75px;
+}
+.videoList .videoItem .videoThumbnail{
+    overflow: hidden;
+    
+}
+.videoList .videoItem .videoThumbnail img{
+    height:75px;
+    width:auto;
+    margin-left: -50%;
+}
+.videoList .videoItem .videoDetail{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.videoList .videoItem .videoDetail .userVideoTitle{
+    height:44px;
+    overflow: hidden;
+    font-size:14px;
+        
+}
+.videoList .videoItem .videoDetail .userVideoAccountFullName{
+    height:22px;
+}

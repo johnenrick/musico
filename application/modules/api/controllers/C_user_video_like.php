@@ -19,7 +19,12 @@ class C_user_video_like extends API_Controller {
         $this->accessNumber = 1;
         if($this->checkACL()){
             $this->form_validation->set_rules('user_video_ID', 'User Video', 'required');
-            if($this->form_validation->run()){
+            if($this->form_validation->run()  && $this->input->post("user_video_ID") != $this->userID && $this->userID){
+                $alreadyExist = $this->m_user_video_like->retrieveUserVideoLike(NULL, NULL, NULL, NULL, NULL, array(
+                    "user_video_ID" => $this->input->post("user_video_ID"),
+                    "account_ID" => $this->userID
+                ));
+                if(!$alreadyExist){
                 $result = $this->m_user_video_like->createUserVideoLike(
                         $this->userID,
                         $this->input->post("user_video_ID")
@@ -29,6 +34,9 @@ class C_user_video_like extends API_Controller {
                     $this->responseData($result);
                 }else{
                     $this->responseError(3, "Failed to create");
+                }
+                }else{
+                    $this->responseError(4, "Already Subscribed");
                 }
             }else{
                 if(count($this->form_validation->error_array())){
@@ -97,6 +105,10 @@ class C_user_video_like extends API_Controller {
     public function deleteUserVideoLike(){
         $this->accessNumber = 8;
         if($this->checkACL()){
+            $condition = $this->input->post("condition");
+            if($condition){
+                $condition["account_ID"] = $this->userID;
+            }
             $result = $this->m_user_video_like->deleteUserVideoLike(
                     $this->input->post("ID"), 
                     $this->input->post("condition")
