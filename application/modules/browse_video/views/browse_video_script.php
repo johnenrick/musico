@@ -45,7 +45,6 @@
             }
         });
         moduleBody.find(".videoList").on("click", ".videoItem a", function(){
-            console.log($(this).parents(".videoItem"));
             load_module("now_playing/index/search/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(moduleBody.find("#searchText").val()).replace(/\=/gi, ''), "Now Paying");
         });
         

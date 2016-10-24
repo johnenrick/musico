@@ -1,5 +1,4 @@
 <div class="videoList">
-    <span class="grey-text">Playlist</span>
     <div class="row">
         <div class="videoList col s12  no-padding" >
         </div>

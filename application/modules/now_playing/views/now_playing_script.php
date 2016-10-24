@@ -20,8 +20,7 @@
             cursorcolor : "#C62828",
             cursorwidth :"10px",
             cursorborder : "none",
-            touchbehavior : true,
-            autohidemode : false,
+            autohidemode : true,
             enablemousewheel : true,
             enablekeyboard : true,
             nativeparentscrolling : false,
@@ -29,6 +28,11 @@
         });
         
         /*Event*/
+        moduleBody.find("#videoPanel, #videoPlaylist").on("resize", function(){
+            moduleBody.find("#videoPlaylist").height(moduleBody.find("#videoPanel").height());
+            moduleBody.find("#videoPlaylist").getNiceScroll().resize();
+        });
+        
         $(window).resize(function(){
             moduleBody.find("#videoPlaylist").height(moduleBody.find("#videoPanel").height());
         });
@@ -133,12 +137,12 @@
                         moduleBody.find(".uploaderDetail img").attr("src", asset_url("image/no_profile_photo.jpg"));
                     }
                     moduleBody.find("#videoPlayer").attr("viewed", 0);
-                    moduleBody.find("#videoPlaylist").height(moduleBody.find("#videoPanel").height());
-                    moduleBody.find("#videoPlaylist").getNiceScroll().resize();
+                    
                     
                     setTimeout(function(){
 //                        moduleBody.find("#videoPlayer")[0].play();
                     }, 2500);
+                    moduleBody.find("#videoPanel, #videoPlaylist").trigger("resize");
                 }
             }, false);
             
@@ -209,10 +213,11 @@
                             }
                         }
                     }
-                    moduleBody.find("#videoPlaylist").getNiceScroll().resize();
+                    
                 }, false);
             }
         }
+        
         nowPlaying.ready = function(){
             playVideo();
             showPlaylist();

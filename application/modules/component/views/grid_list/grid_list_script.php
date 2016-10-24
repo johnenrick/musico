@@ -14,6 +14,11 @@
         gridList.body = $("#pageComponentContainer .gridList").clone();//The HTML instance of the component.
         componentContainer.append(gridList.body);
         
+        gridList.now_playing_source = "";
+        gridList.now_playing_parameter = "";
+        gridList.body.on("click", ".videoItem a", function(){
+            load_module("now_playing/index/"+gridList.now_playing_source+"/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(gridList.now_playing_parameter).replace(/\=/gi, ''), "Now Paying");
+        });
         /**
          * 
          * @param {int} userVideoID ID of the user video

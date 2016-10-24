@@ -4,7 +4,7 @@
             <div class="card hoverable transparent z-depth-0">
                 <div class="card-image" style="">
                     <a href="" >
-                        <img src="<?=  asset_url("sample_image/sample_image (1).jpg")?>" >
+                        <img src="<?=  asset_url("")?>" >
                         <div class="card-image-description">
                             <span class="videoUploader" style="font-size:14px">The Mountain Bikers</span>
                             <br>
@@ -14,8 +14,6 @@
                                 <span  class="viewCount ">1,000,000 view</span>
                             </div>
                         </div>
-                        
-                        
                     </a>
                 </div>
             </div>

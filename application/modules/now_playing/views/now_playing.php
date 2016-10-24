@@ -1,6 +1,5 @@
 <div id="nowPlaying" class="">
-    
-        <div class="row grey darken-4 section">
+        <div class="row grey darken-4 section no-margin-bot">
             <div id="videoPanel" class=" col s12 m9 ">
                 <div class="row no-margin-bot">
                     <div class="col s12 no-padding-side">
@@ -43,8 +42,11 @@
                     </div>
                 </div>
             </div>
-            <div id="videoPlaylist" class="col m3 no-padding-left" style="overflow-y: scroll">
-                
+            <div id="videoPlaylistPanel" class="col m3 no-padding-left" >
+                <span class="grey-text">Playlist</span>
+                <div id="videoPlaylist" style="overflow-y: scroll">
+                    
+                </div>
             </div>
         </div>
 </div>

@@ -15,10 +15,17 @@
         videoListBanner.body = $("#pageComponentContainer .videoListBanner").clone();//The HTML instance of the component. 
         componentContainer.empty();
         componentContainer.append(videoListBanner.body);
-        
+        videoListBanner.now_playing_source = "";
+        videoListBanner.now_playing_parameter = "";
+        videoListBanner.body.on("click", ".videoItem a", function(){
+            load_module("now_playing/index/"+videoListBanner.now_playing_source+"/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(videoListBanner.now_playing_parameter).replace(/\=/gi, ''), "Now Paying");
+        });
+        videoListBanner.body.on("click", ".mainVideo a", function(){
+            load_module("now_playing/index/"+videoListBanner.now_playing_source+"/"+$(this).parents(".mainVideo").attr("user_video_id")+"/"+btoa(videoListBanner.now_playing_parameter).replace(/\=/gi, ''), "Now Paying");
+        });
         videoListBanner.addItem = function(userVideoID, userVideoThumbnailLink, videoDescription, uploaderFullName, datetimeCreated, viewCount, mainVideo){
-            var videoItem = (mainVideo === true) ?  videoListBanner.body.find(".videoContainer") : videoListBanner.body.find(".prototype .videoItem").clone();
-         
+            var videoItem = (mainVideo === true) ?  videoListBanner.body.find(".mainVideo") : videoListBanner.body.find(".prototype .videoItem").clone();
+           
             videoItem.attr("user_video_id", userVideoID);
             videoItem.find("img").attr("src", userVideoThumbnailLink);
             videoItem.find(".videoDescription").text(videoDescription);
@@ -57,5 +64,6 @@
                 videoListBanner.body.find(".videoList .subVideoList").addClass("l3");
             }
         };
+        console.log(videoListBanner.body.find(".videoContainer"))
     };
 </script>

@@ -12,6 +12,11 @@
         var videoList = this;
         videoList.body = $("#pageComponentContainer .videoList").clone();//The HTML instance of the component.
         componentContainer.append(videoList.body);
+        videoList.now_playing_source = "";
+        videoList.now_playing_parameter = "";
+        videoList.body.on("click", ".videoItem a", function(){
+            load_module("now_playing/index/"+videoList.now_playing_source+"/"+$(this).parents(".mainVideo").attr("user_video_id")+"/"+btoa(videoList.now_playing_parameter).replace(/\=/gi, ''), "Now Paying");
+        });
         
         videoList.addVideoItem = function(userVideoID, userVideoThumbnailLink, videoDescription, uploaderFullName){
             var videoItem = videoList.body.find(".prototype .videoItem").clone();
