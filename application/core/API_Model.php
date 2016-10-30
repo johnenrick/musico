@@ -77,7 +77,7 @@ class API_Model extends CI_Model{
         if(is_array($sort)){
             foreach($sort as $key => $value){
                 $keySegment = explode("__", $key);
-                $this->db->order_by(((count($keySegment) > 1 )? $keySegment[0] : $this->TABLE).".".$keySegment[count($keySegment)-1], ($value == "asc") ? "asc" : "desc");
+                $this->db->order_by(((count($keySegment) > 1 )? $keySegment[0]."." : (isset($this->DATABASETABLE[$this->TABLE][$keySegment[count($keySegment)-1]]) ? $this->TABLE."." : "")).$keySegment[count($keySegment)-1], (strtolower($value) == "asc") ? "asc" : "desc");
             }
         }
         //limits and offset

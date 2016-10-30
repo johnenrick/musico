@@ -11,9 +11,9 @@
     </div>
     <div class="row">
         <div class="col s12">
-            <div class="featuredVideoList section">
+            <div class=" section">
                 <h6 class="red-text darken-3 " style="font-weight: bold">Featured Videos</h6>
-                <div class="videoList">
+                <div class="featuredVideoList">
 
                 </div>
             </div>

@@ -4,12 +4,6 @@
     /*Global\ Variable for this module. This is also the moduleName*/
     var registrationModule = function(){
         registrationModule = this;
-        function testing(){
-            $.confirm({
-                title: 'Confirm!',
-                content: 'Simple confirm!'
-            });
-        }
             $("#registrationForm").ajaxForm({
             beforeSubmit: function(data,$form,options){
                 var firstname = data[1].value;
@@ -48,7 +42,9 @@
                     $(".hide-module:not(#success-module)").hide();
                     $("#username").val('');
                     $("#password").val('');
+                    console.log("login---"+getCookie("token"));
                     setCredential(response.data.token, response.data.ID, response.data.username, response.data.first_name, response.data.middle_name, response.data.last_name, response.data.account_type_ID);
+                    
                     $('#registrationModal').closeModal();
                 }else{
                     $("#success-module").hide();

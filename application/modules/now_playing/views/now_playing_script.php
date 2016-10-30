@@ -10,7 +10,9 @@
         var moduleBody = nowPlaying.body = $("#nowPlaying");
         var moduleReady = 0;
         load_component("video_list", function(){
+            
             nowPlaying.videoPlaylist = new VideoList(moduleBody.find("#videoPlaylist")); 
+            nowPlaying.videoPlaylist.onVideoClick = videoListClick;
             moduleReady++;
             if(moduleReady === 1){
                nowPlaying.ready(); 
@@ -109,11 +111,76 @@
         });
         moduleBody.find(".uploaderDetail a").click(function(){
             load_module("member_profile/index/"+moduleBody.find("#videoPlayer").attr("account_ID"), "Member Profile");
-        })
-        function playVideo(){
+        });
+        moduleBody.find(".showComment").click(function(){
+            moduleBody.find(".commentSection").show();
+            moduleBody.find(".showComment").hide();
+            showComment();
+        });
+        moduleBody.find("#createComment textarea").click(function(){
+            if(!user_id()){
+                $(".headerLogin").trigger("click");
+            }
+        });
+        moduleBody.find("#createComment").attr("action", api_url("c_user_video_comment/createUserVideoComment"));
+        moduleBody.find("#createComment").ajaxForm({
+            beforeSubmit : function(data, $form,options){
+                moduleBody.find("#createComment button").attr("disabled", true);
+                moduleBody.find("#createComment button").addClass("disabled");
+                data.push({
+                    name : "user_video_ID",
+                    type : "text",
+                    required : true,
+                    value : moduleBody.find("#videoPlayer").attr("user_video_ID")
+                });
+                
+            },
+            success : function(data){
+                var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September","October", "November", "December"];
+                var response = JSON.parse(data);
+                if(!response["error"].length){
+                    var comment = moduleBody.find(".prototype .videoComment").clone();
+                    comment.find('img').attr("src", user_photo_url());
+                    var datetime = new Date();
+                    comment.find('.commentFullName').text(user_first_name()+" "+user_last_name());
+                    comment.find('.commentContent').text(moduleBody.find("#createComment textarea").val());
+                    comment.find('.datetime').text(month[datetime.getMonth()]+" "+datetime.getDate()+", "+datetime.getFullYear());
+                    moduleBody.find("#createComment textarea").val("");
+                    moduleBody.find("#createComment textarea").trigger("autoresize");
+                    moduleBody.find("#commentPanel").prepend(comment);
+                }
+                moduleBody.find("#createComment button").attr("disabled", false);
+                moduleBody.find("#createComment button").removeClass("disabled");
+            }
+        });
+        function showComment(){
             var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September","October", "November", "December"];
-            var urlParameter = getURLParameter("now_playing/index");
-            api_request("c_user_video/retrieveUserVideo", {ID : urlParameter[1], additional_data : {account_profile_photo : true}}, function(response){
+            var parameter = {
+                condition : {
+                    user_video_ID : moduleBody.find("#videoPlayer").attr("user_video_ID")
+                }
+            }
+            moduleBody.find("#commentPanel").empty();
+            api_request("c_user_video_comment/retrieveUserVideoComment", parameter, function(response){
+                console.log(response)
+                if(!response["error"].length){
+                    for(var x = 0; x < response["data"].length; x++ ){
+                        var comment = moduleBody.find(".prototype .videoComment").clone();
+                        var datetime = new Date(response["data"][x]["datetime"]*1000);
+                        comment.find('img').attr("src", asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["account_profile_photo_file_uploaded_description"]));
+                        comment.find('.commentFullName').text(response["data"][x]["first_name"]+" "+response["data"][x]["last_name"]);
+                        comment.find('.commentContent').text(response["data"][x]["content"]);
+                        comment.find('.datetime').text(month[datetime.getMonth()]+" "+datetime.getDate()+", "+datetime.getFullYear());
+                        moduleBody.find("#commentPanel").append(comment);
+                    }
+                }
+            }, false);
+        }
+        function playVideo(userVideoID){
+            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September","October", "November", "December"];
+            moduleBody.find(".commentSection").hide();
+            moduleBody.find(".showComment").show();
+            api_request("c_user_video/retrieveUserVideo", {ID : userVideoID, additional_data : {account_profile_photo : true}}, function(response){
                 if(!response["error"].length){
                     moduleBody.find("#videoPlayer").attr("user_video_ID", response["data"]["ID"]);
                     moduleBody.find("#videoPlayer").attr("account_ID", response["data"]["account_ID"]);
@@ -122,6 +189,9 @@
                     if(user_id() !== response["data"]["account_ID"]*1){
                         subscriptionDetail();
                         userVideoLikeDetail();
+                    }else{
+                        moduleBody.find(".uploaderDetail .subscriptionButton").hide();
+                        moduleBody.find(".uploaderDetail .unSubscriptionButton").hide();
                     }
                     moduleBody.find(".videoDetail .viewCount").text((response["data"]["user_video_view_count"]*1) ? response["data"]["user_video_view_count"] + " Views" : "");
                     moduleBody.find(".videoDetail .likeCount").text((response["data"]["user_video_like_count"]*1) ? response["data"]["user_video_like_count"] + " Likes" : "");
@@ -161,6 +231,7 @@
                 }
             }
             api_request("c_subscription/retrieveSubscription", parameter, function(response){
+                console.log(parameter)
                 if(!response["error"].length){
                     moduleBody.find(".uploaderDetail .unSubscriptionButton").show();
                     moduleBody.find(".uploaderDetail .subscriptionButton").hide();
@@ -189,6 +260,9 @@
         }
         function showPlaylist(){
             var urlParameter = getURLParameter("now_playing/index");
+            nowPlaying.videoPlaylist.now_playing_source = urlParameter[0];
+            nowPlaying.videoPlaylist.now_playing_parameter = urlParameter[2];
+            console.log(nowPlaying.videoPlaylist)
             nowPlaying.videoPlaylist.empty();
             if(urlParameter[0] === "search"){
                 var filterData = {
@@ -207,19 +281,39 @@
                 }
                 api_request("c_user_video/retrieveUserVideo", filterData, function(response){
                     if(!response["error"].length){
-                        for(var y = 0; y < 10; y++){
-                            for(var x = 0; x < response["data"].length; x++){
-                                nowPlaying.videoPlaylist.addVideoItem(response["data"][x]["ID"], asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), response["data"][x]["title"], response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"]);
-                            }
+                        for(var x = 0; x < response["data"].length; x++){
+                            nowPlaying.videoPlaylist.addVideoItem(response["data"][x]["ID"], asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), response["data"][x]["title"], response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"]);
                         }
+                        focusPlayList();
                     }
                     
                 }, false);
+            }else if(urlParameter[0] === "random"){
+                api_request("c_user_video/retrieveRandomUserVideo", {}, function(response){
+                    if(!response["error"].length){
+                        for(var x = 0; x < response["data"].length; x++){
+                            nowPlaying.videoPlaylist.addVideoItem(response["data"][x]["ID"], asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), response["data"][x]["title"], response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"]);
+                        }
+                        focusPlayList();
+                    }
+                }, false);
             }
         }
-        
+        function focusPlayList(){
+            if(moduleBody.find(".videoItem[user_video_id="+moduleBody.find("#videoPlayer").attr("user_video_ID")+"]").length){
+                $("#videoPlaylist").scrollTop(
+                    moduleBody.find(".videoItem[user_video_id="+moduleBody.find("#videoPlayer").attr("user_video_ID")+"]").offset().top 
+                    - moduleBody.find(".videoItem[user_video_id="+moduleBody.find("#videoPlayer").attr("user_video_ID")+"]").parent().offset().top  
+                    - moduleBody.find(".videoItem[user_video_id="+moduleBody.find("#videoPlayer").attr("user_video_ID")+"]").parent().scrollTop()
+                    );
+            }
+        }
+        function videoListClick(userVideoID){
+            playVideo(userVideoID);
+        }
         nowPlaying.ready = function(){
-            playVideo();
+            var urlParameter = getURLParameter("now_playing/index");
+            playVideo(urlParameter[1]);
             showPlaylist();
         };
         

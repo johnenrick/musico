@@ -17,7 +17,8 @@
         gridList.now_playing_source = "";
         gridList.now_playing_parameter = "";
         gridList.body.on("click", ".videoItem a", function(){
-            load_module("now_playing/index/"+gridList.now_playing_source+"/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(gridList.now_playing_parameter).replace(/\=/gi, ''), "Now Paying");
+            load_module("now_playing/index/"+gridList.now_playing_source+"/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(gridList.now_playing_parameter).replace(/\=/gi, ''), "Now Playing");
+            return false;
         });
         /**
          * 
@@ -60,7 +61,9 @@
             gridList.onVideoItemClickFn = cardCallBack;
         };
         gridList.body.find(".videoList").on("click", ".videoItem", function(){
-            gridList.onVideoItemClickFn($(this));
+            if(gridList.now_playing_source === ""){
+                gridList.onVideoItemClickFn($(this));
+            }
         });
         gridList.empty = function(){
             gridList.body.find(".videoList").empty();

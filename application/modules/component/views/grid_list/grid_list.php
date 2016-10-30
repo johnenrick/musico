@@ -1,4 +1,4 @@
-<div class="gridList row">
+<div class="gridList">
     <div class="videoList row">
         
     </div>

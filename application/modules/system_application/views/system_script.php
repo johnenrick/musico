@@ -71,7 +71,8 @@
         return systemApplication.url.asset_url+"user_upload/"+uploaderAccountID+"/"+videoFilename;
     }
     function user_photo_url(accountID, photoFilename){
-        return systemApplication.url.asset_url+"user_upload/"+accountID+"/"+photoFilename;
+        return systemApplication.url.asset_url+"user_upload/"+((typeof accountID === "undefined") ? user_id(): accountID)+"/"+ ((typeof photoFilename === "undefined") ? system_data.account_information.profile_photo_link : photoFilename);
+        
     }
     function retrieve_access_control(){
         $.post(api_url("C_access_control_list/retrieveAccessControlList"), {}, function(data){
@@ -145,6 +146,7 @@
      */
     function api_request(link, data, callbackFn, tokenRequired){
         tokenRequired = typeof tokenRequired === "undefined" ? true : tokenRequired;
+        console.log("api_request: "+link+"----"+getCookie("token"));
         var request = $.post(api_url(link), data, function(data){
             var response = JSON.parse(data);
             //Check token
@@ -206,7 +208,6 @@
             system_data.account_information.user_ID = ID*1;
             system_data.account_information.user_type = accountTypeID*1;
             
-            
         }else{
             //TODO Reset system frame for Log out/Not login
             system_data.account_information.user_ID = null;
@@ -223,8 +224,10 @@
     function refreshModule(){
         for(var key in systemApplication.module){
             if(typeof systemApplication.module[key].ready !== "undefined"){
+                console.log("refresh"+key+" ---"+getCookie("token"))
                 typeof systemApplication.module[key].ready();
             }
+            
         }
     }
     function logout(){
@@ -235,6 +238,11 @@
         if(token !== null){
             document.cookie = "token="+token;
         }
+        $.ajaxSetup({
+            headers : {
+                token: token
+            }
+        });
     }
     function getCookie(cookieKey){
         var cookieList = document.cookie.split(";");
@@ -270,7 +278,6 @@
         $.ajaxSetup({
             global: true,
             type: "POST",
-//            data : {token: getCookie("token")}
             headers : {
                 token: getCookie("token")
             }

@@ -44,35 +44,36 @@
         var section = window.location.href.split("#");
         moduleLink = moduleLink.replace("#","");
         window.history.pushState('Object', 'Title', base_url(moduleLink)+((section.length >1 ) ? "#"+section[1] : ""));
-        if($("#mainContent").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
+        if($("#mainContent").find(".moduleHolder[module_name='"+camelize(moduleName)+"']").length === 0){
             $.post(base_url(moduleLink), {load_module : true}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
                 var moduleHolder = $("#systemModule").find(".moduleHolder").clone();
                 moduleHolder.attr("module_link", moduleLink);
+                moduleHolder.attr("module_name", camelize(moduleName));
                 moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
                 moduleHolder.append(data);
                 $("#mainContent").append(moduleHolder);
                 /*show page*/
-                $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
-                if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
-                    $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
+                $("#mainContent").find(".moduleHolder[module_name!='"+camelize(moduleName)+"']").hide();
+                if($('.moduleHolder[module_name="'+camelize(moduleName)+'"]').is(":visible") === false){
+                    $('.moduleHolder[module_name="'+camelize(moduleName)+'"]').fadeIn(500);
                 }
 //                if(typeof systemApplication.module[camelize(moduleName)].ready !== "undefined"){
 //                    systemApplication.module[camelize(moduleName)].ready();
 //                }
-                isloadingModule = false
+                isloadingModule = false;
 
             });
         }else{
             /*show page*/
-            $("#mainContent").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
-            if($('#mainContent .moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
-                $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
+            $("#mainContent").find(".moduleHolder[module_name!='"+camelize(moduleName)+"']").hide();
+            if($('#mainContent .moduleHolder[module_name="'+camelize(moduleName)+'"]').is(":visible") === false){
+                $('.moduleHolder[module_name="'+camelize(moduleName)+'"]').fadeIn(500);
                 if(typeof systemApplication.module[camelize(moduleName)].ready !== "undefined"){
                     systemApplication.module[camelize(moduleName)].ready();
                 }
             }
-            isloadingModule = false
+            isloadingModule = false;
         }
     }
     /***

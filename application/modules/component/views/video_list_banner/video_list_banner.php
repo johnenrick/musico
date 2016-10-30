@@ -4,14 +4,14 @@
             <div class="card hoverable transparent z-depth-0">
                 <div class="card-image" style="">
                     <a href="" >
-                        <img src="<?=  asset_url("")?>" >
+                        <img onError="this.onerror=null;this.src='<?=  asset_url()?>/image/no_video_image.jpg';"  src="<?=  asset_url("")?>" >
                         <div class="card-image-description">
-                            <span class="videoUploader" style="font-size:14px">The Mountain Bikers</span>
+                            <span class="videoUploader" style="font-size:14px"></span>
                             <br>
-                            <span class="videoDescription" style="font-size:16px">Cycling to the Mountains</span>
+                            <span class="videoDescription" style="font-size:16px"></span>
                             <div class="" style="font-size:11px">
-                                <span class="videoAge">31 day ago</span> 
-                                <span  class="viewCount ">1,000,000 view</span>
+                                <span class="videoAge"></span> 
+                                <span  class="viewCount "></span>
                             </div>
                         </div>
                     </a>
@@ -24,7 +24,7 @@
             <div class="card hoverable transparent z-depth-0">
                 <div class="card-image">
                     <a href="" >
-                        <img src="<?=  asset_url("sample_image/sample_image (1).jpg")?>" >
+                        <img onError="this.onerror=null;this.src='<?=  asset_url()?>/image/no_video_image.jpg';" src="<?=  asset_url("sample_image/sample_image (1).jpg")?>" >
                         <div class="card-image-description">
                             <span class="uploadederName" style="font-size:14px">The Mountain Bikers</span>
                             <br>

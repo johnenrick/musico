@@ -104,6 +104,53 @@ class C_user_video extends API_Controller {
         }
         $this->outputResponse();
     }
+    public function retrieveRandomUserVideo(){
+        $this->accessNumber = 2;
+        if($this->checkACL()){
+            $userVideoCount = $this->m_user_video->retrieveUserVideo(
+                    1,
+                    $this->input->post("limit"),
+                    0,
+                    NULL,
+                    $this->input->post("ID"), 
+                    $this->input->post("condition")
+                    );
+            $randomOffset = ( ($userVideoCount - $randomOffset < $this->input->post("limit") ) || !$this->input->post("limit")) ? 0 : rand (0, $userVideoCount);
+            $sort = array(
+                "user_video_like_count" => "asc",
+                "user_video_view_count" => "asc",
+                "user_video__datetime" => "asc"
+            );
+            $result = $this->m_user_video->retrieveUserVideo(
+                    $this->input->post("retrieve_type"),
+                    $this->input->post("limit"),
+                    $randomOffset, 
+                    $sort,
+                    $this->input->post("ID"), 
+                    $this->input->post("condition"),
+                    $this->input->post("additional_data")
+                    );
+            if($this->input->post("limit")){
+                $this->responseResultCount($this->m_user_video->retrieveUserVideo(
+                    1,
+                    NULL,
+                    NULL,
+                    NULL,
+                    $this->input->post("ID"), 
+                    $this->input->post("condition")
+                    ));
+            }
+            if($result){
+                $this->actionLog(json_encode($this->input->post()));
+                $this->responseData($result);
+            }else{
+                $this->responseError(2, "No Result");
+            }
+        }else{
+            $this->responseError(1, "Not Authorized");
+        }
+        $this->outputResponse();
+    }
     public function updateUserVideo(){
         $this->accessNumber = 4;
         if($this->checkACL()){

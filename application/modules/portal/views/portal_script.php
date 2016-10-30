@@ -4,28 +4,25 @@
      var Portal = function(){
         var portalPage = this;//instance of the module
         var moduleBody = portalPage.body = $("#portalPage");
+        var isReady = 0;
         /*Featured Video*/
         load_component("grid_list", function(){
-           portalPage.featuredVideoList = new GridList(moduleBody.find(".videoList"));
+           portalPage.featuredVideoList = new GridList(moduleBody.find(".featuredVideoList"));
            portalPage.featuredVideoList.now_playing_source = "featured";
            portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-           portalPage.featuredVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-           
+           isReady++;
+           if(isReady === 2){
+               portalPage.ready();
+           }
         });
         /*5 Random Video*/
         load_component("video_list_banner", function(){
            portalPage.bannerVideoList = new VideoListBanner(moduleBody.find(".randomVideo"));
            portalPage.bannerVideoList.now_playing_source = "random";
-           portalPage.bannerVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10, true);
-           portalPage.bannerVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-//           portalPage.bannerVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-//           portalPage.bannerVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-//           portalPage.bannerVideoList.addItem(1, asset_url("sample_image/sample_image (1).jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
-           
+           isReady++;
+           if(isReady === 2){
+               portalPage.ready();
+           }
         });
         if(user_id()){
             moduleBody.find(".signUpButton").hide();
@@ -40,7 +37,25 @@
                 $(".headerLogin").trigger("click");
             }
         });
+        function listRandomVideo(){
+            api_request("c_user_video/retrieveRandomUserVideo", {}, function(response){
+                if(!response["error"].length){
+                    portalPage.bannerVideoList.empty();
+                    for(var x = 0; x < response["data"].length; x++){
+                        portalPage.bannerVideoList.addItem(
+                            response["data"][x]["ID"],
+                            asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), 
+                            response["data"][x]["title"], response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"], 
+                            response["data"][x]["datetime"], 
+                            response["data"][x]["user_video_view_count"], 
+                            (x === 0 ) ? true : false
+                        );
+                    }
+                }
+            }, false);
+        }
         portalPage.ready = function(){
+            listRandomVideo();
         };
     };
         
