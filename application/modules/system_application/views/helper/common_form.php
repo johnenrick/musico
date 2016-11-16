@@ -3,6 +3,9 @@
         var formHandler = this;
         formHandler.formElement = formElement;
         formHandler.formMode = "";//create or update
+        if(formHandler.formElement.attr("method") === ""){
+            formHandler.formElement.attr("method", "POST"); 
+        }
         //Event binding
         formElement.ajaxForm({
             beforeSubmit : function(data,$form,options){
@@ -35,6 +38,12 @@
                     break;
                 case "delete_yes":
                     deleteForm();
+                    break;
+                case "delete_no":
+                    formElement.find(".formActionButton button[action=delete_yes]").hide();
+                    formElement.find(".formActionButton button[action=delete_no]").hide();
+                    formElement.find(".formActionButton button[action=delete]").show();
+                    formElement.find(".formActionButton label[action=delete_confirmation]").hide();
                     break;
                     
             }
@@ -92,6 +101,7 @@
                 formElement.find(".formActionButton button").attr("disabled", false);
             });
         }
+        formHandler.reset();
         return formHandler;
     }
 </script>

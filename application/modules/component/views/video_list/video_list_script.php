@@ -10,7 +10,7 @@
      */
     var VideoList = function (componentContainer) {
         var videoList = this;
-        videoList.body = $("#pageComponentContainer .videoList").clone();//The HTML instance of the component.
+        videoList.body = $("#pageComponentContainer .video_list").clone();//The HTML instance of the component.
         componentContainer.append(videoList.body);
         videoList.now_playing_source = "";
         videoList.now_playing_parameter = "";
@@ -34,5 +34,6 @@
         videoList.empty = function(){
             videoList.body.find(".videoItemList").empty();
         };
+        videoList.empty();
     };
 </script>

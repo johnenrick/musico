@@ -45,7 +45,7 @@
             }
         });
         moduleBody.find(".videoList").on("click", ".videoItem a", function(){
-            load_module("now_playing/index/search/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(moduleBody.find("#searchText").val()).replace(/\=/gi, ''), "Now Paying");
+            load_module("now_playing/index/search/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(moduleBody.find("#searchText").val()).replace(/\=/gi, ''), "Now Playing");
         });
         
         function addVideoItem(userVideoID, userVideoThumbnailLink, videoDescription, uploaderFullName, videoDetails, datetimeCreated, viewCount){
@@ -75,17 +75,101 @@
             videoItem.find(".videoAge").text(videoAge+" ago");
             browseVideo.body.find(".videoList").append(videoItem);
         }
-        browseVideo.ready = function(){//function to run if the module is already been loaded
-            
+        function listRandomVideo(){
+            var paramater = {
+                limit : 5
+            };
+            api_request("c_user_video/retrieveRandomUserVideo", paramater, function(response){
+                if(!response["error"].length){
+                    for(var x = 0; x < response["data"].length; x++){
+                        if(browseVideo.body.find(".videoList .videoItem[user_video_ID="+response["data"][x]["ID"]+"]").length === 0){
+                            addVideoItem(
+                                response["data"][x]["ID"], 
+                                asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), 
+                                response["data"][x]["title"], 
+                                response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"], 
+                                response["data"][x]["details"], 
+                                response["data"][x]["datetime"], 
+                                response["data"][x]["user_video_view_count"]
+                                    );
+                        }
+                    }
+                }
+            }, false);
         }
+        function listFeaturedVideo(){
+            var parameter = {
+                condition : {
+                    removed_datetime : 0
+                },
+                additional_data : {
+                    user_video : true
+                },
+                sort : {
+                    removed_datetime : "asc",
+                    datetime : "desc"
+                },
+                limit : 10,
+                group_by : "user_video_ID",
+                distinct : true
+            }
+            api_request("C_featured_video/retrieveFeaturedVideo", parameter, function(response){
+                if(!response["error"].length){
+                    for(var x = 0; x < response["data"].length; x++){
+                        if(browseVideo.body.find(".videoList .videoItem[user_video_ID="+response["data"][x]["user_video_ID"]+"]").length === 0){
+                            addVideoItem(
+                                response["data"][x]["user_video_ID"], 
+                                asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), 
+                                response["data"][x]["title"], 
+                                response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"], 
+                                response["data"][x]["details"], 
+                                response["data"][x]["datetime"], 
+                                response["data"][x]["user_video_view_count"]
+                            );
+                        }
+                    }
+                }
+            }, false);
+        }
+        browseVideo.ready = function(){//function to run if the module is already been loaded
+            var urlParameter = getURLParameter();
+            if(urlParameter){
+                switch(urlParameter[0]){
+                    case "featured" :
+                        moduleBody.find(".searchResultIndicator").text("Featured Videos");
+                        moduleBody.find("#searchBar").attr("action", api_url("c_featured_video/retrieveFeaturedVideo") || moduleBody.find("#searchBar").attr("action") === api_url("c_user_video/retrieveUserVideo"));
+                        if(moduleBody.find(".videoList").children().length === 0){
+                            listFeaturedVideo();
+                        }
+                        moduleBody.find(".searchIndicator").text("Search Featured videos...");
+                        break;
+                    default:
+                        
+                        if(moduleBody.find(".videoList").children().length === 0 || moduleBody.find("#searchBar").attr("action") === api_url("c_featured_video/retrieveFeaturedVideo")){
+                            moduleBody.find(".videoList").empty();
+                            listFeaturedVideo();
+                            listRandomVideo();
+                        }
+                        moduleBody.find("#searchBar").attr("action", api_url("c_user_video/retrieveUserVideo"));
+                        moduleBody.find(".searchResultIndicator").text("Random Videos");
+                        moduleBody.find(".searchIndicator").text("Search videos...");
+                        break;
+                }
+            }else{                
+                if(moduleBody.find(".videoList").children().length === 0 || moduleBody.find("#searchBar").attr("action") === api_url("c_featured_video/retrieveFeaturedVideo")){
+                    moduleBody.find(".videoList").empty();
+                    listFeaturedVideo();
+                    listRandomVideo();
+                }
+                moduleBody.find("#searchBar").attr("action", api_url("c_user_video/retrieveUserVideo"));
+                moduleBody.find(".searchResultIndicator").text("Random Videos");
+                moduleBody.find(".searchIndicator").text("Search videos...");
+            }
+        };
+        browseVideo.ready();
     };
         
     $(document).ready(function(){
-        if(typeof systemApplication.module.portalPage === "undefined"){
-            systemApplication.module.browseVideo = new BrowseVideo();
-        }else{
-            //TODO refresh function if the module is revisited
-            
-        }
+        systemApplication.module.browseVideo = new BrowseVideo();
     });
 </script>

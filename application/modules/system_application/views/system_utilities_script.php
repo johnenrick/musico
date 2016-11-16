@@ -10,6 +10,7 @@
         elementSelected.find(".formMessage").empty();
         elementSelected.find(".formMessage").show();
         elementSelected.find(".formLabelIndicator.label-danger").show();
+        console.log(errorList)
         errorList.forEach(function (errorValue) {
             if (errorValue["status"] > 100 && errorValue["status"] < 1000) {/*Form Validation Error*/
                 for (var index in errorValue["message"]) {
@@ -160,5 +161,11 @@
         parameter.splice(0,1);
         return (parameter.length) >= 1 ? parameter : false;
     }
-    
+    function getURLParameter(){
+        var link = (window.location.href.replace(base_url(),"")).replace("index/", "");
+        var sectionSplit = link.split("#");
+        var parameter = sectionSplit[0].split("/");
+        parameter.splice(0,1);
+        return (parameter.length) >= 1 ? parameter : false;
+    }
 </script>

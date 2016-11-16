@@ -18,5 +18,8 @@ class Member_profile extends FE_Controller{
     public function videoTab(){
         $this->loadModule("video_tab", "video_tab_script");
     }
+    public function playlistTab(){
+        $this->loadModule("playlist_tab", "playlist_tab_script");
+    }
 }
 

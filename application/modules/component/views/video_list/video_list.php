@@ -11,6 +11,7 @@
             <div class="videoDetail col s7" style="">
                 <a href="#"><div class="videoDescription small truncate" ></div></a>
                 <div class="uploadederName small grey-text truncate"></div>
+                <div class="playIndicator small grey-text truncate"><span class="glyphicon "></span> playing</div>
             </div>
         </div>
     </div>

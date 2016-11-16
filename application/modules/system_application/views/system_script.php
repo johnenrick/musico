@@ -108,7 +108,52 @@
         }
         system_data.refresh_call[moduleName].push(refreshFunction);
     }
-    
+    /***
+     * Load module to the page
+     * @param {String} moduleLink Controller/Function of the module
+     * @param {String} moduleName Name of the module
+     * @returns {undefined}
+     */
+    var isloadingModule = false;
+    function load_module(moduleLink, moduleName){
+        if(isloadingModule){
+            return false;
+        }else{
+            isloadingModule = true;
+        }
+        moduleName = moduleName.replace("#","");
+//        moduleLink = moduleLink.replace("#","");
+        window.history.pushState('Object', moduleName, base_url(moduleLink));
+        if($("#mainContent").find(".moduleHolder[module_name='"+camelize(moduleName)+"']").length === 0){
+            $.post(base_url(moduleLink), {load_module : true}, function(data){
+                /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
+                var moduleHolder = $("#systemModule").find(".moduleHolder").clone();
+                moduleHolder.attr("module_link", moduleLink);
+                moduleHolder.attr("module_name", camelize(moduleName));
+                moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
+                moduleHolder.append(data);
+                $("#mainContent").append(moduleHolder);
+                /*show page*/
+                $("#mainContent").find(".moduleHolder[module_name!='"+camelize(moduleName)+"']").hide();
+                if($('.moduleHolder[module_name="'+camelize(moduleName)+'"]').is(":visible") === false){
+                    $('.moduleHolder[module_name="'+camelize(moduleName)+'"]').fadeIn(500);
+                }
+                isloadingModule = false;
+            });
+        }else{
+            /*show page*/
+            $("#mainContent").find(".moduleHolder[module_name!='"+camelize(moduleName)+"']").hide();
+            if($('#mainContent .moduleHolder[module_name="'+camelize(moduleName)+'"]').is(":visible") === false){
+                $('.moduleHolder[module_name="'+camelize(moduleName)+'"]').fadeIn(500);
+                
+                
+            }
+            if(typeof systemApplication.module[camelize(moduleName)].ready !== "undefined"){
+                systemApplication.module[camelize(moduleName)].ready();
+            }
+            isloadingModule = false;
+        }
+    }
     /**
      * Load a Page Component to the Document.
      * @param {string} component The name of the component to be loaded
@@ -146,7 +191,6 @@
      */
     function api_request(link, data, callbackFn, tokenRequired){
         tokenRequired = typeof tokenRequired === "undefined" ? true : tokenRequired;
-        console.log("api_request: "+link+"----"+getCookie("token"));
         var request = $.post(api_url(link), data, function(data){
             var response = JSON.parse(data);
             //Check token
@@ -224,7 +268,6 @@
     function refreshModule(){
         for(var key in systemApplication.module){
             if(typeof systemApplication.module[key].ready !== "undefined"){
-                console.log("refresh"+key+" ---"+getCookie("token"))
                 typeof systemApplication.module[key].ready();
             }
             
@@ -258,6 +301,7 @@
             return null;
         }
     }
+    
 </script>
 
 <!--Document Ready-->
@@ -294,19 +338,21 @@
                     setCredential(null);
                 }
                 var moduleLink = window.location.href.replace(base_url(), "").split("/");
-                load_module(system_data.default.module_controller, moduleLink[0]);
+                load_module(system_data.default.module_controller, moduleLink[0] === "" ? "Portal" : moduleLink[0]);
             });
         } else {
             setCredential(null);
             var moduleLink = window.location.href.replace(base_url(), "").split("/");
-            load_module(system_data.default.module_controller, moduleLink[0]);
+            console.log(moduleLink)
+            load_module(system_data.default.module_controller, moduleLink[0] === "" ? "Portal" : moduleLink[0]);
         }
         
         //redirect www
         if(window.location.href.indexOf("www") === 0){
-            window.history.pushState('Object', 'Title', window.location.href.replace("www.", ""));
+            window.location  = window.location.href.replace("www.", "");
+        }else{
+            
         }
         retrieve_access_control();
-        
     });
 </script>

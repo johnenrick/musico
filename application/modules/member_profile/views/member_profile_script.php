@@ -10,12 +10,12 @@
         var memberProfile = this;//instance of the module
         var moduleBody = memberProfile.body = $("#memberProfile");
         var readyFlag = 0;
-        var readyFlagValue = 7;
+        var readyFlagValue = 4;
         /*Load Tabs*/
         load_sub_module("member_profile/homeTab", function(data){
             moduleBody.find(".tabContent").append(data);
             new MemberProfileHomeTab(memberProfile);
-            readyFlag += 1;
+            readyFlag++;
             if(readyFlag === readyFlagValue){
                 memberProfile.ready();
             }
@@ -23,7 +23,7 @@
         load_sub_module("member_profile/aboutTab", function(data){
             moduleBody.find(".tabContent").append(data);
             memberProfile.aboutTab =  new MemberProfileAboutTab(memberProfile);
-            readyFlag += 2;
+            readyFlag++;
             if(readyFlag === readyFlagValue){
                 memberProfile.ready();
             }
@@ -31,7 +31,15 @@
         load_sub_module("member_profile/videoTab", function(data){
             moduleBody.find(".tabContent").append(data);
             new MemberProfileVideoTab(memberProfile);
-            readyFlag += 4;
+            readyFlag++;
+            if(readyFlag === readyFlagValue){
+                memberProfile.ready();
+            }
+        });
+        load_sub_module("member_profile/playlistTab", function(data){
+            moduleBody.find(".tabContent").append(data);
+            memberProfile.playlistTab = new MemberProfilePlaylistTab(memberProfile);
+            readyFlag++;
             if(readyFlag === readyFlagValue){
                 memberProfile.ready();
             }
@@ -279,11 +287,12 @@
             var defaultTab = window.location.href.split("#");
             $('ul.tabs').tabs();
             moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
-            var urlParameter = getURLParameter("member_profile/index");
+            var urlParameter = getURLParameter();
             memberProfile.accountID = urlParameter !== false ? urlParameter[0]*1 : 0;
             memberProfile.accountID = (memberProfile.accountID*1 === 0 ) ? user_id() : memberProfile.accountID;
             subscriptionDetail();
             memberProfile.aboutTab.ready();
+            memberProfile.playlistTab.ready();
         };
     };
         

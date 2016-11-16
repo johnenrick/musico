@@ -4,7 +4,7 @@
             <div class="card hoverable transparent z-depth-0">
                 <div class="card-image" style="">
                     <a href="" >
-                        <img onError="this.onerror=null;this.src='<?=  asset_url()?>/image/no_video_image.jpg';"  src="<?=  asset_url("")?>" >
+                        <img onError="" src="<?=  asset_url("sample_image/sample_image (1).jpg")?>" >
                         <div class="card-image-description">
                             <span class="videoUploader" style="font-size:14px"></span>
                             <br>

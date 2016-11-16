@@ -1,13 +1,18 @@
 <div id="browseVideo" class="section">
     <form id="searchBar" method="POST">
+        <div class="row no-margin-bot">
+            <div class="col s9 m6 offset-m2 no-padding-side">
+               <h5 class="searchIndicator red-text text-darken-3 no-margin-bot ">Search Featured videos...</h5>
+            </div>
+        </div>
         <div class="row searchField no-margin-bot">
-                <div class="input-field col s9  m6 offset-m2   primary-input no-padding-right valign-wrapper">
+                <div class="input-field col s9  m6 offset-m2  no-margin-top primary-input no-padding-right valign-wrapper">
                     <input type="text" id="searchText" class="autocomplete white pull-right valign no-margin-bot" placeholder="  Search Music Cover">
                 </div>
-                <div class="input-field col s3 m3 no-padding-left valign-wrapper">
+                <div class="input-field col s3 m3 no-padding-left valign-wrapper no-margin-top">
                     <button type="submit" class="valign btn red darken-3 pull-left "><i class="fa fa-search" aria-hidden="true"></i> <span class="hide-on-small-and-down">Search</span></button>
                 </div>
-                <div class="searchingMessage italic red-text text-darken-3 input-field col s12  m9 offset-m2 no-margin-top no-padding-left" >
+                <div class="searchingMessage italic red-text text-darken-3 input-field col s12  m9 offset-m2 no-margin-top no-padding-left no-margin-top" >
                     Search by keyword, title, artist, details
                 </div>
         </div>

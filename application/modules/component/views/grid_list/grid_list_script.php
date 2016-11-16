@@ -11,7 +11,7 @@
      */
     var GridList = function (componentContainer) {
         var gridList = this;
-        gridList.body = $("#pageComponentContainer .gridList").clone();//The HTML instance of the component.
+        gridList.body = $("#pageComponentContainer .grid_list").clone();//The HTML instance of the component.
         componentContainer.append(gridList.body);
         
         gridList.now_playing_source = "";
@@ -19,6 +19,9 @@
         gridList.body.on("click", ".videoItem a", function(){
             load_module("now_playing/index/"+gridList.now_playing_source+"/"+$(this).parents(".videoItem").attr("user_video_id")+"/"+btoa(gridList.now_playing_parameter).replace(/\=/gi, ''), "Now Playing");
             return false;
+        });
+        gridList.body.bind('load', ".videoList img", function(){
+            console.log($(this))
         });
         /**
          * 

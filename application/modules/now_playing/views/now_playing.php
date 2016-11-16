@@ -15,6 +15,10 @@
                      <br>
                      <button action_id="2" class="likeButton btn transparent right-align-sm" style="width:48%; display:none" ><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
                      <button action_id="1" class="likeButton btn transparent right-align-sm" style="width:48%; display:none"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+                     <button action_id="2" class="featureButton btn red darken-3 transparent right-align-sm" style="width:48%;display:none" ><i class="fa fa-newspaper-o" aria-hidden="true"></i></button>
+                     <button action_id="1" class="featureButton btn transparent right-align-sm" style="width:48%;display:none"><i class="fa fa-newspaper-o" aria-hidden="true"></i></button>
+                     <br>
+                     <a id="addToPlaylist" href="#">+ add to playlist</a>
 <!--                         <button class="btn transparent left-align-sm" style="width:48%"><i class="fa fa-star" aria-hidden="true"></i></button>
                      <button class="btn transparent left-align-sm" style="width:48%"><i class="fa fa-star-o" aria-hidden="true"></i></button>-->
                 </div>

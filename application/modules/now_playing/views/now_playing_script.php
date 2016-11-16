@@ -10,11 +10,17 @@
         var moduleBody = nowPlaying.body = $("#nowPlaying");
         var moduleReady = 0;
         load_component("video_list", function(){
-            
             nowPlaying.videoPlaylist = new VideoList(moduleBody.find("#videoPlaylist")); 
             nowPlaying.videoPlaylist.onVideoClick = videoListClick;
             moduleReady++;
-            if(moduleReady === 1){
+            if(moduleReady === 2){
+               nowPlaying.ready(); 
+            }
+        });
+        load_component("playlist_modal", function(){
+            nowPlaying.playlistModal = new PlaylistModal(nowPlaying.body.parent().parent().parent().parent());
+            moduleReady++;
+            if(moduleReady === 2){
                nowPlaying.ready(); 
             }
         });
@@ -30,6 +36,10 @@
         });
         
         /*Event*/
+        moduleBody.find("#addToPlaylist").click(function(){
+            nowPlaying.playlistModal.showUserPlaylist(moduleBody.find("#videoPlayer").attr("user_video_ID"));
+            return false;
+        });
         moduleBody.find("#videoPanel, #videoPlaylist").on("resize", function(){
             moduleBody.find("#videoPlaylist").height(moduleBody.find("#videoPanel").height());
             moduleBody.find("#videoPlaylist").getNiceScroll().resize();
@@ -109,6 +119,44 @@
                 });
             }
         });
+        moduleBody.find(".videoDetail .featureButton").click(function(){
+            $(this).addClass("disabled");
+            $(this).attr("disabled", true);
+            if($(this).attr("action_id")*1 === 2){
+                var parameter = {
+                        condition : {
+                            user_video_ID : moduleBody.find("#videoPlayer").attr("user_video_ID"),
+                            removed_datetime : 0
+                        },
+                        updated_data : {
+                            removed_datetime : true
+                        }
+                    };
+                api_request("c_featured_video/updateFeaturedVideo", parameter, function(response){
+                    if(!response["error"].length){
+
+                        moduleBody.find(".videoDetail .featureButton[action_id=2]").hide();
+                        moduleBody.find(".videoDetail .featureButton[action_id=1]").show();
+                    }else{
+                    }
+                    moduleBody.find(".videoDetail .featureButton[action_id=2]").removeClass("disabled");
+                    moduleBody.find(".videoDetail .featureButton[action_id=2]").attr("disabled", false);
+                });
+            }else{
+                var parameter = {
+                    user_video_ID : moduleBody.find("#videoPlayer").attr("user_video_ID")
+                };
+                api_request("c_featured_video/createFeaturedVideo", parameter, function(response){
+                    if(!response["error"].length){
+                        moduleBody.find(".videoDetail .featureButton[action_id=2]").show();
+                        moduleBody.find(".videoDetail .featureButton[action_id=1]").hide();
+                    }else{
+                    }
+                    moduleBody.find(".videoDetail .featureButton[action_id=1]").removeClass("disabled");
+                    moduleBody.find(".videoDetail .featureButton[action_id=1]").attr("disabled", false);
+                });
+            }
+        });
         moduleBody.find(".uploaderDetail a").click(function(){
             load_module("member_profile/index/"+moduleBody.find("#videoPlayer").attr("account_ID"), "Member Profile");
         });
@@ -162,7 +210,6 @@
             }
             moduleBody.find("#commentPanel").empty();
             api_request("c_user_video_comment/retrieveUserVideoComment", parameter, function(response){
-                console.log(response)
                 if(!response["error"].length){
                     for(var x = 0; x < response["data"].length; x++ ){
                         var comment = moduleBody.find(".prototype .videoComment").clone();
@@ -190,16 +237,22 @@
                         subscriptionDetail();
                         userVideoLikeDetail();
                     }else{
-                        moduleBody.find(".uploaderDetail .subscriptionButton").hide();
-                        moduleBody.find(".uploaderDetail .unSubscriptionButton").hide();
+                        moduleBody.find("#videoPanel .uploaderDetail .subscriptionButton").hide();
+                        moduleBody.find("#videoPanel .uploaderDetail .unSubscriptionButton").hide();
+                        moduleBody.find("#videoPanel .likeButton").hide();
                     }
-                    moduleBody.find(".videoDetail .viewCount").text((response["data"]["user_video_view_count"]*1) ? response["data"]["user_video_view_count"] + " Views" : "");
-                    moduleBody.find(".videoDetail .likeCount").text((response["data"]["user_video_like_count"]*1) ? response["data"]["user_video_like_count"] + " Likes" : "");
+                    if(user_type() === 4){
+                        featureDetail();
+                    }else{
+                        moduleBody.find("#videoPanel .videoDetail .featureButton").hide();
+                    }
+                    moduleBody.find("#videoPanel .videoDetail .viewCount").text((response["data"]["user_video_view_count"]*1) ? response["data"]["user_video_view_count"] + " Views" : "");
+                    moduleBody.find("#videoPanel .videoDetail .likeCount").text((response["data"]["user_video_like_count"]*1) ? response["data"]["user_video_like_count"] + " Likes" : "");
                     var datePosted = new Date(response["data"]["datetime"]*1000);
-                    moduleBody.find(".videoDetail .videoDatetime").text(month[datePosted.getMonth()] +" "+datePosted.getDate()+", "+datePosted.getFullYear());
-                    moduleBody.find(".videoDetail .videoDescription").text(response["data"]["title"]);
-                    moduleBody.find(".uploaderDetail .videoDetail").text(response["data"]["details"]);
-                    moduleBody.find(".uploaderDetail .uploaderFullName").text(response["data"]["first_name"]+" "+response["data"]["middle_name"]+" "+response["data"]["last_name"]);
+                    moduleBody.find("#videoPanel .videoDetail .videoDatetime").text(month[datePosted.getMonth()] +" "+datePosted.getDate()+", "+datePosted.getFullYear());
+                    moduleBody.find("#videoPanel .videoDetail .videoDescription").text(response["data"]["title"]);
+                    moduleBody.find("#videoPanel .uploaderDetail .videoDetail").text(response["data"]["details"]);
+                    moduleBody.find("#videoPanel .uploaderDetail .uploaderFullName").text(response["data"]["first_name"]+" "+response["data"]["middle_name"]+" "+response["data"]["last_name"]);
                     
                     if(response["data"]["account_profile_photo_file_uploaded_description"]){
                         moduleBody.find(".uploaderDetail img").attr("src", asset_url("user_upload/"+response["data"]["account_ID"]+"/"+response["data"]["account_profile_photo_file_uploaded_description"]));
@@ -231,7 +284,6 @@
                 }
             }
             api_request("c_subscription/retrieveSubscription", parameter, function(response){
-                console.log(parameter)
                 if(!response["error"].length){
                     moduleBody.find(".uploaderDetail .unSubscriptionButton").show();
                     moduleBody.find(".uploaderDetail .subscriptionButton").hide();
@@ -244,8 +296,8 @@
         function userVideoLikeDetail(){
             var parameter = {
                 condition : {
-                    subscribed_account_ID : moduleBody.find("#videoPlayer").attr("account_ID"),
-                    subscriber_account_ID : user_id()
+                    user_video_ID : moduleBody.find("#videoPlayer").attr("user_video_ID"),
+                    account_ID : user_id()
                 }
             }
             api_request("c_user_video_like/retrieveUserVideoLike", parameter, function(response){
@@ -258,11 +310,28 @@
                 }
             });
         }
+        
+        function featureDetail(){
+            var parameter = {
+                condition : {
+                    user_video_ID : moduleBody.find("#videoPlayer").attr("user_video_ID"),
+                    removed_datetime : 0
+                }
+            }
+            api_request("c_featured_video/retrieveFeaturedVideo", parameter, function(response){
+                if(!response["error"].length){
+                    moduleBody.find(".videoDetail .featureButton[action_id=2]").show();
+                    moduleBody.find(".videoDetail .featureButton[action_id=1]").hide();
+                }else{
+                    moduleBody.find(".videoDetail .featureButton[action_id=2]").hide();
+                    moduleBody.find(".videoDetail .featureButton[action_id=1]").show();
+                }
+            });
+        }
         function showPlaylist(){
             var urlParameter = getURLParameter("now_playing/index");
             nowPlaying.videoPlaylist.now_playing_source = urlParameter[0];
             nowPlaying.videoPlaylist.now_playing_parameter = urlParameter[2];
-            console.log(nowPlaying.videoPlaylist)
             nowPlaying.videoPlaylist.empty();
             if(urlParameter[0] === "search"){
                 var filterData = {
@@ -297,7 +366,29 @@
                         focusPlayList();
                     }
                 }, false);
+            }else if(urlParameter[0] === "featured"){
+                var parameter = {
+                    additional_data : {
+                        user_video : true
+                    },
+                    sort : {
+                        removed_datetime : "asc",
+                        datetime : "desc"
+                    },
+                    limit : 10,
+                    group_by : "user_video_ID",
+                    distinct : true
+                }
+                api_request("C_featured_video/retrieveFeaturedVideo", parameter, function(response){
+                    if(!response["error"].length){
+                        nowPlaying.videoPlaylist.empty();
+                        for(var x = 0; x < response["data"].length; x++){
+                            nowPlaying.videoPlaylist.addVideoItem(response["data"][x]["ID"], asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), response["data"][x]["title"], response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"]);
+                        }
+                    }
+                }, false);
             }
+            
         }
         function focusPlayList(){
             if(moduleBody.find(".videoItem[user_video_id="+moduleBody.find("#videoPlayer").attr("user_video_ID")+"]").length){

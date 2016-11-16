@@ -115,7 +115,7 @@ class C_user_video extends API_Controller {
                     $this->input->post("ID"), 
                     $this->input->post("condition")
                     );
-            $randomOffset = ( ($userVideoCount - $randomOffset < $this->input->post("limit") ) || !$this->input->post("limit")) ? 0 : rand (0, $userVideoCount);
+            $randomOffset = ( ($userVideoCount < $this->input->post("limit") ) || !$this->input->post("limit")) ? 0 : rand (0, $userVideoCount - $this->input->post("limit"));
             $sort = array(
                 "user_video_like_count" => "asc",
                 "user_video_view_count" => "asc",

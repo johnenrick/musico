@@ -20,8 +20,7 @@ and open the template in the editor.
 }
 #browseVideo .videoItem .card.horizontal .card-image img{
     height:100%;
-    width:auto;
-    margin-left:-15%
+    width:100%;
 }
 #browseVideo .videoItem .card.horizontal .card-content{
     padding:5px 10px;

@@ -22,7 +22,7 @@
                 <ul class="links tabs" style="overflow-x: hidden">
                     <li class="tab"><a href="#memberProfileHomeTab">Home</a></li>
                     <li class="tab"><a href="#memberProfileVideoTab">Videos</a></li>
-                    <li class="tab"><a href="#playlist">Playlist</a></li>
+                    <li class="tab"><a href="#memberProfilePlaylistTab">Playlist</a></li>
                     <li class="tab"><a href="#memberProfileAboutTab">About</a></li>
                 </ul>
             </div>
@@ -39,33 +39,6 @@
 
 
 
-        <!-- playlist -->
-        <div id="playlist" class="col m12">
-            <div id="profile-list" class="col m12">
-                <div class="col m12 col-left"> 
-                    <div class="col s3 m3 l3 videoItem" user_video_id="1">
-                        <div class="card hoverable transparent z-depth-0 small  card-fixed">
-                            <div class="card-image">
-                                <a href="">
-                                    <img src="http://localhost/musico/assets/sample_image/s4.jpg">
-                                </a>
-                            </div>
-                            <div class="">
-                                <h6 class=" blue-text darken-4" style="font-weight:bold"><a class="videoDescription" href="">Cycling to the Mountains</a></h6>
-                                <div class="grey-text lighten-2">
-                                    <span class="uploadederName truncate">The Mountain Bikers</span>
-                                    <div class="thin valign " style="font-size: 11px">
-                                        <span class="videoAge">2 months ago</span>
-                                        <span class="viewCount right-aligned right">10 views</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
     </div>
     <div id="profileCoverPhotoModal" class="modal modal-lg modal-fixed-footer">

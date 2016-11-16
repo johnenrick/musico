@@ -17,7 +17,7 @@ and open the template in the editor.
 .videoList .videoItem .videoThumbnail img{
     height:75px;
     width:auto;
-    margin-left: -50%;
+    /*margin-left: -50%;*/
 }
 .videoList .videoItem .videoDetail{
     padding-top:5px;

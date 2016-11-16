@@ -32,7 +32,7 @@ class M_user_video extends API_Model{
     }
     public function retrieveUserVideo($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL, $additionalData = array()) {
         $joinedTable = array(
-            "file_uploaded" => " file_uploaded.ID=user_video.file_uploaded_ID",
+            "file_uploaded" => "file_uploaded.ID=user_video.file_uploaded_ID",
             "file_uploaded AS thumbnail_file_uploaded" => " thumbnail_file_uploaded.ID=user_video.thumbnail_file_uploaded_ID",
             "account_information" => "account_information.account_ID=user_video.account_ID",
             "user_video_view" => "user_video_view.user_video_ID=user_video.ID",

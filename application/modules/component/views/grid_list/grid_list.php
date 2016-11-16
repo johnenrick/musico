@@ -7,7 +7,7 @@
             <div class="card hoverable transparent z-depth-0">
                 <div class="card-image" style="height:150px;overflow: hidden">
                     <a href="#" >
-                        <img src="<?=  asset_url("sample_image/sample_image (1).jpg")?>"  style="width:100%;height:auto">
+                        <img onError="this.onerror=null;this.src='<?=  asset_url()?>/image/no_video_image.jpg';" src="<?=  asset_url("sample_image/sample_image (1).jpg")?>"  style="width:100%;height:auto">
                     </a>
                 </div>
                 <div class="">

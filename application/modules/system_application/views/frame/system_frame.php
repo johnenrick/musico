@@ -26,6 +26,7 @@
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/core/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/core/materialize.min.js"></script>
+
     
     <!--Import customized style-->
     <link type="text/css" rel="stylesheet" href="<?=asset_url()?>css/common.css" />
@@ -88,9 +89,10 @@
 
         <div id="side-nav-large-container" class="col l2 hide-on-med-and-down">
             <ul id="side-nav-large">
-                <li><a class="moduleLink" module_link="portal" module_name="Portal Page" href="#" class="valign-wrapper"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Featured</a></li>
-                <li><a href="#" class="valign-wrapper"><i class="fa fa-calendar-o" aria-hidden="true"></i>Events</a></li>
+                <li><a class="moduleLink" module_link="browse_video" module_name="Browse Video" href="#" class="valign-wrapper"><i class="fa fa-search" aria-hidden="true"></i>Discover</a></li>
+                <li><a class="moduleLink" module_link="portal" module_name="portal" href="#" class="valign-wrapper"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+                <li><a class="moduleLink" module_link="browse_video/index/featured" module_name="Browse Video" href="#" class="valign-wrapper"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Featured</a></li>
+                <li><a class="moduleLink" module_link="event_page" module_name="Event Page" href="#" class="valign-wrapper"><i class="fa fa-calendar-o" aria-hidden="true"></i>Events</a></li>
                 <li><a href="#" class="contactPageLink valign-wrapper"><i class="fa fa-phone" aria-hidden="true"></i>Contact Us</a></li>
             </ul>
             <hr class="playlistSidebar">

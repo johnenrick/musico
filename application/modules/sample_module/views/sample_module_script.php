@@ -21,11 +21,6 @@
     };
         
     $(document).ready(function(){
-        if(typeof systemApplication.module.portalPage === "undefined"){
-            systemApplication.module.sampleModule = new SampleModule();
-        }else{
-            //TODO refresh function if the module is revisited
-            
-        }
+        systemApplication.module.sampleModule = new SampleModule();
     });
 </script>

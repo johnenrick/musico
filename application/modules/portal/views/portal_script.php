@@ -24,11 +24,12 @@
                portalPage.ready();
            }
         });
-        if(user_id()){
-            moduleBody.find(".signUpButton").hide();
-        }
+        
         moduleBody.find(".signUpButton").click(function(){
             $(".headerAuthentication").trigger("click");
+        });
+        moduleBody.find(".discoverButton").click(function(){
+            load_module("browse_video", "Browse Video");
         });
         moduleBody.find(".uploadVideo").click(function(){
             if(user_id()){
@@ -54,12 +55,51 @@
                 }
             }, false);
         }
+        function listFeaturedVideo(){
+            var parameter = {
+                condition : {
+                    removed_datetime : 0
+                },
+                additional_data : {
+                    user_video : true
+                },
+                sort : {
+                    removed_datetime : "asc",
+                    datetime : "desc"
+                },
+                limit : 10,
+                group_by : "user_video_ID",
+                distinct : true
+            }
+            api_request("C_featured_video/retrieveFeaturedVideo", parameter, function(response){
+                if(!response["error"].length){
+                    portalPage.featuredVideoList.empty();
+                    for(var x = 0; x < response["data"].length; x++){
+                        portalPage.featuredVideoList.addItem(
+                            response["data"][x]["user_video_ID"],
+                            asset_url("user_upload/"+response["data"][x]["account_ID"]+"/"+response["data"][x]["thumbnail_file_uploaded_description"]), 
+                            response["data"][x]["title"], response["data"][x]["first_name"]+" "+response["data"][x]["middle_name"]+" "+response["data"][x]["last_name"], 
+                            response["data"][x]["datetime"], 
+                            response["data"][x]["user_video_view_count"]
+                        );
+                    }
+                }
+            }, false);
+        }
         portalPage.ready = function(){
+            if(user_id()){
+                moduleBody.find(".signUpButton").hide();
+                moduleBody.find(".discoverButton").show();
+            }else{
+                moduleBody.find(".signUpButton").show();
+                moduleBody.find(".discoverButton").hide();
+            }
             listRandomVideo();
+            listFeaturedVideo();
         };
     };
         
     $(document).ready(function(){
-        systemApplication.module.portalPage = new Portal();
+        systemApplication.module.portal = new Portal();
     });
 </script>
