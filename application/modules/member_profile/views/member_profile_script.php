@@ -7,42 +7,26 @@
     
     /*Module Object*/
     var MemberProfile  = function(){
-        var memberProfile = this;//instance of the module
-        var moduleBody = memberProfile.body = $("#memberProfile");
-        var readyFlag = 0;
-        var readyFlagValue = 4;
+        var memberProfile = new Module($("#memberProfile"));//instance of the module
+        var moduleBody = memberProfile.body ;
+        memberProfile.accountID = 0;
+        memberProfile.readyFlagValue = 5;
         /*Load Tabs*/
         load_sub_module("member_profile/homeTab", function(data){
             moduleBody.find(".tabContent").append(data);
             new MemberProfileHomeTab(memberProfile);
-            readyFlag++;
-            if(readyFlag === readyFlagValue){
-                memberProfile.ready();
-            }
         });
         load_sub_module("member_profile/aboutTab", function(data){
             moduleBody.find(".tabContent").append(data);
             memberProfile.aboutTab =  new MemberProfileAboutTab(memberProfile);
-            readyFlag++;
-            if(readyFlag === readyFlagValue){
-                memberProfile.ready();
-            }
         });
         load_sub_module("member_profile/videoTab", function(data){
             moduleBody.find(".tabContent").append(data);
-            new MemberProfileVideoTab(memberProfile);
-            readyFlag++;
-            if(readyFlag === readyFlagValue){
-                memberProfile.ready();
-            }
+            memberProfile.videoTab = new MemberProfileVideoTab(memberProfile);
         });
         load_sub_module("member_profile/playlistTab", function(data){
             moduleBody.find(".tabContent").append(data);
             memberProfile.playlistTab = new MemberProfilePlaylistTab(memberProfile);
-            readyFlag++;
-            if(readyFlag === readyFlagValue){
-                memberProfile.ready();
-            }
         });
         /*Profile Cover*/
         moduleBody.find(".changeProfileCover").click(function(){
@@ -71,7 +55,7 @@
                 }
             });
         }); 
-        moduleBody.find("#profileCoverPhotoModal .saveCover").click(function(){
+        memberProfile.profileCoverPhotoModal.find(".saveCover").click(function(){
             moduleBody.find("#profileCoverPhotoModal .label-info").show();
             moduleBody.find("#profileCoverPhotoModal .label-danger").hide();
             moduleBody.find("#profileCoverPhotoModal .saveCover").attr("disabled", true);
@@ -83,7 +67,7 @@
             }
             var file=new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
             var formData = new FormData();
-            formData.append('userfile', file, "tae.jpg");
+            formData.append('userfile', file, "test.jpg");
             formData.append('type', 2);
             $.ajax(api_url("C_account_photo/createAccountPhoto"), {
                 method: "POST",
@@ -283,7 +267,6 @@
         /**/
         
         memberProfile.ready = function(){//function to run if the module is already been loaded
-            
             var defaultTab = window.location.href.split("#");
             $('ul.tabs').tabs();
             moduleBody.find('ul.tabs').tabs('select_tab', defaultTab[1]);
@@ -291,9 +274,14 @@
             memberProfile.accountID = urlParameter !== false ? urlParameter[0]*1 : 0;
             memberProfile.accountID = (memberProfile.accountID*1 === 0 ) ? user_id() : memberProfile.accountID;
             subscriptionDetail();
+            
+            console.log(memberProfile.readyFlag)
             memberProfile.aboutTab.ready();
+       
+            memberProfile.videoTab.ready();
             memberProfile.playlistTab.ready();
         };
+        memberProfile.isReady();
     };
         
     $(document).ready(function(){

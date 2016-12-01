@@ -1,10 +1,9 @@
 <script>
-    load_asset("module/member_profile_home_tab.css");
     var MemberProfileAboutTab = function(memberProfile){
         var memberProfileAboutTab = this;
         var moduleBody = memberProfile.body;
-        var subModuleBody = moduleBody.find("#memberProfileAboutTab");
-        
+        init_sub_module(memberProfileAboutTab, memberProfile, moduleBody.find("#memberProfileAboutTab"));
+        var subModuleBody = memberProfileAboutTab.body;
         subModuleBody.find(".profileSettingForm").attr("action", api_url("c_account/updateAccount"));
         subModuleBody.find(".profileSettingForm").ajaxForm({
             beforeSubmit: function(data,$form,options){
@@ -107,7 +106,7 @@
                     show_form_error(subModuleBody.find(".accountAuthentication form"), response["error"]);
                 }
             }
-        })
+        });
         memberProfileAboutTab.ready = function(){
             if(memberProfile.accountID === user_id()){//viewing own profile
                 subModuleBody.find(".profileSetting").show();
@@ -119,5 +118,7 @@
             retrieveAccountDetail();
             subModuleBody.find(".passwordModification").hide();
         }
+       
+        memberProfileAboutTab.isReady();
     };
 </script>

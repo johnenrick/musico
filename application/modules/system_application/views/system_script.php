@@ -145,8 +145,6 @@
             $("#mainContent").find(".moduleHolder[module_name!='"+camelize(moduleName)+"']").hide();
             if($('#mainContent .moduleHolder[module_name="'+camelize(moduleName)+'"]').is(":visible") === false){
                 $('.moduleHolder[module_name="'+camelize(moduleName)+'"]').fadeIn(500);
-                
-                
             }
             if(typeof systemApplication.module[camelize(moduleName)].ready !== "undefined"){
                 systemApplication.module[camelize(moduleName)].ready();
@@ -277,7 +275,13 @@
         setCredential(null);
     }
     function setToken(token){
-        document.cookie = "token"+ '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';//Destroy Cookie
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
         if(token !== null){
             document.cookie = "token="+token;
         }
@@ -311,7 +315,7 @@
             var response = JSON.parse(xhr.responseText);
             if(typeof response["token"] !== "undefined"){
                 if(getCookie("token") !== null && response["token"] !== null){
-                    setToken(response["token"]);
+//                    setToken(response["token"]);
                 }
                 //TODO Handle system errors here
             }
@@ -343,7 +347,6 @@
         } else {
             setCredential(null);
             var moduleLink = window.location.href.replace(base_url(), "").split("/");
-            console.log(moduleLink)
             load_module(system_data.default.module_controller, moduleLink[0] === "" ? "Portal" : moduleLink[0]);
         }
         

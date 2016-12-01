@@ -36,6 +36,14 @@
                     </div>
                 </form>
             </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="playlistVideo collection with-header">
+                        <li class="collection-header"><h6>Playlist Video</h6></li>
+                        
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="prototype">
@@ -46,6 +54,12 @@
                 <a class="editPlaylistDetail blue-text btn-flat">Edit</a>
             </div>
             <div class="playlistVideoContainer collapsible-body">
+            </div>
+        </li>
+        <li class="playlistVideoItem collection-item">
+            <div>
+                <span class="title"></span>
+                <a href="#" class="removePlaylistVideo secondary-content red-text"><i class="fa fa-trash " aria-hidden="true"></i> remove</a>
             </div>
         </li>
     </div>

@@ -1,4 +1,4 @@
-<div id="portalPage" class="">
+<div id="portal" class="">
     <div class="row ">
         <div class="col s12 center valign">
             <h4 class="">DISCOVER MUSIC COVERS AND ORIGINALS</h4>

@@ -3,27 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/musico/assets/css/component/video_list.css</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_playlist.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/frame/system_frame.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/member_profile.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/playlist_tab.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/playlist_modal/playlist_modal_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/frame/contact_page.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/grid_list/grid_list.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/portal/views/portal.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/portal/views/portal_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/playlist_modal/playlist_modal.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/browse_video/views/browse_video.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/helper/common_form.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/system_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/member_profile_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/playlist_tab_script.php</file>
             <file>file:/C:/xampp/htdocs/musico/application/modules/api/controllers/C_user_video.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/now_playing/views/now_playing_script.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/video_list_banner/video_list_banner.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/now_playing/views/now_playing.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/component/views/video_list/video_list.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/event_page/views/event_page.php</file>
-            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/frame/system_frame_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/home_tab_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/video_tab.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/core/FE_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/about_tab_script.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/system_application/views/helper/module.php</file>
+            <file>file:/C:/xampp/htdocs/musico/application/modules/member_profile/views/video_tab_script.php</file>
         </group>
     </open-files>
 </project-private>

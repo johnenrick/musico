@@ -3,7 +3,7 @@
         
     </div>
     <div class="prototype">
-        <div class="col s12 m4 l3 videoItem">
+        <div class="col s12 m4 l3 videoItem" user_video_id="0">
             <div class="card hoverable transparent z-depth-0">
                 <div class="card-image" style="height:150px;overflow: hidden">
                     <a href="#" >

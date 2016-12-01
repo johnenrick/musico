@@ -7,3 +7,6 @@ and open the template in the editor.
     Created on : 10 11, 16, 5:03:42 PM
     Author     : johnenrick
 */
+.collection li.collection-item{
+    list-style-type: none;
+}

@@ -3,7 +3,8 @@
     var MemberProfileHomeTab = function(memberProfile){
         var memberProfileHomeTab = this;
         var moduleBody = memberProfile.body;
-        var subModuleBody = moduleBody.find("#memberProfileHomeTab");
+        init_sub_module(memberProfileHomeTab, memberProfile, moduleBody.find("#memberProfileHomeTab"))
+        var subModuleBody = memberProfileHomeTab.body;
         
         load_component("video_list_banner", function(){
            memberProfileHomeTab.bannerVideoList = new VideoListBanner(subModuleBody.find(".latestVideo"));
@@ -23,5 +24,6 @@
            memberProfileHomeTab.uploadedVideoList.addItem(1, asset_url("sample_image/s5.jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
            memberProfileHomeTab.uploadedVideoList.addItem(1, asset_url("sample_image/s6.jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
         });
+        memberProfileHomeTab.isReady();
     };
 </script>

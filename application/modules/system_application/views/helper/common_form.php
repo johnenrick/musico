@@ -58,12 +58,15 @@
             formElement.find(".formActionButton button[action=cancel]").show();
             formElement.find(".formActionButton button[action=submit]").show();
         };
-        formHandler.createForm = function(){
+        formHandler.createForm = function(callbackFn){
             formHandler.reset();
             formElement.attr("action", api_url(createLink));
             changeFieldName("create", formElement);
             formElement.find(".formActionButton button[action=delete]").hide();
             formHandler.formMode = "create";
+            if(typeof callbackFn !== "undefined"){
+                callbackFn()
+            }
         };
         formHandler.updateForm = function(){
             formHandler.reset();

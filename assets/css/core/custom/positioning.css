@@ -103,3 +103,7 @@ and open the template in the editor.
 .width-99{
     width:99%!important;
 }
+
+.pull-left{
+    float:left!important;
+}

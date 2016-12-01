@@ -37,6 +37,7 @@
         
         /*Event*/
         moduleBody.find("#addToPlaylist").click(function(){
+           
             nowPlaying.playlistModal.showUserPlaylist(moduleBody.find("#videoPlayer").attr("user_video_ID"));
             return false;
         });
