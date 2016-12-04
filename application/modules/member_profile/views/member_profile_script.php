@@ -275,7 +275,6 @@
             memberProfile.accountID = (memberProfile.accountID*1 === 0 ) ? user_id() : memberProfile.accountID;
             subscriptionDetail();
             
-            console.log(memberProfile.readyFlag)
             memberProfile.aboutTab.ready();
        
             memberProfile.videoTab.ready();

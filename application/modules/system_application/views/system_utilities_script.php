@@ -168,4 +168,7 @@
         parameter.splice(0,1);
         return (parameter.length) >= 1 ? parameter : false;
     }
+    function system_console(object){
+        console.log(object)
+    }
 </script>

@@ -15,8 +15,6 @@
        });
        load_component("grid_list", function(){
            memberProfileHomeTab.uploadedVideoList = new GridList(moduleBody.find(".albumVideoList"));
-           memberProfileHomeTab.uploadedVideoList.onVideoItemClick(function(card){
-           });
            memberProfileHomeTab.uploadedVideoList.addItem(1, asset_url("sample_image/s1.jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
            memberProfileHomeTab.uploadedVideoList.addItem(1, asset_url("sample_image/s2.jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);
            memberProfileHomeTab.uploadedVideoList.addItem(1, asset_url("sample_image/s3.jpg"), "Cycling to the Mountains", "The Mountain Bikers", 1462767575, 10);

@@ -13,6 +13,7 @@
         moduleBody.find("[id]").each(function(){
             module[$(this).attr("id")] = $(this);
         });
+       
         return module;
     };
     var init_sub_module = function(subModule, parentModule, subModuleBody){

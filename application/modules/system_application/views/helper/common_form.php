@@ -1,6 +1,7 @@
 <script>
-    function commonFormHandler(formElement, createLink, updateLink, deleteLink){
+    var commonFormHandler = function(formElement, createLink, updateLink, deleteLink){
         var formHandler = this;
+        formElement = (formElement[0].tagName === "FORM") ? formElement : formElement.find("form");
         formHandler.formElement = formElement;
         formHandler.formMode = "";//create or update
         if(formHandler.formElement.attr("method") === ""){
@@ -12,6 +13,7 @@
                 clear_form_error(formElement);
                 formElement.find(".formActionButton button").attr("disabled", true);
                 formHandler.submitBeforeSubmit(data);
+                console.log(data)
             },
             success : function(data){
                 var response = JSON.parse(data);
@@ -50,6 +52,7 @@
         });
         
         /*Function*/
+        formHandler.resetCallBack = null;
         formHandler.reset = function(){
             formElement.trigger("reset");
             clear_form_error(formElement);
@@ -57,10 +60,15 @@
             formElement.find(".formActionButton button[action=delete]").show();
             formElement.find(".formActionButton button[action=cancel]").show();
             formElement.find(".formActionButton button[action=submit]").show();
+            if(formHandler.resetCallBack !== null){
+                formHandler.resetCallBack;
+            }
         };
         formHandler.createForm = function(callbackFn){
             formHandler.reset();
+            console.log(createLink)
             formElement.attr("action", api_url(createLink));
+            console.log(formElement)
             changeFieldName("create", formElement);
             formElement.find(".formActionButton button[action=delete]").hide();
             formHandler.formMode = "create";
@@ -104,6 +112,15 @@
                 formElement.find(".formActionButton button").attr("disabled", false);
             });
         }
+        formHandler.formValue = function(data, formulatedData){
+            for(var x in data){
+                formElement.find("input[name="+x+"]").val(data[x]).trigger("change");
+                formElement.find("input[field_name="+x+"]").val(data[x]).trigger("change");
+                formElement.find("textarea[field_name="+x+"]").val(data[x]).trigger("change");
+                formElement.find("textarea[field_name="+x+"]").val(data[x]).trigger("change");
+            }
+        }
+        
         formHandler.reset();
         return formHandler;
     }

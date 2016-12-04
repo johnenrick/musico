@@ -18,9 +18,9 @@ class C_user_video extends API_Controller {
     public function createUserVideo(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            $this->form_validation->set_rules('video_category_ID', 'Video Category', 'required');
+            $this->form_validation->set_rules('video_category_ID', 'Video Category', 'required|numeric');
             $this->form_validation->set_rules('title', 'Title', 'required|min_length[5]|max_length[100]|trim');
-            $this->form_validation->set_rules('details', 'Details', 'required'); 
+//            $this->form_validation->set_rules('details', 'Details', 'required'); 
             if($this->form_validation->run()){
                 $result = $this->m_user_video->createUserVideo(
                         $this->userID,

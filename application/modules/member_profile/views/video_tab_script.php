@@ -8,9 +8,28 @@
         $('ul.tabs').tabs();
         load_component("grid_list", function(){
             memberProfileVideoTab.videoList = new GridList(moduleBody.find("#videoUploaded")); 
-            memberProfileVideoTab.videoList.onVideoClick = editVideo;
+            memberProfileVideoTab.videoList.onVideoItemClickFn = editVideo;
             memberProfileVideoTab.isReady();
         });
+        var userVideoModalForm = new commonFormHandler(memberProfileVideoTab.userVideoModal, "c_user_video/createUserVideo", "c_user_video/updateUserVideo", "c_user_video/deleteUserVideo");
+        userVideoModalForm.resetCallBack = resetUserVideoModal;
+        userVideoModalForm.submitBeforeSubmit = function(data){
+            if(memberProfileVideoTab.screenCaptureFile){
+                var formData = new FormData();
+                formData.append("thumbnail_userfile", memberProfileVideoTab.screenCaptureFile, "test.jpg");
+                data.push({
+                    name : "thumbnail_userfile",
+                    required : true,
+                    type: "file",
+                    value : formData.get("thumbnail_userfile")
+                })
+            }
+        };
+        userVideoModalForm.submitUpdateSuccess = function(response){
+            if(!response["error"].length){
+                
+            }
+        };
         subModuleBody.find("#userVideoInput").change(function(){
             var URL = window.URL || window.webkitURL;
             var file = this.files[0];
@@ -23,14 +42,16 @@
             subModuleBody.find("#screenCapture img").hide();
             subModuleBody.find("#videoSelection video").attr("poster", "");
         });
-        
+        memberProfileVideoTab.userVideoPlayer[0].oncanplay = function(){
+            subModuleBody.find("#screenCapture button").trigger("click");
+        };
         subModuleBody.find("#uploadNewVideo").click(function(){
-            subModuleBody.find("#userVideoModal").openModal();
-//            subModuleBody.find("#userVideoPlayer").hide();
-            if(subModuleBody.find("#userVideoModal input[name=ID]").val()*1 === 0){
-                resetUserVideoModal();
+            if(subModuleBody.find("#userVideoModal #userVideoInput").val() === ""){
+                userVideoModalForm.createForm();
             }
+            subModuleBody.find("#userVideoModal").openModal();
         });
+        memberProfileVideoTab.screenCaptureFile = null;
         subModuleBody.find("#screenCapture button").click(function(){
             subModuleBody.find("#screenCapture img").show();
             var canvas = document.createElement('canvas');
@@ -42,40 +63,41 @@
             var dataURI = canvas.toDataURL('image/jpeg'); // can also use 'image/png'
             subModuleBody.find("#screenCapture img").attr("src", dataURI);
 //            subModuleBody.find("#screenCapture input[name=thumbnail_userfile]").val(dataURI);
-            var blob = dataURItoBlob(dataURI);
-            var fd = new FormData(subModuleBody.find("#userVideoModal form")[0]);
-            fd.append("canvasImage", blob);
+//            var blob = dataURItoBlob(dataURI);
+            var blobBin = atob(dataURI.split(',')[1]);
+            var array = [];
+            for(var i = 0; i < blobBin.length; i++) {
+                array.push(blobBin.charCodeAt(i));
+            }
+            memberProfileVideoTab.screenCaptureFile =new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
             subModuleBody.find("#userVideoPlayer")[0].pause()
         });
         
-        function dataURItoBlob(dataURI) {
-            // convert base64/URLEncoded data component to raw binary data held in a string
-            var byteString;
-            if (dataURI.split(',')[0].indexOf('base64') >= 0)
-                byteString = atob(dataURI.split(',')[1]);
-            else
-                byteString = unescape(dataURI.split(',')[1]);
-
-            // separate out the mime component
-            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-            // write the bytes of the string to a typed array
-            var ia = new Uint8Array(byteString.length);
-            for (var i = 0; i < byteString.length; i++) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-
-            return new Blob([ia], {type:mimeString});
-        }
-        
         function resetUserVideoModal(){
+            memberProfileVideoTab.screenCaptureFile = null;
             subModuleBody.find("#screenCapture").hide();
-            subModuleBody.find("#userVideoModal form").trigger("reset");
+            subModuleBody.find("#userVideoInput").show();
+            subModuleBody.find("#videoSelection video").attr("src", "");
             subModuleBody.find("#videoSelection video").attr("poster", asset_url("image/select_video.jpg"));
         }
         
         function editVideo(videoItem){
-            console.log(videoItem)
+            userVideoModalForm.updateForm();
+            subModuleBody.find("#userVideoInput").hide();
+            var parameter = {
+                ID : videoItem.attr("user_video_ID")
+            };
+            api_request("C_user_video/retrieveUserVideo", parameter, function(response){
+                if(!response["error"].length){
+                    memberProfileVideoTab.userVideoPlayer.attr("src", asset_url("user_upload/"+response["data"]["account_ID"]+"/"+response["data"]["file_uploaded_description"]));
+                    memberProfileVideoTab.userVideoPlayer.attr("poster", asset_url("user_upload/"+response["data"]["account_ID"]+"/"+response["data"]["thumbnail_file_uploaded_description"]));
+                    memberProfileVideoTab.screenCapture.attr("src", asset_url("user_upload/"+response["data"]["account_ID"]+"/"+response["data"]["thumbnail_file_uploaded_description"]));
+                    userVideoModalForm.formValue(response["data"]);
+                }else{
+                    system_console(response);
+                }
+            });
+            subModuleBody.find("#userVideoModal").openModal();
         }
         function listUserVideo(){
             memberProfileVideoTab.videoList.empty();
@@ -87,7 +109,8 @@
             memberProfileVideoTab.videoList.loadingVideoItem();
             api_request("c_user_video/retrieveUserVideo", param, function(response){
                 memberProfileVideoTab.videoList.addItemList(response["data"]);
-            }, false)
+            }, false);
+            
         }
         
         memberProfileVideoTab.ready = function(){
